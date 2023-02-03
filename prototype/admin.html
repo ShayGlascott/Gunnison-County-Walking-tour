@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .box {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+      }
+
+      .title {
+        background-color: #ccc;
+        padding: 10px;
+        font-weight: bold;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        text-align: center;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+
+    <h1>Gunnison Walking Tour Administration Page</h1>
+
+    <!-- Simple form to edit the main page -->
+
+    <div class="box">
+      <div class="title">Main Page</div>
+      <form action="admin.php" method="post">
+        <label for="tour_information">Tour Information:</label><br>
+        <textarea id="tour_information" name="tour_information" rows="5" cols="50"></textarea><br><br>
+
+        <label for="qr_instruction_image">QR Instruction Image:</label><br>
+        <input type="text" id="qr_instruction_image" name="qr_instruction_image"><br><br>
+
+        <label for="extra_information">Extra Information:</label><br>
+        <textarea id="extra_information" name="extra_information" rows="5" cols="50"></textarea><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- List of tour stops, dynamically generated from database using php.  Each row will have the 
+    name of the stop and a button to edit the stop. -->
+
+    <div class="box">
+      <div class="title">Tour Stops</div>
+      <table>
+        <tr>
+          <th>Site Name</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          <td>site1</td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Edit">
+            </form>
+          </td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>site2</td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Edit">
+            </form>
+          </td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        <!-- Template for historic site:
+        <tr>
+          <td>site1</td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Edit">
+            </form>
+          </td>
+          <td>
+            <form action="admin.php" method="post">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        -->
+      </table>
+      <!-- Button to create a new tour stop -->
+      <form action="admin.php" method="post">
+        <input type="submit" value="New Tour Stop" name="new_tour_stop">
+      </form>
+    </div>
+
+    <!-- Form to edit the tour stops. The button from the list of tour stops will populate this with
+    the old information. If the new tour stop button is pressed the form will be cleared to create a
+    new stop -->
+
+    <div class="box">
+      <div class="title">Edit</div>
+      <form action="admin.php" method="post" enctype="multipart/form-data">
+        <label for="site_name">Site Name:</label><br>
+        <input type="text" id="site_name" name="site_name"><br><br>
+
+        <!-- X and Y coordinates for location on the map
+        <label for="x">x:</label>
+        <input type="text" id="x" name="x">
+        <label for="y">y:</label>
+        <input type="text" id="y" name="y">
+        -->
+
+        <label for="image_filenames">Image Filenames:</label><br>
+        <input type="file" id="image_filenames" name="image_filenames" multiple><br><br>
+
+        <label for="site_information">Site Information:</label><br>
+        <textarea id="site_information" name="site_information" rows="5" cols="50"></textarea><br><br>
+
+        <label for="extra_information">Extra Information:</label><br>
+        <textarea id="extra_information" name="extra_information" rows="5" cols="50"></textarea><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>
