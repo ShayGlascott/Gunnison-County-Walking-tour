@@ -4,11 +4,15 @@ padding: 0;
 box-sizing: border-box;
 font-family: "Asap", sans-serif;
 }
-h1{
-    color: red;
-}
+
 body{
 background: #42455a;
+}
+.label{
+  position:absolute;
+  left: 10px;
+  top:10px;
+  font-size: 20;
 }
 section{
 min-height: 100vh;
@@ -44,6 +48,7 @@ text-transform: uppercase;
 }
 section .text-container{
  display: flex;
+ 
 }
 section .text-container .text-box{
 margin: 20px;
@@ -65,6 +70,10 @@ section h1{
 section .text-container{
   flex-direction: column;
 }
+}
+img{
+  height: 75%;
+  width: 75%;
 }
 
 .reveal{
