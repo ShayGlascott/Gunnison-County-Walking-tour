@@ -28,7 +28,7 @@
 
     <div class="box">
       <div class="title">Main Page</div>
-      <form action="admin.php" method="post">
+      <form  method="post">
         <label for="tour_information">Tour Information:</label><br>
         <textarea id="tour_information" name="tour_information" rows="5" cols="50"></textarea><br><br>
 
@@ -56,12 +56,12 @@
         <tr>
           <td>site1</td>
           <td>
-            <form action="admin.php" method="post">
+            <form method="post">
               <input type="submit" value="Edit">
             </form>
           </td>
           <td>
-            <form action="admin.php" method="post">
+            <form method="post">
               <input type="submit" value="Delete">
             </form>
           </td>
@@ -69,12 +69,12 @@
         <tr>
           <td>site2</td>
           <td>
-            <form action="admin.php" method="post">
+            <form method="post">
               <input type="submit" value="Edit">
             </form>
           </td>
           <td>
-            <form action="admin.php" method="post">
+            <form method="post">
               <input type="submit" value="Delete">
             </form>
           </td>
@@ -100,6 +100,23 @@
         <input type="submit" value="New Tour Stop" name="new_tour_stop">
       </form>
     </div>
+
+
+
+    <!---
+    <img src="example.jpg" id="image" />
+    <script>
+      const image = document.getElementById("image");
+
+      image.addEventListener("click", function(event) {
+        const x = event.clientX - image.offsetLeft;
+        const y = event.clientY - image.offsetTop;
+        console.log(`Clicked at (${x}, ${y})`);
+      });
+    </script>
+    -->
+
+
 
     <!-- Form to edit the tour stops. The button from the list of tour stops will populate this with
     the old information. If the new tour stop button is pressed the form will be cleared to create a
