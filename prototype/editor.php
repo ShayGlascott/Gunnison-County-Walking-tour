@@ -59,31 +59,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!-- 
-    On click, the listener gets coordinates of that click on the image of the map
--->
-<div class="box">
-      <div class="title">Map Icons</div>
-      <img src="map.jpg" class="map" id="image" />
-      <form id="myForm">
-        <label for="x">X:</label>
-        <input type="text" id="x" name="x"><br><br>
-        <label for="y">Y:</label>
-        <input type="text" id="y" name="y"><br><br>
-        <input type="submit" value="Submit">
-      </form>
-      <script>
-        const image = document.getElementById("image");
-        const form = document.getElementById("myForm");
-        image.addEventListener("click", function(event) {
-          const x = event.clientX - image.offsetLeft;
-          const y = event.clientY - image.offsetTop;
-          console.log(`Clicked at (${x}, ${y})`);
-          form.elements["x"].value = x;
-          form.elements["y"].value = y;
-        });
-      </script>
-    </div>
+Create Site Form
+$name = enter title
+$siteName = $name with whitespace removed all lower case
+$image1 and $image2 = upload 2 images to "pictures/" and store the paths (path = "pictures/$siteName$imageName")
+$image1alt and $image2alt = enter text
+$image1caption and $image2caption = enter text
+%text1 and $text2 = edit and generate 2 html formatted texts using TinyMCE
+ -->
+
  <form method="post" enctype="multipart/form-data">
     <label for="name">Title:</label>
     <input type="text" name="name" required><br>
@@ -109,7 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <input type="submit" value="Create Site">
 </form>
-
 
 <script src="tinymce/js/tinymce/tinymce.min.js"></script>
 <script>

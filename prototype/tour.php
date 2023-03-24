@@ -5,11 +5,12 @@ $username = 'student';
 $password = 'CS350';
 $db = new PDO($dsn, $username, $password);
 
-$t1q = "SELECT * FROM `historic_sites` WHERE id = 1";
+$getId = $_GET['id'];
+
+$t1q = "SELECT * FROM `historic_sites` WHERE id =". $getId;
 $statement = $db->prepare($t1q);
 $statement->execute();
 $data= $statement->fetchAll();
-
 ?>
 
 <html>
@@ -39,8 +40,7 @@ $data= $statement->fetchAll();
     <!-- Further information and pictures for those interested in reading more -->
     <?php $id = $data['id']?>
     <!--Getting the id for the item that is being displayed-->
-    <?php echo '<a href="ReadMore.php?id='.$id.'">Read More</a>';?>
+    <?php echo '<a href="ReadMore.php?id='.$getId.'">Read More</a>';?>
     <?php endforeach; ?>
   </body>
 </html>
-
