@@ -1,3 +1,40 @@
+<?php
+
+$servername = 'localhost';
+$username = 'student';
+$password = 'CS350';
+$dbname = 'tour_db';
+
+
+$conn = new mysqli($servername,$username,$password,$dbname);
+
+if ($conn->connect_error){
+  die("Connection failed: ".$conn->connect_error);
+}
+
+$t1q = $conn->query("SELECT * FROM historic_sites");
+$sites = array();
+
+if ($t1q->num_rows> 0){
+  while($row = $t1q->fetch_assoc()){
+    $site = array(
+      'id' => $row['id'],
+      'img1_fname' => $row['img1_fname'],
+      'img1_altText' => $row['img1_altText'],
+      'img1_caption' => $row['img1_caption'],
+      'img2_fname' => $row['img2_fname'],
+      'img2_altText' => $row['img2_altText'],
+      'img2_caption' => $row['img2_caption'],
+      'title' => $row['title'],
+      'text1' => $row['text1'],
+      'text2' => $row['text2'],
+    );
+    array_push($sites,$site);
+  }
+}
+
+?>~
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,22 +91,24 @@
     
     <h2>Points of Interest</h2>
     <div class="map">
-      <img src="map.jpg" alt="Map of Gunnison, Colorado">
+      <img src="pictures/map.jpg" alt="Map of Gunnison, Colorado">
       <a href="#region1" class="region1">Region 1</a>
       <a href="#region2" class="region2">Region 2</a>
       <a href="#region3" class="region3">Region 3</a>
     </div>
-    <a href="#region1">Region 1</a>
-    <a href="#region2">Region 2</a>
-    <a href="#region3">Region 3</a>
+    <ul>
+      <?php foreach ($sites as $site): ?>
+        <li><a href="template1.php?id=<?php echo $site['id']; ?>"><?php echo $site['title']; ?></a></li>
+      <?php endforeach; ?>
+    </ul>
 
     <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
     find more locations, etc. -->
 
     <h2>How to go on the tour...</h2>
-    <img src="howto.jpg" alt="How to scan a QR code">
+    <img src="pictures/howto.jpg" alt="How to scan a QR code">
     
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat imperdiet sed euismod nisi porta. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. </p>
-
+    
   </body>
 </html>

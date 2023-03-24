@@ -1,22 +1,43 @@
 <?php
 
-$dsn = 'mysql:host=localhost;dbname=tour_db';
+$servername = 'localhost';
 $username = 'student';
 $password = 'CS350';
-$db = new PDO($dsn, $username, $password);
+$dbname = 'tour_db';
 
-$t1q = "SELECT * FROM `historic_sites`";
-$statement = $db->prepare($t1q);
-$statement->execute();
-$data= $statement->fetchAll();
+
+$conn = new mysqli($servername,$username,$password,$dbname);
+
+if ($conn->connect_error){
+  die("Connection failed: ".$conn->connect_error);
+}
+
+$t1q = $conn->query("SELECT * FROM historic_sites");
+$sites = array();
+
+if ($t1q-> > 0){
+  while($row = $t1q->fetch_assoc()){
+    $site = array(
+      'id' => $row['id'],
+      'img1_fname' => $row['img1_fname'],
+      'img1_altText' => $row['img1_altText'],
+      'img1_caption' => $row['img1_caption'],
+      'img2_fname' => $row['img2_fname'],
+      'img2_altText' => $row['img2_altText'],
+      'img2_caption' => $row['img2_caption'],
+      'title' => $row['title'],
+      'text1' => $row['text1'],
+      'text2' => $row['text2'],
+    );
+    array_push($sites,$site);
+  }
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <?php foreach($data as $data): ?>
-
     <style>
       .map {
         position: relative;
@@ -75,9 +96,10 @@ $data= $statement->fetchAll();
       <a href="#region2" class="region2">Region 2</a>
       <a href="#region3" class="region3">Region 3</a>
     </div>
-    <?php $id = $data['id']?>
     <ul>
-        <?php echo '<li><a href="template1.php?id='.$id.'">'.$data['title'].'</a> </li>' ?>
+      <?php foreach ($sites as $site): ?>
+        <li><a href="template1.php?id=<?php echo $site['id']; ?>"><?php echo $site['title']; ?></a></li>
+      <?php endforeach; ?>
     </ul>
 
     <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
@@ -87,6 +109,6 @@ $data= $statement->fetchAll();
     <img src="pictures/howto.jpg" alt="How to scan a QR code">
     
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat imperdiet sed euismod nisi porta. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. </p>
-    <?php endforeach; ?>
+    
   </body>
 </html>
