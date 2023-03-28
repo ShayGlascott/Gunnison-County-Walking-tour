@@ -1,107 +1,144 @@
 <?php
+//verify that the session is active and login was successful
+session_start();
 
-/*
-CREATE TABLE IF NOT EXISTS tour_sites (
-  id INT NOT NULL AUTO_INCREMENT,
-  img1_fname TEXT NOT NULL,
-  img1_altText TEXT NOT NULL,
-  img1_caption TEXT NOT NULL,
-  img2_fname TEXT NOT NULL,
-  img2_altText TEXT NOT NULL,
-  img2_caption TEXT NOT NULL,
-  title TEXT NOT NULL,
-  text1 TEXT NOT NULL,
-  text2 TEXT NOT NULL,
-  PRIMARY KEY (id)
-);
-*/
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $siteName = str_replace(' ', '', strtolower($name));
-    
-    $img1Name = $_FILES["img1"]["name"];
-    $img2Name = $_FILES["img2"]["name"];
-    $img1Path = "pictures/$siteName$img1Name";
-    $img2Path = "pictures/$siteName$img2Name";
-    $img1Alt = $_POST["img1Alt"];
-    $img2Alt = $_POST["img2Alt"];
-    $img1Caption = $_POST["img1Caption"];
-    $img2Caption = $_POST["img2Caption"];
-    $text1 = $_POST["text1"];
-    $text2 = $_POST["text2"];
-    
-    if (move_uploaded_file($_FILES["img1"]["tmp_name"], $img1Path) && 
-        move_uploaded_file($_FILES["img2"]["tmp_name"], $img2Path)) {
-        
-        // Connect to database
-        $servername = "localhost";
-        $username = "username";
-        $password = "password";
-        $dbname = "gwt_data";
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        
-        // Insert data into database
-        $sql = "INSERT INTO tour_sites (img1_fname, img1_altText, img1_caption, img2_fname, img2_altText, img2_caption, title, text1, text2)
-                VALUES ('$img1Path', '$img1Alt', '$img1Caption', '$img2Path', '$img2Alt', '$img2Caption', '$name', '$text1', '$text2')";
-        if ($conn->query($sql) === TRUE) {
-            echo "Site created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        
-        $conn->close();
-    } else {
-        echo "Error uploading images";
-    }
+if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
+    //if usr isnt logged in redirect to login page
+    echo "<script>location.href='login.php';</script>";
+    exit;
 }
+
 ?>
+<html>
+  <head>
+    <style>
+      .box {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+      }
+  
+      .title {
+        background-color: #ccc;
+        padding: 10px;
+        font-weight: bold;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        text-align: center;
+      }
+    </style>
+    <title>Gunnion Historic Walking Tour</title>
+  </head>
 
-<!-- 
-Create Site Form
-$name = enter title
-$siteName = $name with whitespace removed all lower case
-$image1 and $image2 = upload 2 images to "pictures/" and store the paths (path = "pictures/$siteName$imageName")
-$image1alt and $image2alt = enter text
-$image1caption and $image2caption = enter text
-%text1 and $text2 = edit and generate 2 html formatted texts using TinyMCE
- -->
+<?php
 
- <form method="post" enctype="multipart/form-data">
-    <label for="name">Title:</label>
-    <input type="text" name="name" required><br>
-    
-    <label for="img1">Image 1:</label>
-    <input type="file" name="img1" required><br>
-    <label for="img1Alt">Image 1 Alt Text:</label>
-    <input type="text" name="img1Alt" required><br>
-    <label for="img1Caption">Image 1 Caption:</label>
-    <input type="text" name="img1Caption" required><br>
-    
-    <label for="img2">Image 2:</label>
-    <input type="file" name="img2" required><br>
-    <label for="img2Alt">Image 2 Alt Text:</label>
-    <input type="text" name="img2Alt" required><br>
-    <label for="img2Caption">Image 2 Caption:</label>
-    <input type="text" name="img2Caption" required><br>
-    
-    <label for="text1">Text 1:</label>
-    <textarea name="text1" id="text1" required></textarea><br>
-    <label for="text2">Text 2:</label>
-    <textarea name="text2" id="text2" required></textarea><br>
+$servername = 'localhost';
+$username = 'student';
+$password = 'CS350';
+$dbname = 'tour_db';
 
-    <input type="submit" value="Create Site">
-</form>
+// Connect to the database
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-<script src="tinymce/js/tinymce/tinymce.min.js"></script>
-<script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    toolbar_mode: 'floating',
-    height: 300
-  });
-</script>
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  
+  // Retrieve all rows from historic_sites table
+  //$sql = "SELECT * FROM historic_sites";
+  $result = $conn->query("SELECT * FROM historic_sites");
+  
+  // Create array to hold sites data
+  $sites = array();
+  
+  // Loop through each row and add it to the sites array
+  if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      $site = array(
+        'id' => $row['id'],
+        'img1_fname' => $row['img1_fname'],
+        'img1_altText' => $row['img1_altText'],
+        'img1_caption' => $row['img1_caption'],
+        'img2_fname' => $row['img2_fname'],
+        'img2_altText' => $row['img2_altText'],
+        'img2_caption' => $row['img2_caption'],
+        'title' => $row['title']
+      );
+      array_push($sites, $site);
+    }
+  }
+  
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $user_id = $POST['user_id']
+  $operation = $_POST['function'];
+  echo $user_id
+  $stmt = $conn->query("SELECT * FROM users");  
+  //empty array for users 
+  $users = array();
+
+  //loop through users and add them to users array
+  if($stmt->num_rows > 0){
+      while($rows = $stmt->fetch_assoc()){
+          $user = array(
+              'id' => $rows['id'],
+              'username' => $rows['uName'],
+              'password' => $rows['passwd'],
+          );
+          array_push($users,$user);
+      }
+  }
+  echo $operation;
+} 
+?>
+  <body>
+    <div class="box">
+      
+    <?php 
+    switch ($operation) {
+      case "edit_main_page":
+        ?>
+
+        <?php
+          break;
+      case "edit_site_page":
+        ?>
+
+        <?php
+          break;
+      case "edit_user_page":
+        ?>
+        <html>
+        
+        <?php foreach($users as $user): ?>
+        <h1>Edit user <?php echo $user['username']; ?></h1>
+
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username_<?php echo $user['id']; ?>" value="<?php echo $user['username']; ?>" required><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password_<?php echo $user['id']; ?>" value="<?php echo $user['password']; ?>" required><br>
+            <input type="submit" name="submit" value="Login">
+        </form>
+        <?php endforeach; ?>
+
+        </html>
+
+        <?php
+          break;
+      
+    }
+    ?>
+
+    </div>
+  </body>
+</html>
+
+
+<?php 
+// Close database connection
+$conn->close();
+
+?>
