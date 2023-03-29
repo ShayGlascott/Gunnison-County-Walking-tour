@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     //sql connection to get users that are not admin
-    $stmt = $conn->query("SELECT * FROM users");
+    $stmt = $conn->query("SELECT * FROM users WHERE id > 0");
 
     //empty array for users 
     $users = array();
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SESSION['id'] == 0) {
 ?>
 <div class="box">
-  <div class="title">Tour Stops</div>
+  <div class="title">Users</div>
   <table>
     <tr>
       <th>User</th>
@@ -114,7 +114,7 @@ if ($_SESSION['id'] == 0) {
     <tr>
       <td><?php echo $username; ?></td>
       <td>
-        <form action="editor.php" method="post">
+        <form action="editor.php" method="POST">
           <input type="hidden" name="function" value="edit_user_page">
           <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
           <input type="submit" value="Edit">
@@ -122,7 +122,7 @@ if ($_SESSION['id'] == 0) {
       </td>
       <!-- Button to delete user -->
       <td>
-        <form action="admin.php" method="post">
+        <form action="admin.php" method="POST">
           <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
           <input type="submit" value="Delete">
         </form>

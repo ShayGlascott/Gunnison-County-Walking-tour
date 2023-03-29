@@ -69,13 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       array_push($sites, $site);
     }
   }
+
   
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $user_id = $POST['user_id']
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $uid = $_POST['user_id'];
   $operation = $_POST['function'];
-  echo $user_id
-  $stmt = $conn->query("SELECT * FROM users");  
+  $stmt = $conn->query("SELECT * FROM users WHERE id = $uid");  
   //empty array for users 
   $users = array();
 
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           array_push($users,$user);
       }
   }
-  echo $operation;
+
 } 
 ?>
   <body>
@@ -107,20 +107,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ?>
 
         <?php
+        //type in old password
+        //check to make sure that its matching 
+        //type new password 2x
+        //check to see if they match for both old and new ones 
+        //post to update
           break;
       case "edit_user_page":
         ?>
         <html>
         
         <?php foreach($users as $user): ?>
-        <h1>Edit user <?php echo $user['username']; ?></h1>
+        <h1>Edit password for <?php echo $user['username']; ?></h1>
 
         <form method="POST">
             <label for="username">Username:</label>
-            <input type="text" name="username_<?php echo $user['id']; ?>" value="<?php echo $user['username']; ?>" required><br>
+            <input type="text" name="username" value="<?php echo $user['username']; ?>" required><br>
             <label for="password">Password:</label>
-            <input type="password" name="password_<?php echo $user['id']; ?>" value="<?php echo $user['password']; ?>" required><br>
+            <input type="text" name="password" value="<?php echo $user['password']; ?>" required><br>
             <input type="submit" name="submit" value="Login">
+            
         </form>
         <?php endforeach; ?>
 
