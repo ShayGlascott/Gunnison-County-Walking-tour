@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     //sql connection to get users that are not admin
-    $stmt = $conn->query("SELECT * FROM users ");
+    $stmt = $conn->query("SELECT * FROM users WHERE id > 0");
 
     //empty array for users 
     $users = array();
@@ -181,7 +181,7 @@ if ($_SESSION['id'] == 0) {
       </table>
     
       <!-- Button to create a new stop -->
-      <form action="admin.php" method="post">
+      <form action="editor.php" method="post">
         <input type="hidden" name="function" value="new_tour_stop">
         <input type="submit" value="New Tour Stop">
       </form>
@@ -199,11 +199,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   switch($update){
     case "site":
       $update_id = $_POST['update_site_id'];
-        $img1_fname = $_POST['img1_name'];
         $img1_altText = $_POST['img1_alt'];
         $img1_caption = $_POST['img1_cap'];
 
-        $img2_fname = $_POST['img2_name'];
         $img2_altText = $_POST['img2_alt'];
         $img2_caption = $_POST['img2_cap'];
 
@@ -212,10 +210,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $text2 = $_POST['text2'];
 
         $stmt = $conn->prepare("UPDATE historic_sites
-          SET img1_fname = ?,
+          SET 
               img1_altText = ?,
               img1_caption = ?,
-              img2_fname = ?,
+              
               img2_altText = ?,
               img2_caption = ?,
               title = ?,
@@ -223,11 +221,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               text2 = ?
           WHERE id = ?
         ");
-        $stmt->bind_param("sssssssssi", $img1_fname, $img1_altText, $img1_caption, $img2_fname, $img2_altText, $img2_caption, $title, $text1, $text2, $update_id);
+        $stmt->bind_param("sssssssi",  $img1_altText, $img1_caption,  $img2_altText, $img2_caption, $title, $text1, $text2, $update_id);
         $stmt->execute();
 
      
-        echo "<script>alert('This is an alert message box.');</script>;";
+        echo "<script>alert('Updated Successfully!');</script>;";
 
         echo "<script>location.href='admin.php';</script>";
 
