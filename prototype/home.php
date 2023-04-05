@@ -3,7 +3,7 @@
 $servername = 'localhost';
 $username = 'student';
 $password = 'CS350';
-$dbname = 'tour_db';
+$dbname = 'tour_db.sql';
 
 
 $conn = new mysqli($servername,$username,$password,$dbname);

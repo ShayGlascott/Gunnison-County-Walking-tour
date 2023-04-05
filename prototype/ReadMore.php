@@ -13,7 +13,7 @@
 ?>
 
 <html>
-<?php foreach($data as $data): ?>
+    <?php foreach($data as $data): ?>
 <head>
 
 </head>
