@@ -26,7 +26,7 @@ body {
 
 #navbar {
     --navbar-height: 100px;
-    position: fixed;
+    position: sticky;
     height: var(--navbar-height);
     background-color: var(--navbar-bg-color);
     left: 0;
@@ -54,6 +54,7 @@ body {
     font-weight: 400;
     font-size: large;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 .home-link:is(:focus, :hover) {
