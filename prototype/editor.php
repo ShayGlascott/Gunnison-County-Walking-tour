@@ -38,40 +38,16 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
         object-fit: cover;
         margin: 10px;
       }
+      #textboxid
+      {
+          height:100px;
+          width: 300px;
+          font-size:10pt;
+      }
+
 
     </style>
     <link rel="stylesheet" href="style.css">
-    <script src="tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type="text/javascript">
-        tinymce.init({
-          selector: 'textarea#basic-conf',
-          a_plugin_option: true,
-          a_configuration_option: 400,
-          width: 600,
-          height: 500,
-          plugins: [
-      'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-      'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
-      'media', 'table', 'emoticons', 'template', 'help'
-    ],
-    toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
-      'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
-      'forecolor backcolor emoticons | help',
-          menu: {
-            file: { title: 'File', items: 'newdocument restoredraft | preview | export print | deleteallconversations' },
-            edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
-            view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments' },
-            insert: { title: 'Insert', items: 'image link media addcomment pageembed template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime' },
-            format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat' },
-            tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
-            table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
-            help: { title: 'Help', items: 'help' }
-  }
-  content_css: 'css/content.css'
-
-        });
-    </script>
-
     <title>Gunnion Historic Walking Tour</title>
   </head>
   
@@ -90,16 +66,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-  
- 
-}
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $site_id = $_POST['site_id'];
-  $operation = $_POST['function'];
+$site_id = $_POST['site_id'];
+$_SESSION['sID'] = $site_id;
+$operation = $_POST['function'];
+$_SESSION['op'] = $operation;
 
-  $result = $conn->query("SELECT * FROM historic_sites WHERE id=".$site_id);
-    
+$result = $conn->query("SELECT * FROM historic_sites WHERE id=".$_SESSION['sID']);
+
+
   // Create array to hold sites data
   $sites = array();
   
@@ -122,6 +96,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  
+ 
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $new = $_POST['addNew'];
+  if($new == 'addIt'){
+    echo "hello";
+    if (isset($_FILES['new_1file']) && isset($_FILES['new_2file'])) {
+      $uploadDir = 'pictures/';
+      $fileName_1 = $_FILES['new_1file']['name'];
+      $filePath_1 = $uploadDir . $fileName_1;
+      $fileName_2 = $_FILES['new_2file']['name'];
+      $filePath_2 = $uploadDir . $fileName_2;
+  
+        if (move_uploaded_file($_FILES['new_1file']['tmp_name'], $filePath_1)) {
+          $img1_fname = $fileName_;
+
+          } else {
+            echo "<script>alert('The First image had an error while being updated. Please try again');</script>;";
+  
+        }
+        if (move_uploaded_file($_FILES['new_2file']['tmp_name'], $filePath_2)) {
+          $img2_fname = $fileName_2;
+
+  
+        } else {
+          echo "<script>alert('The Second image had an error while being updated. Please try again');</script>;";
+  
+      }
+      echo "there";
+        $img1_altText = $_POST['new_img1_alt'];
+        $img1_caption = $_POST['new_img1_cap'];
+
+        $img2_altText = $_POST['new_img2_alt'];
+        $img2_caption = $_POST['new_img2_cap'];
+
+        $title = $_POST['new_title'];
+        $text1 = $_POST['new_text1'];
+        $text2 = $_POST['new_text2'];
+
+        
+        $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
+        VALUES ('$img1_fname', '$img1_altText', '$img1_caption', '$img2_fname', '$img2_altText', '$img2_caption', '$title', '$text1', '$text2')";
+
+          // Execute the query and insert the data into the database
+          if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('New Site has been created!');</script>;";
+
+          } else {
+            echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
+
+          }
+
+
+        echo "<script>location.href='admin.php';</script>";
+
+
+     
+        
+
+  
+    }else{
+
+
   if (isset($_FILES['1file']) && isset($_FILES['2file'])) {
     $uploadDir = 'pictures/';
     $fileName_1 = $_FILES['1file']['name'];
@@ -129,34 +168,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fileName_2 = $_FILES['2file']['name'];
     $filePath_2 = $uploadDir . $fileName_2;
 
-    if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
-      $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
-      if ($conn->query($query)) {
-        echo "<script>alert('The First image for ".$sites['title'] . "was updated Successfully!');</script>;";
+      if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
+        $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
+        if ($conn->query($query)) {
+          echo "<script>alert('The First image for ".$sites['title'] . "was updated Successfully!');</script>;";
 
-     } else {
-      echo "<script>alert('Database error, please try again.');</script>;";
-    } 
-       
       } else {
-        echo "<script>alert('The First image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
+        echo "<script>alert('Database error, please try again.');</script>;";
+      } 
+        
+        } else {
+          echo "<script>alert('The First image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
+
+      }
+      if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
+        $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
+        if ($conn->query($query2)) {
+          echo "<script>alert('The Second image for ".$sites['title'] . "was updated Successfully!');</script>;";
+
+      } else {
+        echo "<script>alert('Database error, please try again.');</script>;";
+      } 
+
+      } else {
+        echo "<script>alert('The Second image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
 
     }
-    if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
-      $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
-      if ($conn->query($query2)) {
-        echo "<script>alert('The Second image for ".$sites['title'] . "was updated Successfully!');</script>;";
-
-     } else {
-      echo "<script>alert('Database error, please try again.');</script>;";
+      
     } 
-
-    } else {
-      echo "<script>alert('The Second image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
-
   }
-    
-} 
+}
+}
   
 
 ?>
@@ -165,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="box">
       
     <?php 
-    switch ($operation) {
+    switch ($_SESSION['op']) {
       case "edit_main_page":
         ?>
 
@@ -173,32 +215,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           break;
       case "edit_site_page":
         ?>
-        <html>
-
-        
-        
-        <?php foreach($sites as $site): ?>
-        <h1>Edit site information for <?php echo $site['title']; ?></h1>
-        <!--form to upload/update files -->
-        <form action='editor.php' method="POST" enctype="multipart/form-data" >
+<?php foreach($sites as $site): ?>
+  <h1>Edit site information for <?php echo $site['title']; ?></h1>
+  <table>
+    <tr>
+      <td>
         <div class="image-preview">
-
           <label for="1file">First Image:</label>
-          <input type="file" name="1file" accept="image/*" onchange="previewImage(event, '1file')" required><br>
-          <img id="preview_1file" class="preview_img" /><br>
-
+          <input type="file" name="1file" value="pictures/<?php echo $site['img1_fname'] ?>" accept="image/*" onchange="previewImage(event, '1file')" required><br>
+          <img id="preview_1file" class="preview_img" src="pictures/<?php echo $site['img1_fname'] ?>" /><br>
         </div>
+      </td>
+      <td>
         <div class="image-preview">
           <label for="2file">Second Image:</label>
-          <input type="file" name="2file" accept="image/*" onchange="previewImage(event, '2file')"><br>
-          <img id="preview_2file" class="preview_img" /><br>
+          <input type="file" name="2file" value="pictures/<?php echo $site['img2_fname'] ?>" accept="image/*" onchange="previewImage(event, '2file')"><br>
+          <img id="preview_2file" class="preview_img" src="pictures/<?php echo $site['img2_fname'] ?>" /><br>
         </div>
-          <input type='hidden' name='site_id' value="<?php echo $site_id; ?>">
-          <input type="hidden" name="function" value="edit_site_page">
-          <input type="submit" name="submit" value="Add Images">
-        </form>
-        
-        <script>
+      </td>
+    </tr>
+    <tr>
+    <script>
           function previewImage(event, inputId) {
             var reader = new FileReader();
             reader.onload = function() {
@@ -209,80 +246,120 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             reader.readAsDataURL(event.target.files[0]);
           }
           </script>
-        <!--form to post updated to the admin page -->
-
-        <form action="admin.php" method="POST" enctype="multipart/form-data">
-            <input type='hidden' name='update' value='site'>
-            <input type='hidden' name='update_site_id' value='<?php echo $site['id'];?>'>
-
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="<?php echo $site['title']; ?>" required><br>
-
-            <label for="img1_alt">First Image alt Text:</label>
-            <input type="text" name="img1_alt" value="<?php echo $site['img1_altText']; ?>" required><br>
-            <label for="img1_cap">First Image Caption:</label>
-            <input type="text" name="img1_cap" value="<?php echo $site['img1_caption']; ?>" required><br>
-            
-            <label for="img2_alt">Second Image alt Text:</label>
-            <input type="text" name="img2_alt" value="<?php echo $site['img2_altText']; ?>" required><br>
-            <label for="img2_cap">Second Image Caption:</label>
-            <input type="text" name="img2_cap" value="<?php echo $site['img2_caption']; ?>" required><br>
-            
-            <textarea id="basic-conf">hello</textarea>
-
-            <label for="text2">Read More:</label>
-            <input type="text" name="text2" value="<?php echo $site['text2']; ?>" required><br>
-
-            <input type="submit" name="submit" value="UPDATE">
-            
+      <td colspan="2">
+        <!--form to upload/update files -->
+        <form action='editor.php' method="POST" enctype="multipart/form-data" >
+          <input type='hidden' name='site_id' value="<?php echo $site_id; ?>">
+          <input type="hidden" name="function" value="edit_site_page">
+          <input type="submit" name="submit" value="Add Images">
         </form>
-        <?php endforeach; 
-          break;?>
-        </html>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button onclick="window.location.href ='editText1.php?id=<?php echo $site_id; ?>;'">Edit Introduction Text</button>
+        <button onclick="window.location.href ='editText2.php?id=<?php echo $site_id; ?>;'">Edit Read More Text</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <!--form to post updated to the admin page -->
+        <form action="admin.php" method="POST" enctype="multipart/form-data">
+          <input type='hidden' name='update' value='site'>
+          <input type='hidden' name='update_site_id' value='<?php echo $site['id'];?>'>
+
+          <label for="title">Title:</label>
+          <input type="text" name="title" value="<?php echo $site['title']; ?>" required><br>
+
+          <label for="img1_alt">First Image alt Text:</label>
+          <input id='textboxid' type="text" name="img1_alt" value="<?php echo $site['img1_altText']; ?>" required><br>
+          <label for="img1_cap">First Image Caption:</label>
+          <input id='textboxid' type="text" name="img1_cap" value="<?php echo $site['img1_caption']; ?>" required><br>
+
+          <label for="img2_alt">Second Image alt Text:</label>
+          <input id='textboxid' type="text" name="img2_alt" value="<?php echo $site['img2_altText']; ?>" required><br>
+          <label for="img2_cap">Second Image Caption:</label>
+          <input id='textboxid' type="text" name="img2_cap" value="<?php echo $site['img2_caption']; ?>" required><br>
+
+          <input type="submit" name="submit" value="UPDATE">
+        </form>
+      </td>
+    </tr>
+   
+  </table>
+<?php endforeach; 
+      break;?>
+
         <?php
         case "new_tour_stop":
         ?>
-        <html>
-        
-        <h1>Add a new site:</h1>
+  <h1>Add a new Stop:</h1>
+  <table>
+    <tr>
+    <script>
+          function previewImage(event, inputId) {
+            var reader = new FileReader();
+            reader.onload = function() {
+              var outputId = "preview_" + inputId;
+              var output = document.getElementById(outputId);
+              output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+          }
+          </script>
+        <!--form to upload/update files -->
+          
+    
+    </tr>
+   
+    <tr>
+      <td colspan="2">
+        <!--form to post updated to the admin page -->
+        <form action="editor.php" method="POST" enctype="multipart/form-data">
+          <input type='hidden' name='addNew' value='addIt'>
+      
+        <div class="image-preview">
+          <label for="new_1file">First Image:</label>
+          <input type="file" name="new_1file"  accept="image/*" onchange="previewImage(event, 'new_1file')" required><br>
+          <img id="preview_new_1file" class="preview_img"  /><br>
+        </div>
+      
+        <div class="image-preview">
+          <label for="new_2file">Second Image:</label>
+          <input type="file" name="new_2file"  accept="image/*" onchange="previewImage(event, 'new_2file')" required><br>
+          <img id="preview_new_2file" class="preview_img"/><br>
+        </div>
+      
+          <label for="title">Title:</label>
+          <input type="text" name="new_title"  required><br>
 
+          <label for="new_img1_alt">First Image alt Text:</label>
+          <input id='textboxid' type="text" name="new_img1_alt" required><br>
+          <label for="new_img1_cap">First Image Caption:</label>
+          <input id='textboxid' type="text" name="new_img1_cap" required><br>
 
-        <form action='admin.php' method="POST">
-            <input type='hidden' name='update' value='new'>
-
-            <label for="title">Title:</label>
-            <input type="text" name="title"  required><br>
-
-            <label for="img1_name">First Image:</label>
-            <input type="file" name="img1" required><br>
-            <label for="img1_alt">First Image alt Text:</label>
-            <input type="text" name="img1_alt" required><br>
-            <label for="img1_cap">First Image Caption:</label>
-            <input type="text" name="img1_cap"required><br>
-            
-            <label for="img2_name">Second Image:</label>
-            <input type="file" name="img2" required><br>
-            <label for="img2_alt">Second Image alt Text:</label>
-            <input type="text" name="img2_alt" required><br>
-            <label for="img2_cap">Second Image Caption:</label>
-            <input type="text" name="img2_cap" required><br>
-            
-            <label for="text1">Introduction Text:</label>
-            <input type="text" name="text1" required><br>
-
-            <label for="text2">Read More:</label>
-            <input type="text" name="text2" required><br>
-
-            <input type="submit" name="submit" value="ADD NEW">
-            
+          <label for="new_img2_alt">Second Image alt Text:</label>
+          <input id='textboxid' type="text" name="new_img2_alt"  required><br>
+          <label for="new_img2_cap">Second Image Caption:</label>
+          <input id='textboxid' type="text" name="new_img2_cap"  required><br>
+          <label for="new_text1">Introduction Text:</label><br>
+          <textarea name='new_text1'rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
+          </textarea><br>
+          <label for="new_text2">Read More Text:</label><br>
+          <textarea name='new_text2' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
+          </textarea><br>
+          <input type="submit" name="submit" value="Create!">
         </form>
-
-        <?php
+      </td>
+    </tr>
+   
+  </table>
+<?php  
           break;
 
        
     }
-  }?>
+  ?>
 
     </div>
   </body>

@@ -17,30 +17,32 @@ if ($conn->connect_error) {
 if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $passwd = $_POST['password'];
-
-  $sql = "SELECT * FROM users WHERE uName = '$username' AND passwd = '$passwd'";
+  
+  $sql = "SELECT * FROM users WHERE uName = '$username'";
   $result = $conn->query($sql);
+  
   if ($result->num_rows > 0) {
-    $users = array();
-    while($row = $result->fetch_assoc()){
-        $user = array(
-          'id' => $row['id'],
-          'name' => $row['uName'],
-        );
-        array_push($users,$user);
-      }
-    // Username and password match
-    $id = $sites['id'];
-    session_regenerate_id();
-    $_SESSION['isVerified'] = 1;
-    $_SESSION['name'] = $username;
-    $_SESSION['id'] = $id;
-    echo "<script>location.href='admin.php';</script>";
+    $row = $result->fetch_assoc();
+    $hashed_password = $row['passwd'];
+    
+    if (password_verify($passwd, $hashed_password)) {
+      // Username and password match
+      $id = $row['id'];
+      session_regenerate_id();
+      $_SESSION['isVerified'] = 1;
+      $_SESSION['name'] = $username;
+      $_SESSION['id'] = $id;
+      echo "<script>location.href='admin.php';</script>";
+    } else {
+      // Password does not match
+      echo "Invalid password.";
+    }
   } else {
-    // Username and password do not match
-    echo "Invalid username or password.";
+    // Username not found
+    echo "Invalid username.";
   }
 }
+
 ?>
 
 <html>
