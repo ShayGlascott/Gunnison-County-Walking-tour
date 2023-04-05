@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     //sql connection to get users that are not admin
-    $stmt = $conn->query("SELECT * FROM users WHERE id > 0");
+    $stmt = $conn->query("SELECT * FROM users ");
 
     //empty array for users 
     $users = array();
