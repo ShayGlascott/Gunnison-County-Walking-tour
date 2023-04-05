@@ -76,7 +76,7 @@ if ($t1q->num_rows> 0){
           </div>
         </nav>
       </header>
-      
+      <br><br><br><br>
       <script src="index.js"></script>
       <!-- Add your content here -->
       <div class = main-info>

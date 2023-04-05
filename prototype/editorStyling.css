@@ -23,7 +23,32 @@ body {
     padding: 20px;
     margin: 0 auto;
 }
+.box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
 
+  .title {
+    background-color: #ccc;
+    padding: 10px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+  }
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .preview_img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+  }
 #navbar {
     --navbar-height: 100px;
     position:fixed;
@@ -145,36 +170,4 @@ body {
     background-color: var(--navbar-bg-color);
     opacity: 1;
     visibility: visible;
-}
-.main-info{
-    text-align: center;
-}
-.map{
-    width: 100%;
-    height: 100%;
-
-}
-footer {
-    background-color: #f8f8f8;
-    color: #555;
-    padding: 20px 0;
-}
-
-footer a {
-    color: #555;
-    text-decoration: none;
-}
-
-footer img {
-    max-width: 100%;
-}
-
-footer ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-footer ul li {
-    margin-bottom: 10px;
 }

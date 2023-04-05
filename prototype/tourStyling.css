@@ -26,19 +26,25 @@ body {
 
 #navbar {
     --navbar-height: 100px;
-    position: sticky;
+    position:fixed;
     height: var(--navbar-height);
     background-color: var(--navbar-bg-color);
     left: 0;
     right: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 1;
 }
+.fixed-position {
+    position: fixed;
+ }
+
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     height: 100%;
     align-items: center;
+
 }
 
 .navbar-item {
@@ -142,6 +148,11 @@ body {
 }
 .main-info{
     text-align: center;
+}
+#header{
+    z-index: 9999;
+    background-color:#fff;
+    min-width:100%;
 }
 footer {
     background-color: #f8f8f8;

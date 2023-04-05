@@ -11,37 +11,9 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 ?>
 <html>
   <head>
-    <style>
-      .box {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px 0;
-      }
-  
-      .title {
-        background-color: #ccc;
-        padding: 10px;
-        font-weight: bold;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        text-align: center;
-      }
-      .image-preview {
-        display: flex;
-        flex-wrap: wrap;
-      }
 
-      .preview_img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        margin: 10px;
-      }
-
-    </style>
-    <link rel="stylesheet" href="style.css">
-    <script src="tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="editorStyling.css">
+    <script src="tinymce/js/tinymce" referrerpolicy="origin"></script>
     <script type="text/javascript">
         tinymce.init({
           selector: 'textarea#basic-conf',
@@ -67,7 +39,7 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
             table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
             help: { title: 'Help', items: 'help' }
   }
-  content_css: 'css/content.css'
+  /* content_css: 'css/content.css' */
 
         });
     </script>
@@ -77,6 +49,38 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
   
   
   <body>
+    <header id="navbar">
+        <nav class="navbar-container container">
+          <a class="home-link">
+            <div class="navbar-logo">
+              <img src = "pictures/cityOfGunniLogo.png" alt = 'navLogo'
+                weight = "70px"
+                height = "70px" />
+            </div>
+            Gunnison Walking Tour
+          </a>
+          <button
+            type="button"
+            id="navbar-toggle"
+            aria-controls="navbar-menu"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div id="navbar-menu" aria-labelledby="navbar-toggle">
+            <ul class="navbar-links">
+              <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <br><br><br><br>
 <?php
 
 $servername = 'localhost';
@@ -238,11 +242,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <?php endforeach; 
           break;?>
-        </html>
+        
         <?php
         case "new_tour_stop":
         ?>
-        <html>
+        
         
         <h1>Add a new site:</h1>
 
