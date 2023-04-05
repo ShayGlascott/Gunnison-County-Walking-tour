@@ -76,7 +76,7 @@ if ($t1q->num_rows> 0){
           </div>
         </nav>
       </header>
-      <br><br><br><br>
+      
       <script src="index.js"></script>
       <!-- Add your content here -->
       <div class = main-info>
@@ -85,13 +85,12 @@ if ($t1q->num_rows> 0){
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
         <h2>Points of Interest</h2>
-        <div class="map">
-          <img src="pictures/map.jpg" alt="Map of Gunnison, Colorado"
-          >
+        <div style="position:relative">
+          <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
           <br>
-          <a href="#region1" class="region1">Region 1</a>
-          <a href="#region2" class="region2">Region 2</a>
-          <a href="#region3" class="region3">Region 3</a>
+          <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
+          <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
+          <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
         </div>
         <ul>
           <?php foreach ($sites as $site): ?>

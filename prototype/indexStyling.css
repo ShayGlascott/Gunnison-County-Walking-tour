@@ -26,7 +26,7 @@ body {
 
 #navbar {
     --navbar-height: 100px;
-    position: fixed;
+    position: sticky;
     height: var(--navbar-height);
     background-color: var(--navbar-bg-color);
     left: 0;
@@ -54,6 +54,7 @@ body {
     font-weight: 400;
     font-size: large;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 .home-link:is(:focus, :hover) {
@@ -141,6 +142,11 @@ body {
 }
 .main-info{
     text-align: center;
+}
+.map{
+    width: 100%;
+    height: 100%;
+
 }
 footer {
     background-color: #f8f8f8;
