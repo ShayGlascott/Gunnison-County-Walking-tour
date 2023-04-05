@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
   }
-  
+}
 ?>
 
   <body>
@@ -97,11 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SESSION['id'] == 0) {
 ?>
 <div class="box">
-  <div class="title">Users</div>
+  <div class="title">Edit Users</div>
   <table>
     <tr>
       <th>User</th>
-      <th>Edit</th>
       <th>Delete</th>
     </tr>
 
@@ -113,13 +112,6 @@ if ($_SESSION['id'] == 0) {
 
     <tr>
       <td><?php echo $username; ?></td>
-      <td>
-        <form action="editor.php" method="POST">
-          <input type="hidden" name="function" value="edit_user_page">
-          <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-          <input type="submit" value="Edit">
-        </form>
-      </td>
       <!-- Button to delete user -->
       <td>
         <form action="admin.php" method="POST">
@@ -140,8 +132,9 @@ if ($_SESSION['id'] == 0) {
 ?>
 
     <!-- Button to edit main page -->
-    <form action="editor.php" method="post">
+    <form action="editor.php" method="POST">
       <input type="hidden" name="function" value="edit_main_page">
+      
       <input type="submit" value="Edit Main Page">
     </form>
   
@@ -165,7 +158,7 @@ if ($_SESSION['id'] == 0) {
           <td><?php echo $name; ?></td>
           <!-- Button to edit stop -->
           <td>
-            <form action="editor.php" method="post">
+            <form action="editor.php" method="POST">
               <input type="hidden" name="function" value="edit_site_page">
               <input type="hidden" name="site_id" value="<?php echo $site_id; ?>">
               <input type="submit" value="Edit">
@@ -173,7 +166,8 @@ if ($_SESSION['id'] == 0) {
           </td>
           <!-- Button to delete stop -->
           <td>
-            <form action="admin.php" method="post">
+            <form action="admin.php" method="POST">
+              <input type="hidden" name="update" value="delete">
               <input type="hidden" name="site_id" value="<?php echo $site_id; ?>">
               <input type="submit" value="Delete">
             </form>
@@ -198,8 +192,51 @@ if ($_SESSION['id'] == 0) {
 
 
 <?php 
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  
+  $update = $_POST['update'];
+
+  switch($update){
+    case "site":
+      $update_id = $_POST['update_site_id'];
+        $img1_fname = $_POST['img1_name'];
+        $img1_altText = $_POST['img1_alt'];
+        $img1_caption = $_POST['img1_cap'];
+
+        $img2_fname = $_POST['img2_name'];
+        $img2_altText = $_POST['img2_alt'];
+        $img2_caption = $_POST['img2_cap'];
+
+        $title = $_POST['title'];
+        $text1 = $_POST['text1'];
+        $text2 = $_POST['text2'];
+
+        $stmt = $conn->prepare("UPDATE historic_sites
+          SET img1_fname = ?,
+              img1_altText = ?,
+              img1_caption = ?,
+              img2_fname = ?,
+              img2_altText = ?,
+              img2_caption = ?,
+              title = ?,
+              text1 = ?,
+              text2 = ?
+          WHERE id = ?
+        ");
+        $stmt->bind_param("sssssssssi", $img1_fname, $img1_altText, $img1_caption, $img2_fname, $img2_altText, $img2_caption, $title, $text1, $text2, $update_id);
+        $stmt->execute();
+
+     
+        echo "<script>alert('This is an alert message box.');</script>;";
+
+        echo "<script>location.href='admin.php';</script>";
+
+      break;
+  }
+  
   $site_id = $_POST['site_id'];
+  
+
 
   // Confirmation before delete:  Type the full name of the site exactly as it appears in the database.
   
