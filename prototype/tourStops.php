@@ -76,7 +76,12 @@ if ($t1q->num_rows> 0){
     <br><br><br><br>
     <script src="index.js"></script>
     <div class = main-info>
-            <h2>Points of Interest</h2>
+            <h1>Points of Interest</h1>
+            <style>
+              h1{
+                font-size: 100px;
+              }
+            </style>
             <div style="position:relative">
               <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
               <br>
@@ -100,24 +105,21 @@ if ($t1q->num_rows> 0){
     
     
         <footer>
-            <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                <a href="about.php">About Us</a>
-                </div>
-                <div class="col-md-4">
-                <img src="pictures/cityOfGunniLogo.png" alt="Logo">
-                </div>
-                <div class="col-md-4">
-                <ul>
-                    <li>123 Main Street</li>
-                    <li>City, State ZIP</li>
-                    <li>Phone: 123-456-7890</li>
-                    <li>Email: info@example.com</li>
-                </ul>
-                </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              
+              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
+              <a href="about.php">About Us</a><br><br>
+              <ul>
+                <li>123 Main Street</li>
+                <li>City, State ZIP</li>
+                <li>Phone: 123-456-7890</li>
+                <li>Email: info@example.com</li>
+              </ul>
             </div>
-            </div>
-        </footer>
+          </div>
+        </div>
+      </footer>  
     </body>
 </html>
