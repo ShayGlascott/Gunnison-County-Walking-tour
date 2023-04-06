@@ -80,12 +80,9 @@ $data= $statement->fetchAll();
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              <a href="about.php">About Us</a>
-            </div>
-            <div class="col-md-4">
-              <img src="pictures/cityOfGunniLogo.png" alt="Logo">
-            </div>
-            <div class="col-md-4">
+              
+              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
+              <a href="about.php">About Us</a><br><br>
               <ul>
                 <li>123 Main Street</li>
                 <li>City, State ZIP</li>

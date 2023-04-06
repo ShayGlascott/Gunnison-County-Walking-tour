@@ -101,9 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $new = $_POST['addNew'];
+  if(isset($_POST['addNew'])){
+    $new = $_POST['addNew'];
+  }
   if($new == 'addIt'){
-    echo "hello";
     if (isset($_FILES['new_1file']) && isset($_FILES['new_2file'])) {
       $uploadDir = 'pictures/';
       $fileName_1 = $_FILES['new_1file']['name'];
@@ -354,6 +355,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </tr>
    
   </table>
+  
 <?php  
           break;
 

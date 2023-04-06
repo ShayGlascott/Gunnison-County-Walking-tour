@@ -37,7 +37,6 @@ if ($t1q->num_rows> 0){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-MJ8AeRhnOvA1WhJpULy0x8g0Mq3wqdkJ/DH0mzLuXcTnq3TqNCVizif2n59a7VszJl/JuID7sI91af6fs+Xtw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel = "stylesheet" href = "indexStyling.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,11 +53,11 @@ if ($t1q->num_rows> 0){
             Gunnison Walking Tour
           </a>
           <button
-            type="button"
-            id="navbar-toggle"
-            aria-controls="navbar-menu"
-            aria-label="Toggle menu"
-            aria-expanded="false"
+              type="button"
+              id="navbar-toggle"
+              aria-controls="navbar-menu"
+              aria-label="Toggle menu"
+              aria-expanded="false"
             >
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -74,17 +73,21 @@ if ($t1q->num_rows> 0){
           </div>
         </nav>
     </header>
-    <br><br><br><br><br>
+    <br><br><br><br>
     <script src="index.js"></script>
     <div class = main-info>
-            <h2>Points of Interest</h2>
-            <div class="map">
-            <img src="pictures/map.jpg" alt="Map of Gunnison, Colorado"
-            >
-            <br>
-            <a href="#region1" class="region1">Region 1</a>
-            <a href="#region2" class="region2">Region 2</a>
-            <a href="#region3" class="region3">Region 3</a>
+            <h1>Points of Interest</h1>
+            <style>
+              h1{
+                font-size: 100px;
+              }
+            </style>
+            <div style="position:relative">
+              <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
+              <br>
+              <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
+              <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
+              <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
             </div>
             <ul>
             <?php foreach ($sites as $site): ?>
@@ -102,24 +105,21 @@ if ($t1q->num_rows> 0){
     
     
         <footer>
-            <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                <a href="about.php">About Us</a>
-                </div>
-                <div class="col-md-4">
-                <img src="pictures/cityOfGunniLogo.png" alt="Logo">
-                </div>
-                <div class="col-md-4">
-                <ul>
-                    <li>123 Main Street</li>
-                    <li>City, State ZIP</li>
-                    <li>Phone: 123-456-7890</li>
-                    <li>Email: info@example.com</li>
-                </ul>
-                </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              
+              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
+              <a href="about.php">About Us</a><br><br>
+              <ul>
+                <li>123 Main Street</li>
+                <li>City, State ZIP</li>
+                <li>Phone: 123-456-7890</li>
+                <li>Email: info@example.com</li>
+              </ul>
             </div>
-            </div>
-        </footer>
+          </div>
+        </div>
+      </footer>  
     </body>
 </html>
