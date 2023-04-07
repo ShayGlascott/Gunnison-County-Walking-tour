@@ -17,6 +17,9 @@ body {
     line-height: 1.6;
     text-align: center;
 }
+h1{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 .container {
     max-width: 1000px;

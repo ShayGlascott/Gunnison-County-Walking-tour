@@ -101,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $new = '';
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
