@@ -53,8 +53,13 @@
       <br><br><br><br>
       <h1>More Info </h1>
       <script src="index.js"></script>
-    <div
+    <div>
     <?php echo $data['text2'] ?> 
+    <?php $next_site_id = $getId + 1 ?>
+    <br>
+    <button onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
+
+    </div>
 </body> 
 <footer>
         <div class="container">
