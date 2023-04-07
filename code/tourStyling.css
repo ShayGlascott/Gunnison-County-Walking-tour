@@ -17,6 +17,10 @@ body {
     line-height: 1.6;
     text-align: center;
 }
+p{
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 .container {
     max-width: 1000px;

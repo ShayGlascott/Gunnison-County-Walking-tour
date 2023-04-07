@@ -77,11 +77,11 @@ if ($t1q->num_rows> 0){
     <script src="index.js"></script>
     <div class = main-info>
             <h1>Points of Interest</h1>
-            <style>
+            <!-- <style>
               h1{
                 font-size: 100px;
               }
-            </style>
+            </style> -->
             <div style="position:relative">
               <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
               <br>
