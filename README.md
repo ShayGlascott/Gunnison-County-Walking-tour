@@ -1,3 +1,8 @@
+## Necessary fixes:
+* Change database accesses to use [PDO](https://www.php.net/manual/en/book.pdo.php)
+* [Example of PDO used to access a database](examples/index.php)
+* Make instructions for using admin page and generating qr codes
+
 # Gunnison Historical Walking Tour
 ## Installation
 ### Clone the GitHub repository:  
