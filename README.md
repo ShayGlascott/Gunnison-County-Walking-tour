@@ -1,6 +1,9 @@
 # Gunnison Historical Walking Tour
 
-Clone the Git repository:  
+## Installation
+Use the script `./setup.sh` or install manually:
+
+Clone the GitHub repository:  
 `git clone https://github.com/CampbellZach/CS_495.git`
 
 Change into the project directory:  
@@ -11,3 +14,11 @@ Build the Docker images:
 
 Start the Docker containers:  
 `docker-compose up -d`
+
+## Using the website
+
+Admin Page
+
+QR Codes
+
+...
