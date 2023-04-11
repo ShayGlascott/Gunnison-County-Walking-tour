@@ -12,7 +12,8 @@ try {
   echo "Connection failed: " . $e->getMessage();
   exit();
 }
-$t1q = "SELECT * FROM `historic_sites` WHERE id = " . $_GET['id'];
+$getId = $_GET['id'];
+$t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
 $statement = $conn->prepare($t1q);
 $statement->execute();
 $data= $statement->fetchAll();
@@ -79,7 +80,7 @@ $data= $statement->fetchAll();
     <!-- Further information and pictures for those interested in reading more -->
     <?php $id = $data['id']?>
     <!--Getting the id for the item that is being displayed-->
-    <?php echo '<a href="ReadMore.php?id='.$getId.'">Read More</a>';?>
+    <?php echo '<a href="ReadMore.php?id='.$id.'">Read More</a>';?>
     <?php endforeach; ?>
     <?php $next_site_id = $getId + 1 ?>
     <br>
