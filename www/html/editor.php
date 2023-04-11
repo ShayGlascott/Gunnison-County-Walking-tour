@@ -57,10 +57,8 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 
 $site_id = $_POST['site_id'];
 $_SESSION['sID'] = $site_id;
-echo $site_id;
 $operation = $_POST['function'];
 $_SESSION['op'] = $operation;
-echo $operation;
 $host = 'mysql';
 $db_name = 'tourdb';
 $username = 'user';
@@ -77,22 +75,8 @@ try {
 $sites = array();
 $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
 $stmt = $conn->prepare($t1q);
-
-while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-  $site = array(
-    'id' => $row['id'],
-    'img1_fname' => $row['img1_fname'],
-    'img1_altText' => $row['img1_altText'],
-    'img1_caption' => $row['img1_caption'],
-    'img2_fname' => $row['img2_fname'],
-    'img2_altText' => $row['img2_altText'],
-    'img2_caption' => $row['img2_caption'],
-    'title' => $row['title'],
-    'text1' => $row['text1'],
-    'text2' => $row['text2'],
-  );
-  array_push($sites,$site);
-}
+$stmt->execute();
+$data= $stmt->fetchAll();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -218,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           break;
       case "edit_site_page":
         ?>
-<?php foreach($sites as $site): ?>
+<?php foreach($data as $site): ?>
   <h1>Edit site information for <?php echo $site['title']; ?></h1>
   <table>
     <tr>
