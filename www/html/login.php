@@ -1,28 +1,28 @@
 <?php 
 session_start();
 
-$servername = 'localhost';
-$username = 'student';
-$password = 'CS350';
-$dbname = 'tour_db';
-$_SESSION['isVerified'] = -1;
+$host = 'mysql';
+$db_name = 'tourdb';
+$username = 'user';
+$password = 'password';
 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+try {
+  $conn = new PDO('mysql:host='.$host.';port=3306;dbname='.$db_name, $username, $password);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+  exit();
 }
-
 if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $passwd = $_POST['password'];
   
-  $sql = "SELECT * FROM users WHERE uName = '$username'";
-  $result = $conn->query($sql);
+  $sql = "SELECT * FROM users WHERE uName = :username";
+  $statement = $conn->prepare($sql);
+  $statement->execute(['username' => $username]);
+  $row = $statement->fetch(PDO::FETCH_ASSOC);
   
-  if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+  if ($row) {
     $hashed_password = $row['passwd'];
     
     if (password_verify($passwd, $hashed_password)) {
