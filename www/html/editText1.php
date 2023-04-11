@@ -6,6 +6,7 @@
         echo "<script>location.href='login.php';</script>";
         exit;
     }
+    $site_id = $_GET['id'];
     $host = 'mysql';
     $db_name = 'tourdb';
     $username = 'user';
@@ -19,7 +20,6 @@
       exit();
     }
 
-    $sites = array();
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
     $stmt = $conn->prepare($t1q);
     $stmt->execute();
