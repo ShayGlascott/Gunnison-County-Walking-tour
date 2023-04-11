@@ -19,29 +19,11 @@
       exit();
     }
 
-    $result = $conn->query("SELECT * FROM historic_sites WHERE id=".$_SESSION['sID']);
-    
-  // Create array to hold sites data
-  $sites = array();
-  
-  // Loop through each row and add it to the sites array
-  if ($result->num_rows > 0) {
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-      $site = array(
-        'id' => $row['id'],
-        'img1_fname' => $row['img1_fname'],
-        'img1_altText' => $row['img1_altText'],
-        'img1_caption' => $row['img1_caption'],
-        'img2_fname' => $row['img2_fname'],
-        'img2_altText' => $row['img2_altText'],
-        'img2_caption' => $row['img2_caption'],
-        'title' => $row['title'],
-        'text1' => $row['text1'],
-        'text2' => $row['text2']
-      );
-      array_push($sites, $site);
-    }
-  }
+    $sites = array();
+    $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
+    $stmt = $conn->prepare($t1q);
+    $stmt->execute();
+    $data= $stmt->fetchAll();
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $text1 = $_POST['ut1'];
@@ -55,7 +37,6 @@
     echo "<script>location.href='editor.php';</script>";
 
 }
-foreach($sites as $site):
 
 echo '<!DOCTYPE html>
 <html>
@@ -91,14 +72,12 @@ echo '<!DOCTYPE html>
 
     <div class="box" style=\'position: absolute; top: 2;\'>
         <form action="editText1.php" method="post">
-            <textarea id="myTextarea" name="ut1">'.$site['text1']. '</textarea>
+            <textarea id="myTextarea" name="ut1">'.$data['text1']. '</textarea>
             <input type="submit" value="Update">
         </form>
     </div>
 </body>
 </html>';
-
-endforeach;
 ?>
 
 
