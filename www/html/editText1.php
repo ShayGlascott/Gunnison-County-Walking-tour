@@ -37,7 +37,7 @@
     echo "<script>location.href='editor.php';</script>";
 
 }
-
+foreach($data as $data):
 echo '<!DOCTYPE html>
 <html>
 <head>
@@ -78,6 +78,7 @@ echo '<!DOCTYPE html>
     </div>
 </body>
 </html>';
+endforeach;
 ?>
 
 
