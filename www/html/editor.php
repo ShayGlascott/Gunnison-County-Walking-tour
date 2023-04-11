@@ -87,9 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $data= $stmt->fetchAll();
   }
-  else{
-    continue;
-  }
+
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
