@@ -12,7 +12,6 @@ try {
   echo "Connection failed: " . $e->getMessage();
   exit();
 }
-echo $_GET['id'];
 $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $_GET['id'];
 $statement = $conn->prepare($t1q);
 $statement->execute();
