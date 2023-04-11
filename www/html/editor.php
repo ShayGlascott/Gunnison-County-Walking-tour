@@ -101,6 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
+  else{
+    $new = "";
+  }
   if($new == 'addIt'){
     if (isset($_FILES['new_1file']) && isset($_FILES['new_2file'])) {
       $uploadDir = 'pictures/';
