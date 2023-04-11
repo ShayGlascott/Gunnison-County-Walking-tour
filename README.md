@@ -23,10 +23,6 @@
         ├── database.php
         ├── index.php
         └── ...
-
-
-
-
 ```
 
 # Gunnison Historical Walking Tour

@@ -1,13 +1,19 @@
 <?php
 
-$dsn = 'mysql:host=localhost;dbname=tour_db';
-$username = 'student';
-$password = 'CS350';
-$db = new PDO($dsn, $username, $password);
+$host = 'mysql';
+$db_name = 'tourdb';
+$username = 'user';
+$password = 'password';
 
-$getId = $_GET['id'];
+try {
+  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+  exit();
+}
 
-$t1q = "SELECT * FROM `historic_sites` WHERE id =". $getId;
+$t1q = "SELECT * FROM `historic_sites` WHERE id = " . $_GET['id'];
 $statement = $db->prepare($t1q);
 $statement->execute();
 $data= $statement->fetchAll();
