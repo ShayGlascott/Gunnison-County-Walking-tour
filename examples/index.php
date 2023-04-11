@@ -7,7 +7,7 @@
         <h1>Hello World!</h1>  
         <p><?php echo 'We are running PHP, version: ' . phpversion(); ?></p>  
         <?  // Database values:
-            $database ="dbname";  
+            $database ="tourdb";  
             $user = "user";  
             $password = "password";  
             $host = "mysql"; // Do not change 

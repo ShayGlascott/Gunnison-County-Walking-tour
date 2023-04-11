@@ -35,13 +35,27 @@ services:
             - mysql-data  
         environment:  
          MYSQL_ROOT_PASSWORD: secret  
-         MYSQL_DATABASE: mydb  
-         MYSQL_USER: myuser  
+         MYSQL_DATABASE: tourdb  
+         MYSQL_USER: user  
          MYSQL_PASSWORD: password  
 
     mysql-data:    
         image: mysql:5.7  
         container_name: mysql-data-container  
         volumes:  
-            - /var/lib/mysql  
+    #        - /var/lib/mysql  
+            - ./content/tourdb.sql:/docker-entrypoint-initdb.d/init.sql  
         command: "true" 
+
+    # mysql-import:    
+    #     image: mysql:5.7  
+    #     container_name: mysql-import-container  
+    #     volumes:  
+    #         - ./content/tourdb.sql:/docker-entrypoint-initdb.d/init.sql  
+    #     environment:  
+    #         MYSQL_ROOT_PASSWORD: secret  
+    #         MYSQL_DATABASE: tourdb  
+    #         MYSQL_USER: user  
+    #         MYSQL_PASSWORD: password  
+    #     depends_on:  
+    #         - mysql  
