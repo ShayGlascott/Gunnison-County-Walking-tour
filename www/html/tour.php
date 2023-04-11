@@ -17,6 +17,8 @@ $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
 $statement = $conn->prepare($t1q);
 $statement->execute();
 $data= $statement->fetchAll();
+
+$last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 
 <html>
@@ -49,8 +51,8 @@ $data= $statement->fetchAll();
         <div id="navbar-menu" aria-labelledby="navbar-toggle">
           <ul class="navbar-links">
             <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="tour.php">Tours</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="">About</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
             <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
           </ul>
         </div>
@@ -82,10 +84,15 @@ $data= $statement->fetchAll();
     <!--Getting the id for the item that is being displayed-->
     <?php echo '<a href="ReadMore.php?id='.$id.'">Read More</a>';?>
     <?php endforeach; ?>
-    <?php $next_site_id = $getId + 1 ?>
+    <?php 
+      $next_site_id = $getId + 1;
+      if ($next_site_id < $last_site_id) {
+    ?>
     <br>
     <button onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
-
+    <?php
+      }
+    ?>
     <footer>
         <div class="container">
           <div class="row">
