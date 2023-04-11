@@ -3,6 +3,32 @@
 * [Example of PDO used to access a database](examples/index.php)
 * Make instructions for using admin page and generating qr codes
 
+## Directory structure
+```
+├── docker-compose.yaml
+├── content
+│   ├── ...
+│   └── tourdb.sql
+├── examples
+│   └── index.php
+├── nginx
+│   ├── default.conf
+│   └── Dockerfile
+├── php
+│   └── Dockerfile
+└── www
+    └── html
+        ├── pictures
+        ├── tinymce
+        ├── database.php
+        ├── index.php
+        └── ...
+
+
+
+
+```
+
 # Gunnison Historical Walking Tour
 ## Installation
 ### Clone the GitHub repository:  
