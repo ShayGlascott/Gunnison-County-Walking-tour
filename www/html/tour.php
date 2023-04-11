@@ -12,9 +12,9 @@ try {
   echo "Connection failed: " . $e->getMessage();
   exit();
 }
-
+echo $_GET['id'];
 $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $_GET['id'];
-$statement = $db->prepare($t1q);
+$statement = $conn->prepare($t1q);
 $statement->execute();
 $data= $statement->fetchAll();
 ?>

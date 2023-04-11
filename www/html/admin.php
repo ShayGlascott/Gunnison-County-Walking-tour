@@ -34,42 +34,42 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 
 <?php
 
-$servername = 'localhost';
-$username = 'student';
-$password = 'CS350';
-$dbname = 'tour_db';
+$host = 'mysql';
+$db_name = 'tourdb';
+$username = 'user';
+$password = 'password';
 
-// Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+try {
+  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+  exit();
+}
+
+$sites = array();
+
+$stmt = $conn->prepare("SELECT * FROM historic_sites");
+$stmt->execute();
+
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+  $site = array(
+    'id' => $row['id'],
+    'img1_fname' => $row['img1_fname'],
+    'img1_altText' => $row['img1_altText'],
+    'img1_caption' => $row['img1_caption'],
+    'img2_fname' => $row['img2_fname'],
+    'img2_altText' => $row['img2_altText'],
+    'img2_caption' => $row['img2_caption'],
+    'title' => $row['title'],
+    'text1' => $row['text1'],
+    'text2' => $row['text2'],
+  );
+  array_push($sites,$site);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   
-  // Retrieve all rows from historic_sites table
-  //$sql = "SELECT * FROM historic_sites";
-  $result = $conn->query("SELECT * FROM historic_sites");
-  
-  // Create array to hold sites data
-  $sites = array();
-  
-  // Loop through each row and add it to the sites array
-  if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      $site = array(
-        'id' => $row['id'],
-        'img1_fname' => $row['img1_fname'],
-        'img1_altText' => $row['img1_altText'],
-        'img1_caption' => $row['img1_caption'],
-        'img2_fname' => $row['img2_fname'],
-        'img2_altText' => $row['img2_altText'],
-        'img2_caption' => $row['img2_caption'],
-        'title' => $row['title']
-      );
-      array_push($sites, $site);
-    }
-
     //sql connection to get users that are not admin
     $stmt = $conn->query("SELECT * FROM users WHERE id > 0");
 
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
   }
-}
+
 ?>
 
   <body>
