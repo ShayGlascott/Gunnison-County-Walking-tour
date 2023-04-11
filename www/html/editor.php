@@ -72,11 +72,7 @@ try {
   exit();
 }
 
-$sites = array();
-$t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
-$stmt = $conn->prepare($t1q);
-$stmt->execute();
-$data= $stmt->fetchAll();
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -84,6 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if(isset($_POST)["site_id"]){
+    $sites = array();
+    $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
+    $stmt = $conn->prepare($t1q);
+    $stmt->execute();
+    $data= $stmt->fetchAll();
+  }
+  else{
+    continue;
+  }
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
