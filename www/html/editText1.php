@@ -29,8 +29,9 @@
     $text1 = $_POST['ut1'];
     $query = "UPDATE historic_sites SET text1 = '$text1' WHERE id = $site_id";
       if ($conn->query($query)) {
-        echo "<script>alert('The Introduction Text for ".$sites['title'] . "was updated Successfully!');</script>;";
-
+        foreach($data as $data):
+        echo "<script>alert('The Introduction Text for ".$data['title'] . "was updated Successfully!');</script>;";
+        endforeach;
      } else {
       echo "<script>alert('Database error, please try again in a moment.');</script>;";
     } 
