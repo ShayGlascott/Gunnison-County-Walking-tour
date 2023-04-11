@@ -1,39 +1,14 @@
-## Necessary fixes:
-* Change database accesses to use [PDO](https://www.php.net/manual/en/book.pdo.php)
-* [Example of PDO used to access a database](examples/index.php)
-* Make instructions for using admin page and generating qr codes
-
-## Directory structure
-```
-├── docker-compose.yaml
-├── content
-│   ├── ...
-│   └── tourdb.sql
-├── examples
-│   └── index.php
-├── nginx
-│   ├── default.conf
-│   └── Dockerfile
-├── php
-│   └── Dockerfile
-└── www
-    └── html
-        ├── pictures
-        ├── tinymce
-        ├── database.php
-        ├── index.php
-        └── ...
-```
-
 # Gunnison Historical Walking Tour
 ## Installation
 ### Clone the GitHub repository:  
 ```
 # git clone https://github.com/CampbellZach/CS_495.git
 ```
-### Change into the project directory:  
+or download a release: [release-1.0](https://github.com/CampbellZach/CS_495/releases/tag/v1.0)
+
+### Change into the project directory: 
 ```
-# cd CS_495
+cd CS_495
 ```
 ### Add user to docker group (optional):
 ```
@@ -52,5 +27,7 @@
 # docker ps -a
 ```
 ## Using the website
-* Admin Page  
-* QR Codes
+* The website is hosted on port `80`.  Navigate to `http://localhost` to view the site.  
+* The [main page](http://localhost/index.php) has information about the tour.
+* Add/delete/edit tour stops using the [admin page](http://localhost/login.php), the username is `admin` and the password is `gwt23`.
+* Navigate to a tour site and copy the url (`http://example.com/tour.php?id=2`) and use it to generate a QR code.
