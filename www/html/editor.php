@@ -248,8 +248,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </tr>
     <tr>
       <td colspan="2">
-        <button onclick="window.location.href ='editText1.php?id=<?php echo $site_id; ?>;'">Edit Introduction Text</button>
-        <button onclick="window.location.href ='editText2.php?id=<?php echo $site_id; ?>;'">Edit Read More Text</button>
+        <button onclick="window.location.href ='editText1.php?id=<?php echo $site_id; ?>'">Edit Introduction Text</button>
+        <button onclick="window.location.href ='editText2.php?id=<?php echo $site_id; ?>'">Edit Read More Text</button>
       </td>
     </tr>
     <tr>
