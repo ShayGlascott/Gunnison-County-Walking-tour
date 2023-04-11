@@ -107,7 +107,7 @@ if ($_SESSION['id'] == 0) {
     <?php
     foreach ($users as $user):
       $user_id = $user['id'];
-      $username = $user['username'];
+      $username = $user['uName'];
     ?>
 
     <tr>
