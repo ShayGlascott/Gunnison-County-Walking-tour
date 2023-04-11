@@ -55,6 +55,7 @@
     echo "<script>location.href='editor.php';</script>";
 
 }
+foreach($sites as $site):
 
 echo '<!DOCTYPE html>
 <html>
@@ -97,7 +98,7 @@ echo '<!DOCTYPE html>
 </body>
 </html>';
 
-
+endforeach;
 ?>
 
 
