@@ -6,17 +6,17 @@
         echo "<script>location.href='login.php';</script>";
         exit;
     }
-    $servername = 'localhost';
-    $username = 'student';
-    $password = 'CS350';
-    $dbname = 'tour_db';
+    $host = 'mysql';
+    $db_name = 'tourdb';
+    $username = 'user';
+    $password = 'password';
 
-    $site_id = $_SESSION['sID'];
-
-    // Connect to the database
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    try {
+      $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+      exit();
     }
 
     $result = $conn->query("SELECT * FROM historic_sites WHERE id=".$_SESSION['sID']);
@@ -26,7 +26,7 @@
   
   // Loop through each row and add it to the sites array
   if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       $site = array(
         'id' => $row['id'],
         'img1_fname' => $row['img1_fname'],
