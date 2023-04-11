@@ -75,7 +75,6 @@ try {
 $sites = array();
 $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
 $statement = $conn->prepare($t1q);
-$stmt->execute();
 
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   $site = array(
