@@ -55,7 +55,10 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
   <body>
 <?php
 
-
+$site_id = $_POST['site_id'];
+$_SESSION['sID'] = $site_id;
+$operation = $_POST['function'];
+$_SESSION['op'] = $operation;
 $host = 'mysql';
 $db_name = 'tourdb';
 $username = 'user';
@@ -89,6 +92,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   );
   array_push($sites,$site);
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   
