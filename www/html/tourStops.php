@@ -1,37 +1,21 @@
 <?php
 
-$servername = 'localhost';
-$username = 'student';
-$password = 'CS350';
-$dbname = 'tour_db';
+$host = 'mysql';
+$db_name = 'tourdb';
+$username = 'user';
+$password = 'password';
 
-
-$conn = new mysqli($servername,$username,$password,$dbname);
-
-if ($conn->connect_error){
-  die("Connection failed: ".$conn->connect_error);
+try {
+  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+  exit();
 }
-
-$t1q = $conn->query("SELECT * FROM historic_sites");
-$sites = array();
-
-if ($t1q->num_rows> 0){
-  while($row = $t1q->fetch_assoc()){
-    $site = array(
-      'id' => $row['id'],
-      'img1_fname' => $row['img1_fname'],
-      'img1_altText' => $row['img1_altText'],
-      'img1_caption' => $row['img1_caption'],
-      'img2_fname' => $row['img2_fname'],
-      'img2_altText' => $row['img2_altText'],
-      'img2_caption' => $row['img2_caption'],
-      'title' => $row['title'],
-      'text1' => $row['text1'],
-      'text2' => $row['text2'],
-    );
-    array_push($sites,$site);
-  }
-}
+    $t1q = "SELECT * FROM `historic_sites`";
+    $stmt = $conn->prepare($t1q);
+    $stmt->execute();
+    $data= $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -90,7 +74,7 @@ if ($t1q->num_rows> 0){
               <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
             </div>
             <ul>
-            <?php foreach ($sites as $site): ?>
+            <?php foreach ($data as $site): ?>
                 <li><a href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $site['title']; ?></a></li>
             <?php endforeach; ?>
             </ul>
