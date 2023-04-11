@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $filePath_2 = $uploadDir . $fileName_2;
   
         if (move_uploaded_file($_FILES['new_1file']['tmp_name'], $filePath_1)) {
-          $img1_fname = $fileName_;
+          $img1_fname = $fileName_1;
 
           } else {
             echo "<script>alert('The First image had an error while being updated. Please try again');</script>;";
