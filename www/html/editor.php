@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_POST)["site_id"]){
+  if(isset($_POST["site_id"])){
     $sites = array();
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
     $stmt = $conn->prepare($t1q);
