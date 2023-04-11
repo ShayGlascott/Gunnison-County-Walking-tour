@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
     
             // Prepare the query
-            $stmt = $pdo->prepare($sql);
+            $stmt = $conn->prepare($sql);
             
             // Bind the parameters
             $stmt->bindParam(':img1_fname', $img1_fname);
