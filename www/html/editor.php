@@ -117,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           echo "<script>alert('The Second image had an error while being updated. Please try again');</script>;";
   
       }
-      echo "there";
         $img1_altText = $_POST['new_img1_alt'];
         $img1_caption = $_POST['new_img1_cap'];
 
@@ -128,18 +127,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $text1 = $_POST['new_text1'];
         $text2 = $_POST['new_text2'];
 
-        
-        $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
-        VALUES ('$img1_fname', '$img1_altText', '$img1_caption', '$img2_fname', '$img2_altText', '$img2_caption', '$title', '$text1', '$text2')";
+            $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
+            VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
+    
+            // Prepare the query
+            $stmt = $pdo->prepare($sql);
+            
+            // Bind the parameters
+            $stmt->bindParam(':img1_fname', $img1_fname);
+            $stmt->bindParam(':img1_altText', $img1_altText);
+            $stmt->bindParam(':img1_caption', $img1_caption);
+            $stmt->bindParam(':img2_fname', $img2_fname);
+            $stmt->bindParam(':img2_altText', $img2_altText);
+            $stmt->bindParam(':img2_caption', $img2_caption);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':text1', $text1);
+            $stmt->bindParam(':text2', $text2);
+    
+    // Execute the query and insert the data into the database
+    if ($stmt->execute()) {
+        // Query executed successfully
+        echo "<script>alert('New Site has been created!');</script>;";
 
-          // Execute the query and insert the data into the database
-          if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('New Site has been created!');</script>;";
+    } else {
+        // Error executing query
+        echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
 
-          } else {
-            echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
+    }
+    
 
-          }
+           
 
 
         echo "<script>location.href='admin.php';</script>";
