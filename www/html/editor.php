@@ -56,8 +56,10 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 <?php
 
 $site_id = $_GET['site_id'];
+echo $site_id;
 //$_SESSION['sID'] = $site_id;
 $operation = $_GET['function'];
+echo $operation;
 //$_SESSION['op'] = $operation;
 $host = 'mysql';
 $db_name = 'tourdb';
