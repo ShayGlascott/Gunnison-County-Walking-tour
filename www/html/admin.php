@@ -115,7 +115,7 @@ if ($_SESSION['id'] == 0) {
       <td><?php echo $username; ?></td>
       <!-- Button to delete user -->
       <td>
-        <form action="admin.php" method="GET">
+        <form action="admin.php" method="POST">
           <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
           <input type="submit" value="Delete">
         </form>
@@ -159,7 +159,7 @@ if ($_SESSION['id'] == 0) {
           <td><?php echo $name; ?></td>
           <!-- Button to edit stop -->
           <td>
-            <form action="editor.php" method="POST">
+            <form action="editor.php" method="GET">
               <input type="hidden" name="function" value="edit_site_page">
               <input type="hidden" name="site_id" value="<?php echo $site_id; ?>">
               <input type="submit" value="Edit">
