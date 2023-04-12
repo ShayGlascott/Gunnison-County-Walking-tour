@@ -67,18 +67,14 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   );
   array_push($sites,$site);
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-  
-    //sql connection to get users that are not admin
-    $stmt = $conn->query("SELECT * FROM users WHERE id > 0");
-
+  $stmt1 = $conn->query("SELECT * FROM users WHERE id > 0");
+  $stmt1->execute();
     //empty array for users 
     $users = array();
     
     //loop through users and add them to users array
-    if($stmt->num_rows > 0){
-        while($rows = $stmt->fetch_assoc()){
+    if($stmt1->num_rows > 0){
+        while($rows = $stmt->fetch(PDO::FETCH_ASSOC)){
             $user = array(
                 'id' => $rows['id'],
                 'username' => $rows['uName'],
@@ -87,6 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             array_push($users,$user);
         }
     }
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  
+    //sql connection to get users that are not admin
+    
   }
 
 ?>
@@ -107,7 +108,7 @@ if ($_SESSION['id'] == 0) {
     <?php
     foreach ($users as $user):
       $user_id = $user['id'];
-      $username = $user['uName'];
+      $username = $user['username'];
     ?>
 
     <tr>
