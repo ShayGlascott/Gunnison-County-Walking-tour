@@ -218,12 +218,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             img2_altText = ?,
             img2_caption = ?,
             title = ?,
-            text1 = ?,
-            text2 = ?
+            
         WHERE id = ?
       ");
 
-      $stmt->execute([$img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $text1, $text2, $update_id]);
+      $stmt->execute([$img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $update_id]);
 
 
      
