@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             img1_caption = ?,
             img2_altText = ?,
             img2_caption = ?,
-            title = ?,
+            title = ?
             WHERE id= 
         " .$update_id);
 
