@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!--form to post updated to the admin page -->
         <form action="admin.php" method="POST" enctype="multipart/form-data">
           <input type='hidden' name='update' value='site'>
-          <input type='hidden' name='update_site_id' value='<?php echo $site['id'];?>'>
+          <input type='hidden' name='update_site_id' value='<?php echo $site_id;?>'>
 
           <label for="title">Title:</label>
           <input type="text" name="title" value="<?php echo $site['title']; ?>" required><br>
