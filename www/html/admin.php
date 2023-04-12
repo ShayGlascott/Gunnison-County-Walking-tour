@@ -115,7 +115,7 @@ if ($_SESSION['id'] == 0) {
       <td><?php echo $username; ?></td>
       <!-- Button to delete user -->
       <td>
-        <form action="admin.php" method="POST">
+        <form action="admin.php" method="GET">
           <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
           <input type="submit" value="Delete">
         </form>

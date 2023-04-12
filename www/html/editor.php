@@ -55,7 +55,7 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
   <body>
 <?php
 
-$site_id = $_POST['site_id'];
+$site_id = $_GET['site_id'];
 //$_SESSION['sID'] = $site_id;
 $operation = $_POST['function'];
 //$_SESSION['op'] = $operation;
