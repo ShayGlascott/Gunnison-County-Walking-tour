@@ -226,7 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $stmt->bindParam(3, $img2_altText, PDO::PARAM_STR);
       $stmt->bindParam(4, $img2_caption, PDO::PARAM_STR);
       $stmt->bindParam(5, $title, PDO::PARAM_STR);
-      $stmt->bindParam(6, $update_id, PDO::PARAM_INT);
       $stmt->execute();
 
      
