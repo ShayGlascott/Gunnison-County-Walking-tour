@@ -218,8 +218,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             img2_caption = ?,
             title = ?,
             
-        WHERE id = ?
-        ");
+            WHERE id = 
+        " .$update_id);
 
       $stmt->bindParam(1, $img1_altText, PDO::PARAM_STR);
       $stmt->bindParam(2, $img1_caption, PDO::PARAM_STR);
