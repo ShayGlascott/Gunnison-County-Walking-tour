@@ -200,30 +200,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   switch($update){
     case "site":
       $update_id = $_POST['update_site_id'];
-        $img1_altText = $_POST['img1_alt'];
-        $img1_caption = $_POST['img1_cap'];
+      $img1_altText = $_POST['img1_alt'];
+      $img1_caption = $_POST['img1_cap'];
 
-        $img2_altText = $_POST['img2_alt'];
-        $img2_caption = $_POST['img2_cap'];
+      $img2_altText = $_POST['img2_alt'];
+      $img2_caption = $_POST['img2_cap'];
 
-        $title = $_POST['title'];
-        $text1 = $_POST['text1'];
-        $text2 = $_POST['text2'];
+      $title = $_POST['title'];
+      $text1 = $_POST['text1'];
+      $text2 = $_POST['text2'];
 
-        $stmt = $conn->prepare("UPDATE historic_sites
-          SET 
-              img1_altText = ?,
-              img1_caption = ?,
-              
-              img2_altText = ?,
-              img2_caption = ?,
-              title = ?,
-              text1 = ?,
-              text2 = ?
-          WHERE id = ?
-        ");
-        $stmt->bind_param("sssssssi",  $img1_altText, $img1_caption,  $img2_altText, $img2_caption, $title, $text1, $text2, $update_id);
-        $stmt->execute();
+      $stmt = $conn->prepare("UPDATE historic_sites
+        SET 
+            img1_altText = ?,
+            img1_caption = ?,
+            
+            img2_altText = ?,
+            img2_caption = ?,
+            title = ?,
+            text1 = ?,
+            text2 = ?
+        WHERE id = ?
+      ");
+
+      $stmt->execute([$img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $text1, $text2, $update_id]);
+
 
      
         echo "<script>alert('Updated Successfully!');</script>;";
