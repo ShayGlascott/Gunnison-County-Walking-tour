@@ -221,8 +221,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         WHERE id = ?
         ");
 
-      $stmt->execute([$img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $update_id]);
-
+      $stmt->bindParam(1, $img1_altText, PDO::PARAM_STR);
+      $stmt->bindParam(2, $img1_caption, PDO::PARAM_STR);
+      $stmt->bindParam(3, $img2_altText, PDO::PARAM_STR);
+      $stmt->bindParam(4, $img2_caption, PDO::PARAM_STR);
+      $stmt->bindParam(5, $title, PDO::PARAM_STR);
+      $stmt->bindParam(6, $update_id, PDO::PARAM_INT);
+      $stmt->execute();
 
      
         echo "<script>alert('Updated Successfully!');</script>;";
