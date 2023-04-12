@@ -56,9 +56,9 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 <?php
 
 $site_id = $_POST['site_id'];
-$_SESSION['sID'] = $site_id;
+//$_SESSION['sID'] = $site_id;
 $operation = $_POST['function'];
-$_SESSION['op'] = $operation;
+//$_SESSION['op'] = $operation;
 $host = 'mysql';
 $db_name = 'tourdb';
 $username = 'user';
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="box">
       
     <?php 
-    switch ($_SESSION['op']) {
+    switch ($operation) {
       case "edit_main_page":
         ?>
 

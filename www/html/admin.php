@@ -207,8 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $img2_caption = $_POST['img2_cap'];
 
       $title = $_POST['title'];
-      $text1 = $_POST['text1'];
-      $text2 = $_POST['text2'];
+      
 
       $stmt = $conn->prepare("UPDATE historic_sites
         SET 
@@ -220,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             title = ?,
             
         WHERE id = ?
-      ");
+        ");
 
       $stmt->execute([$img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $update_id]);
 
