@@ -76,17 +76,18 @@ try {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  if($operation == "edit_site_page"){
     $sites = array();
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
     $stmt = $conn->prepare($t1q);
     $stmt->execute();
     $data= $stmt->fetchAll();
+  }
+
   
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
@@ -153,18 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
 
     }
-    
-
-           
-
-
         echo "<script>location.href='admin.php';</script>";
-
-
-     
-        
-
-  
     }else{
 
 

@@ -67,22 +67,10 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   );
   array_push($sites,$site);
 }
-  $stmt1 = $conn->query("SELECT * FROM users WHERE id > 0");
+  $t1q = "SELECT * FROM users WHERE id > 0";
+  $stmt1 = $conn->prepare($t1q);
   $stmt1->execute();
-    //empty array for users 
-    $users = array();
-    
-    //loop through users and add them to users array
-    if($stmt1->num_rows > 0){
-        while($rows = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $user = array(
-                'id' => $rows['id'],
-                'username' => $rows['uName'],
-                'password' => $rows['passwd'],
-            );
-            array_push($users,$user);
-        }
-    }
+  $data= $stmt1->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   
@@ -98,25 +86,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SESSION['id'] == 0) {
 ?>
 <div class="box">
+  <div class="title">Add User</div>
+  <table>
+    <tr>
+    <form method="post">
+      <td>
+          <label for="Username">Username:</label>
+      </td>
+      <td>
+          <input type='text' name="username" required>
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <label for="password1">Password:</label>
+      </td>
+      <td>
+        <input type='password' name='password1' required>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="password2">Re-enter Password:</label>
+      </td>
+      <td>
+          <input type='password' name='password2' reqired><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Add User">
+        <input type="hidden" value="add_user" name='update'>
+      </form>
+      </td>
+          
+    </tr>
+  </table>
+
+</div>
+<div class="box">
   <div class="title">Edit Users</div>
   <table>
     <tr>
       <th>User</th>
       <th>Delete</th>
     </tr>
-
     <?php
-    foreach ($users as $user):
-      $user_id = $user['id'];
-      $username = $user['username'];
-    ?>
-
+    foreach ($data as $user): ?>
     <tr>
-      <td><?php echo $username; ?></td>
+      <td><?php echo $user['uName']; ?></td>
       <!-- Button to delete user -->
       <td>
         <form action="admin.php" method="POST">
-          <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+          <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
           <input type="submit" value="Delete">
         </form>
       </td>
@@ -182,7 +204,7 @@ if ($_SESSION['id'] == 0) {
       </table>
     
       <!-- Button to create a new stop -->
-      <form action="editor.php" method="post">
+      <form action="editor.php" method="GET">
         <input type="hidden" name="function" value="new_tour_stop">
         <input type="submit" value="New Tour Stop">
       </form>
@@ -227,6 +249,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>location.href='admin.php';</script>";
 
       break;
+      case "add_user":
+        $username = $_POST['username'];
+        $password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
+        if($password1 === $password2){
+          $password = password_hash($password1, PASSWORD_DEFAULT);
+          $sql = "INSERT INTO users(`uName`, `passwd`) VALUES (:uName, :passwd)";
+  
+          // Prepare the query
+          $stmt = $conn->prepare($sql);
+          
+          // Bind the parameters
+          $stmt->bindParam(':uName', $username);
+          $stmt->bindParam(':passwd', $password);
+  
+          // Execute the query and insert the data into the database
+          if ($stmt->execute()) {
+              // Query executed successfully
+              echo "<script>alert('A new user has been added!');</script>;";
+
+          } else {
+              // Error executing query
+              echo "<script>alert('ERROR ADDING USER.Please try again.');</script>;";
+
+          }
+        }
+        else{
+          echo "<script>alert('Passwords did not match, Please try again.');</script>;";
+
+        }
+        echo "<script>location.href='admin.php';</script>";
+
+
   }
   
   $site_id = $_POST['site_id'];
