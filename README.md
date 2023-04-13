@@ -4,15 +4,16 @@
 ```
 # git clone https://github.com/CampbellZach/CS_495.git
 ```
-or download a release: [release-1.0](https://github.com/CampbellZach/CS_495/releases/tag/v1.0)
+or download the latest [release](https://github.com/CampbellZach/CS_495/releases/).
 
 ### Change into the project directory: 
 ```
 cd CS_495
 ```
-### Add user to docker group (optional):
+### Change permissions of pictures folder:
+(Required to upload pictures using the admin page)
 ```
-# usermod -aG docker your-user
+# chmod 777 www/html/pictures/
 ```
 ### Build the Docker images:  
 ```
@@ -29,5 +30,5 @@ cd CS_495
 ## Using the website
 * The website is hosted on port `80`.  Navigate to `http://localhost` to view the site.  
 * The [main page](http://localhost/index.php) has information about the tour.
-* Add/delete/edit tour stops using the [admin page](http://localhost/login.php), the username is `admin` and the password is `gwt23`.
+* Add/delete/edit tour stops and edit other pages using the [admin page](http://localhost/login.php), the username is `admin` and the password is `gwt23`.
 * Navigate to a tour site and copy the url (`http://example.com/tour.php?id=2`) and use it to generate a QR code.
