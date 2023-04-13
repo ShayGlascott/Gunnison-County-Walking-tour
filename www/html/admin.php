@@ -190,7 +190,7 @@ if ($_SESSION['id'] == 0) {
           <!-- Button to delete stop -->
           <td>
             <form action="admin.php" method="POST">
-              <input type="hidden" name="update" value="delete">
+              <input type="hidden" name="update" value="delete_stop">
               <input type="hidden" name="site_id" value="<?php echo $site_id; ?>">
               <input type="submit" value="Delete">
             </form>
@@ -280,6 +280,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
         echo "<script>location.href='admin.php';</script>";
+        break;
+        case "delete_stop":
+          //implement aleart box to confirm delete
 
 
   }
