@@ -19,7 +19,9 @@ services:
         links:  
             - mysql  
         volumes_from:  
-            - app-data  
+            - app-data
+        volumes:
+            - ./www/html/pictures:/var/www/html/pictures:rw  
 
     app-data:    
         image: php:7.0-fpm  
