@@ -21,7 +21,9 @@ services:
         volumes_from:  
             - app-data
         volumes:
-            - ./www/html/pictures:/var/www/html/pictures:rw  
+            - ./www/html/pictures:/var/www/html/pictures:rw
+            - ./www/html/mapMaterials:/var/www/html/mapMaterials:rw  
+  
 
     app-data:    
         image: php:7.0-fpm  

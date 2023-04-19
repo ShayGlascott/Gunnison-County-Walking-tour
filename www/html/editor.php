@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
  
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $site_id = $_POST['site_id'];
   if(isset($_POST['addNew'])){
     $new = $_POST['addNew'];
   }
@@ -155,7 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
         echo "<script>location.href='admin.php';</script>";
-    }else{
+    }
+  }
+  else{
 
 
   if (isset($_FILES['1file']) && isset($_FILES['2file'])) {
@@ -167,34 +170,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
         $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
-        if ($conn->query($query)) {
-          echo "<script>alert('The First image for ".$sites['title'] . "was updated Successfully!');</script>;";
+        $stmt = $conn->prepare($query);
+
+        if ($stmt->execute()) {
+          echo "<script>alert('The First image  was updated Successfully!');</script>;";
 
       } else {
         echo "<script>alert('Database error, please try again.');</script>;";
       } 
         
         } else {
-          echo "<script>alert('The First image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
+          echo "<script>alert('The First image had an error while being updated. Please try again');</script>;";
 
       }
       if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
         $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
-        if ($conn->query($query2)) {
-          echo "<script>alert('The Second image for ".$sites['title'] . "was updated Successfully!');</script>;";
+        $stmt = $conn->prepare($query);
+        if ($stmt->execute()) {
+          echo "<script>alert('The Second image was updated Successfully!');</script>;";
 
       } else {
         echo "<script>alert('Database error, please try again.');</script>;";
       } 
 
       } else {
-        echo "<script>alert('The Second image for ".$sites['title'] . "had an error while being updated. Please try again');</script>;";
+        echo "<script>alert('The Second image had an error while being updated. Please try again');</script>;";
 
     }
+    echo "<script>location.href='admin.php';</script>";
+
       
     } 
   }
-}
+
 }
   
 

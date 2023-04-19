@@ -89,7 +89,7 @@ $t1q = "SELECT * FROM home";
       <div class = main-info>
       <?php foreach ($data as $data): ?>
         <h2><?php echo $data['intro_heading_text']; ?></h2>
-        <?php echo $data['intro_text'];?>
+        <p><?php echo $data['intro_text'];?></p>
         <h2>Points of Interest</h2>
         <div style="position:relative">
           <img src="<?php echo $data['map_fname'];?>" class="map" alt="Map of Gunnison, Colorado">
@@ -108,7 +108,7 @@ $t1q = "SELECT * FROM home";
         find more locations, etc. -->
 
         <h2>How to go on the tour...</h2>
-        <?php echo $data['how_to_text'];?>
+        <p><?php echo $data['how_to_text'];?></p>
         <br> 
       <footer>
         <div class="container">

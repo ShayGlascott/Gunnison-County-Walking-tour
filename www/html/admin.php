@@ -158,11 +158,8 @@ if ($_SESSION['id'] == 0) {
 ?>
 
     <!-- Button to edit main page -->
-    <form action="editor.php" method="POST">
-      <input type="hidden" name="function" value="edit_main_page">
-      
-      <input type="submit" value="Edit Main Page">
-    </form>
+    <button onclick="window.location.href ='edit_home_page.php'">Edit Home Page</button>
+
   
     <!-- List of tour stops -->
     <div class="box">
@@ -249,7 +246,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      
         echo "<script>alert('Updated Successfully!');</script>;";
 
-        echo "<script>location.href='admin.php';</script>";
 
       break;
       case "add_user":
