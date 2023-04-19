@@ -17,6 +17,11 @@ try {
     $stmt->execute();
     $data= $stmt->fetchAll();
 
+    $t1q = "SELECT * FROM home";
+    $stmt1 = $conn->prepare($t1q);
+    $stmt1->execute();
+    $data1= $stmt1->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +65,7 @@ try {
     <br><br><br><br>
     <script src="index.js"></script>
     <div class = main-info>
-    <?php foreach ($data as $data): ?>
+    <?php foreach ($data1 as $data1): ?>
 
             <h1>Points of Interest</h1>
             <!-- <style>
@@ -69,7 +74,7 @@ try {
               }
             </style> -->
             <div style="position:relative">
-            <img src="<?php echo $data['map_fname'];?>" class="map" alt="Map of Gunnison, Colorado">
+            <img src="<?php echo $data1['map_fname'];?>" class="map" alt="Map of Gunnison, Colorado">
               <br>
               <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
               <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
@@ -85,7 +90,7 @@ try {
             find more locations, etc. -->
 
             <h2>How to go on the tour...</h2>
-            <p><?php echo $data['how_to_text'];?></p>
+            <p><?php echo $data1['how_to_text'];?></p>
 
             <br>
     
@@ -98,10 +103,10 @@ try {
               <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
-                <li><?php echo $data['address'];?></li>
-                <li><?php echo $data['city_state_zip'];?></li>
-                <li>Phone: <?php echo $data['phone_number'];?></li>
-                <li>Email: <?php echo $data['email'];?></li>
+                <li><?php echo $data1['address'];?></li>
+                <li><?php echo $data1['city_state_zip'];?></li>
+                <li>Phone: <?php echo $data1['phone_number'];?></li>
+                <li>Email: <?php echo $data1['email'];?></li>
                 <?php endforeach; ?>
               </ul>
             </div>
