@@ -32,23 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName_1 = $_FILES['file']['name'];
         $filePath_1 = $uploadDir . $fileName_1;
         echo $filePath_1;
-        echo "1";
-
-    
           if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath_1)) {
-            $map_fname = $fileName_1;
-            echo "2";
-        } else {
-              echo "<script>alert('The map had an error while being updated. Please try again');</script>;";
-    
+            $query = "UPDATE home SET map_fname = '$filePath_1'";
+            if ($s = $conn->prepare($query)) {
+              echo "<script>alert('The map was updated Successfully!');</script>;";
+              $s->execute();
+            }else{
+              echo "<script>alert('Error uploading map!');</script>;";
+
+            }
+
           }
     }
-    if (isset($_POST['intro_heading_text']) && 
-    isset($_POST['intro_text']) && 
-    isset($_POST['how_to_text']) && 
-    isset($_POST['address']) && 
-    isset($_POST['city_state_zip']) && 
-    isset($_POST['phone_number']) && 
+    if (isset($_POST['intro_heading_text']) ||
+    isset($_POST['intro_text']) ||
+    isset($_POST['how_to_text']) || 
+    isset($_POST['address']) ||
+    isset($_POST['city_state_zip']) ||
+    isset($_POST['phone_number']) || 
     isset($_POST['email'])) {
         $intro_heading_text = $_POST['intro_heading_text'];
         $intro_text = $_POST['intro_text'];
@@ -63,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "UPDATE home SET `intro_heading_text` = :intro_heading_text, 
         `intro_text` = :intro_text, 
         `how_to_text` = :how_to_text,
-        `map_fname` = :map_fname, 
         `address` = :address, 
         `city_state_zip` = :city_state_zip, 
         `phone_number` = :phone_number, 
@@ -75,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(":intro_heading_text",$intro_heading_text);
         $stmt->bindParam(":intro_text",$intro_text);
         $stmt->bindParam(":how_to_text",$how_to_text);
-        $stmt->bindParam(":map_fname",$map_fname);
         $stmt->bindParam(":address",$address);
         $stmt->bindParam(":city_state_zip",$city_state_zip);
         $stmt->bindParam(":phone_number",$phone_number);
@@ -90,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
+    echo "<script>location.href='edit_home_page.php';</script>";
+
 
 }
 ?>
