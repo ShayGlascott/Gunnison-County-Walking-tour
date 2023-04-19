@@ -53,6 +53,9 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
   
   
   <body>
+  <a href='index.php'>HOME</a>
+  <a href='admin.php'>ADMIN</a>
+  <a href='logout.php'>LOGOUT</a>
 <?php
 
 $site_id = $_GET['site_id'];

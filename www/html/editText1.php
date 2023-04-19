@@ -30,7 +30,7 @@
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $site_id = $_POST['site_id'];
       $text2 = $_POST['ut1'];
-      $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
+      $query = "UPDATE historic_sites SET text1 = :text2 WHERE id = :site_id";
       $stmt = $conn->prepare($query);
       $stmt->bindParam(':text2', $text2);
       $stmt->bindParam(':site_id', $site_id);
