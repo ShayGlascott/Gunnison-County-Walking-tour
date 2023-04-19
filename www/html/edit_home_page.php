@@ -31,10 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadDir = 'mapMaterials/';
         $fileName_1 = $_FILES['file']['name'];
         $filePath_1 = $uploadDir . $fileName_1;
-        
+        echo $filePath_1;
+        echo "1";
+
     
           if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath_1)) {
             $map_fname = $fileName_1;
+            echo "2";
         } else {
               echo "<script>alert('The map had an error while being updated. Please try again');</script>;";
     
@@ -54,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $city_state_zip = $_POST['city_state_zip'];
         $phone_number = $_POST['phone_number'];
         $email = $_POST['email'];
+        echo "3";
+
 
         $query = "UPDATE home SET `intro_heading_text` = :intro_heading_text, 
         `intro_text` = :intro_text, 
@@ -63,6 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         `city_state_zip` = :city_state_zip, 
         `phone_number` = :phone_number, 
         `email` = :email";
+        
+        echo "3.5";
+
         $stmt = $conn->prepare($query);
         $stmt->bindParam(":intro_heading_text",$intro_heading_text);
         $stmt->bindParam(":intro_text",$intro_text);
@@ -72,15 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(":city_state_zip",$city_state_zip);
         $stmt->bindParam(":phone_number",$phone_number);
         $stmt->bindParam(":email",$email);
+        echo "4";
         if($stmt->execute()){
             echo "<script>alert('Updated Successfully!');</script>;";
+            echo "5";
 
         }else{
             echo "<script>alert('Error Updating, try again.');</script>;";
 
         }
     }
-    echo "<script>location.href='admin.php';</script>";
 
 }
 ?>
@@ -132,11 +141,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <h2>Edit Map Photo:</h2><br>
         <form method="POST" enctype="multipart/form-data" >
+
         <div class="image-preview">
           <label for="file">Map:</label>
           <input type="file" name="file"  accept="image/*" onchange="previewImage(event, 'file')"><br>
           <img id="preview_file" class="preview_img" src="<?php echo $data['map_fname']; ?>" /><br>
         </div>
+
      
     <script>
           function previewImage(event, inputId) {

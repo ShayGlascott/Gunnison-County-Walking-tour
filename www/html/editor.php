@@ -170,9 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
         $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
-        $stmt = $conn->prepare($query);
 
-        if ($stmt->execute()) {
+        if ($stmt = $conn->prepare($query)) {
           echo "<script>alert('The First image  was updated Successfully!');</script>;";
 
       } else {
@@ -185,8 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
         $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
-        $stmt = $conn->prepare($query);
-        if ($stmt->execute()) {
+        if ($stmt = $conn->prepare($query2)) {
           echo "<script>alert('The Second image was updated Successfully!');</script>;";
 
       } else {
@@ -225,6 +223,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <table>
     <tr>
       <td>
+      <form action='editor.php' method="POST" enctype="multipart/form-data" >
+
         <div class="image-preview">
           <label for="1file">First Image:</label>
           <input type="file" name="1file" value="pictures/<?php echo $site['img1_fname'] ?>" accept="image/*" onchange="previewImage(event, '1file')" required><br>
@@ -253,7 +253,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </script>
       <td colspan="2">
         <!--form to upload/update files -->
-        <form action='editor.php' method="POST" enctype="multipart/form-data" >
           <input type='hidden' name='site_id' value="<?php echo $site_id; ?>">
           <input type="hidden" name="function" value="edit_site_page">
           <input type="submit" name="submit" value="Add Images">
