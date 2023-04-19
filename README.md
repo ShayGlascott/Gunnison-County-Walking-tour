@@ -10,10 +10,11 @@ or download the latest [release](https://github.com/CampbellZach/CS_495/releases
 ```
 cd CS_495
 ```
-### Change permissions of pictures folder:
+### Change permissions of pictures and mapMaterials folder:
 (Required to upload pictures using the admin page)
 ```
 # chmod 777 www/html/pictures/
+# chmod 777 www/html/mapMaterials/
 ```
 ### Build the Docker images:  
 ```
