@@ -50,6 +50,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 <body>
+  <a href='index.php'>Home</a>
     <h1>Login</h1>
 
     <form method="POST">

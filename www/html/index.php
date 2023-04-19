@@ -34,6 +34,12 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   array_push($sites,$site);
 }
 
+
+$t1q = "SELECT * FROM home";
+  $stmt1 = $conn->prepare($t1q);
+  $stmt1->execute();
+  $data= $stmt1->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +87,12 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
       <script src="index.js"></script>
       <!-- Add your content here -->
       <div class = main-info>
-        <h2>Information</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+      <?php foreach ($data as $data): ?>
+        <h2><?php echo $data['intro_heading_text']; ?></h2>
+        <?php echo $data['intro_text'];?>
         <h2>Points of Interest</h2>
         <div style="position:relative">
-          <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
+          <img src="<?php echo $data['map_fname'];?>" class="map" alt="Map of Gunnison, Colorado">
           <br>
           <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
           <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
@@ -103,7 +108,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         find more locations, etc. -->
 
         <h2>How to go on the tour...</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat imperdiet sed euismod nisi porta. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. </p>
+        <?php echo $data['how_to_text'];?>
         <br> 
       <footer>
         <div class="container">
@@ -113,10 +118,11 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
               <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
-                <li>123 Main Street</li>
-                <li>City, State ZIP</li>
-                <li>Phone: 123-456-7890</li>
-                <li>Email: info@example.com</li>
+                <li><?php echo $data['address'];?></li>
+                <li><?php echo $data['city_state_zip'];?></li>
+                <li>Phone: <?php echo $data['phone_number'];?></li>
+                <li>Email: <?php echo $data['email'];?></li>
+                <?php endforeach; ?>
               </ul>
             </div>
           </div>

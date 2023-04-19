@@ -31,7 +31,9 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
     </style>
     <title>Gunnion Historic Walking Tour</title>
   </head>
-
+    <a href='index.php'>HOME</a>
+    <a href='admin.php'>ADMIN</a>
+    <a href='logout.php'>LOGOUT</a>
 <?php
 
 $host = 'mysql';
@@ -138,6 +140,7 @@ if ($_SESSION['id'] == 0) {
       <!-- Button to delete user -->
       <td>
         <form action="admin.php" method="POST">
+          <input type='hidden' name='update' value='delete_user'>
           <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
           <input type="submit" value="Delete">
         </form>
@@ -189,8 +192,8 @@ if ($_SESSION['id'] == 0) {
           </td>
           <!-- Button to delete stop -->
           <td>
-            <form action="admin.php" method="POST">
-              <input type="hidden" name="update" value="delete_stop">
+            <form action="editor.php" method="GET">
+              <input type="hidden" name="function" value="delete_stop">
               <input type="hidden" name="site_id" value="<?php echo $site_id; ?>">
               <input type="submit" value="Delete">
             </form>
@@ -251,43 +254,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       break;
       case "add_user":
         $username = $_POST['username'];
-        $password1 = $_POST['password1'];
-        $password2 = $_POST['password2'];
-        if($password1 === $password2){
-          $password = password_hash($password1, PASSWORD_DEFAULT);
-          $sql = "INSERT INTO users(`uName`, `passwd`) VALUES (:uName, :passwd)";
-  
-          // Prepare the query
-          $stmt = $conn->prepare($sql);
-          
-          // Bind the parameters
-          $stmt->bindParam(':uName', $username);
-          $stmt->bindParam(':passwd', $password);
-  
-          // Execute the query and insert the data into the database
-          if ($stmt->execute()) {
-              // Query executed successfully
-              echo "<script>alert('A new user has been added!');</script>;";
+        $sql = "SELECT * FROM users WHERE uName = '$username'";
 
-          } else {
-              // Error executing query
-              echo "<script>alert('ERROR ADDING USER.Please try again.');</script>;";
+        // Execute the SELECT statement
+        $result = $conn->query($sql);
 
-          }
-        }
-        else{
-          echo "<script>alert('Passwords did not match, Please try again.');</script>;";
+        // Check if the username already exists
+        if ($result->num_rows > 0) {
+            echo "Username already exists";
+        } else {
+            $password1 = $_POST['password1'];
+            $password2 = $_POST['password2'];
+            if($password1 === $password2){
+              $password = password_hash($password1, PASSWORD_DEFAULT);
+              $sql = "INSERT INTO users(`uName`, `passwd`) VALUES (:uName, :passwd)";
+      
+              // Prepare the query
+              $stmt = $conn->prepare($sql);
+              
+              // Bind the parameters
+              $stmt->bindParam(':uName', $username);
+              $stmt->bindParam(':passwd', $password);
+      
+              // Execute the query and insert the data into the database
+              if ($stmt->execute()) {
+                  // Query executed successfully
+                  echo "<script>alert('A new user has been added!');</script>;";
 
-        }
+              } else {
+                  // Error executing query
+                  echo "<script>alert('ERROR ADDING USER.Please try again.');</script>;";
+
+              }
+            }
+            else{
+              echo "<script>alert('Passwords did not match, Please try again.');</script>;";
+
+            }
+      }
         echo "<script>location.href='admin.php';</script>";
         break;
         case "delete_stop":
-          //implement aleart box to confirm delete
+          $name = $_POST['name'];
+          $dID = $_POST['site_id'];
+          $stmt = $conn->prepare("SELECT * FROM historic_sites WHERE id = :id");
+          $stmt->bindParam(":id", $dID);
+          $stmt->execute();
+          $data = $stmt->fetch();
+          if($name == $data['title']){
+            $stmt = $conn->prepare("DELETE FROM historic_sites WHERE id = :id");
+            $stmt->bindParam(":id", $dID);
+            $stmt->execute();
+            echo "<script>location.href='admin.php';</script>";
 
 
+          }else{
+            echo "<script>alert('ERROR: Delete from database failed, Please try again.');</script>;";
+
+          }
+          break;
+          case "delete_user":
+            $uid = $_POST['user_id'];
+            $stmt = $conn->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(":id",$uid);
+            if ($stmt->execute()) {
+              // Query executed successfully
+              echo "<script>alert('A user was deleted!');</script>;";
+          } else {
+              // Error executing query
+              echo "<script>alert('ERROR DELETING USER.Please try again.');</script>;";
+          }
+          echo "<script>location.href='admin.php';</script>";
+          
   }
   
-  $site_id = $_POST['site_id'];
+   
   
 
 
