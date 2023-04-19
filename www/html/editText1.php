@@ -19,23 +19,28 @@
       echo "Connection failed: " . $e->getMessage();
       exit();
     }
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
+      $stmt = $conn->prepare($t1q);
+      $stmt->execute();
+      $data= $stmt->fetchAll();
+    }
 
-    $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
-    $stmt = $conn->prepare($t1q);
-    $stmt->execute();
-    $data= $stmt->fetchAll();
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $text1 = $_POST['ut1'];
-    $query = "UPDATE historic_sites SET text1 = '$text1' WHERE id = $site_id";
-      if ($conn->query($query)) {
-        foreach($data as $data):
-        echo "<script>alert('The Introduction Text for ".$data['title'] . "was updated Successfully!');</script>;";
-        endforeach;
-     } else {
-      echo "<script>alert('Database error, please try again in a moment.');</script>;";
-    } 
-    echo "<script>location.href='editor.php';</script>";
+    $site_id = $_POST['site_id'];
+      $text2 = $_POST['ut1'];
+      $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
+      $stmt = $conn->prepare($query);
+      $stmt->bindParam(':text2', $text2);
+      $stmt->bindParam(':site_id', $site_id);
+      if ($stmt->execute()) {
+          echo "success";
+          echo "<script>location.href='editor.php?function=edit_site_page&site_id=".$site_id."';</script>";
+
+      } else {
+          echo "<script>alert('Database error, please try again in a moment.');</script>";
+      }
 
 }
 foreach($data as $data):
@@ -74,6 +79,7 @@ echo '<!DOCTYPE html>
     <div class="box" style=\'position: absolute; top: 2;\'>
         <form action="editText1.php" method="post">
             <textarea id="myTextarea" name="ut1">'.$data['text1']. '</textarea>
+            <input type="hidden" name="site_id" value='.$data['id'].'>
             <input type="submit" value="Update">
         </form>
     </div>
