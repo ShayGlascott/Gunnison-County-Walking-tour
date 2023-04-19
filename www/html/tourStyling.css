@@ -27,6 +27,12 @@ p{
     padding: 20px;
     margin: 0 auto;
 }
+/* .container img {
+    flex: 1;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+  } */
 
 #navbar {
     --navbar-height: 100px;
@@ -201,8 +207,11 @@ footer .container {
 }
 
 .column {
-    flex: 33.33%;
-    padding: 5px;
+    padding: 1px; 
+    flex: 1;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 .pictures{
     max-width: 100%;
