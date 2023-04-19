@@ -1,6 +1,13 @@
 <?php 
 session_start();
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  if($_SESSION['isVerified'] == 1){
+    //if usr isnt logged in redirect to login page
+    echo "<script>location.href='admin.php';</script>";
+  }
+}
 $host = 'mysql';
 $db_name = 'tourdb';
 $username = 'user';

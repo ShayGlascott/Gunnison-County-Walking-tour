@@ -60,6 +60,8 @@ try {
     <br><br><br><br>
     <script src="index.js"></script>
     <div class = main-info>
+    <?php foreach ($data as $data): ?>
+
             <h1>Points of Interest</h1>
             <!-- <style>
               h1{
@@ -67,7 +69,7 @@ try {
               }
             </style> -->
             <div style="position:relative">
-              <img src="mapMaterials/map.jpg" class="map" alt="Map of Gunnison, Colorado">
+            <img src="<?php echo $data['map_fname'];?>" class="map" alt="Map of Gunnison, Colorado">
               <br>
               <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
               <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
@@ -83,8 +85,8 @@ try {
             find more locations, etc. -->
 
             <h2>How to go on the tour...</h2>
-            
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat imperdiet sed euismod nisi porta. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. </p>
+            <p><?php echo $data['how_to_text'];?></p>
+
             <br>
     
     
@@ -96,10 +98,11 @@ try {
               <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
-                <li>123 Main Street</li>
-                <li>City, State ZIP</li>
-                <li>Phone: 123-456-7890</li>
-                <li>Email: info@example.com</li>
+                <li><?php echo $data['address'];?></li>
+                <li><?php echo $data['city_state_zip'];?></li>
+                <li>Phone: <?php echo $data['phone_number'];?></li>
+                <li>Email: <?php echo $data['email'];?></li>
+                <?php endforeach; ?>
               </ul>
             </div>
           </div>

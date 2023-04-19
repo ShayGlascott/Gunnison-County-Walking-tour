@@ -82,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "4";
         if($stmt->execute()){
             echo "<script>alert('Updated Successfully!');</script>;";
-            echo "5";
-
         }else{
             echo "<script>alert('Error Updating, try again.');</script>;";
 
@@ -137,6 +135,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Gunnion Historic Walking Tour</title>
     </head>
     <body>
+    <a href='index.php'>HOME</a>
+    <a href='admin.php'>ADMIN</a>
+    <a href='logout.php'>LOGOUT</a>
     <div class="box">
     <?php foreach($data as $data): ?>
 
