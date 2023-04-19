@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   else{
 
 
-  if (isset($_FILES['1file']) && isset($_FILES['2file'])) {
+  if (isset($_FILES['1file'])) {
     $uploadDir = 'pictures/';
     $fileName_1 = $_FILES['1file']['name'];
     $filePath_1 = $uploadDir . $fileName_1;
@@ -170,35 +170,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
         $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
-
-        if ($stmt = $conn->prepare($query)) {
+        if ($stmt1 = $conn->prepare($query)) {
           echo "<script>alert('The First image  was updated Successfully!');</script>;";
+          $stmt1->execute();
 
-      } else {
-        echo "<script>alert('Database error, please try again.');</script>;";
-      } 
+
+        }else{
+            echo "<script>alert('Database error, please try again.');</script>;";
+          } 
         
         } else {
-          echo "<script>alert('The First image had an error while being updated. Please try again');</script>;";
+          echo "<script>alert('The First image had an error while being updated or was missing. Please try again');</script>;";
 
       }
+    }
+    if (isset($_FILES['2file'])){
+      $uploadDir = 'pictures/';
+      $fileName_2 = $_FILES['2file']['name'];
+      $filePath_2 = $uploadDir . $fileName_2;
       if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
         $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
-        if ($stmt = $conn->prepare($query2)) {
+        if ($s = $conn->prepare($query2)) {
           echo "<script>alert('The Second image was updated Successfully!');</script>;";
+          $s->execute();
 
       } else {
         echo "<script>alert('Database error, please try again.');</script>;";
       } 
 
       } else {
-        echo "<script>alert('The Second image had an error while being updated. Please try again');</script>;";
+        echo "<script>alert('The Second image had an error while being updated or was missing.');</script>;";
 
     }
+  }
     echo "<script>location.href='admin.php';</script>";
 
       
-    } 
+     
   }
 
 }
@@ -227,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="image-preview">
           <label for="1file">First Image:</label>
-          <input type="file" name="1file" value="pictures/<?php echo $site['img1_fname'] ?>" accept="image/*" onchange="previewImage(event, '1file')" required><br>
+          <input type="file" name="1file" value="pictures/<?php echo $site['img1_fname'] ?>" accept="image/*" onchange="previewImage(event, '1file')"><br>
           <img id="preview_1file" class="preview_img" src="pictures/<?php echo $site['img1_fname'] ?>" /><br>
         </div>
       </td>
