@@ -21,6 +21,7 @@ $data = $statement->fetchAll();
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 
+
 <html>
 
 <head>
