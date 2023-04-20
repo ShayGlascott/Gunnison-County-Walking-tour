@@ -1,23 +1,7 @@
 <?php
-
-$host = 'mysql';
-$db_name = 'tourdb';
-$username = 'user';
-$password = 'password';
-
-try {
-  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  exit();
-}
-$getId = $_GET['id'];
-$t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
-$statement = $conn->prepare($t1q);
-$statement->execute();
-$data = $statement->fetchAll();
-
+require('model.php');
+$conn = connectDb();
+$data = getTourStop($conn);
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 
