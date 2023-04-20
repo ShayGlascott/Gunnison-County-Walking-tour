@@ -60,11 +60,11 @@ $data = getHomeData($conn);
         <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
         <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
       </div>
-      <ol type = "1">
-        <?php 
-          $i = 1;
-          foreach ($sites as $site): ?>
-          <li><a href="tour.php?id=<?php echo $site['id'];?>"><?php echo $i.'  '.$site['title']; $i+=1; ?></a></li>
+      <ol type="1">
+        <?php
+        $i = 1; foreach ($sites as $site): ?>
+          <li><a href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $i . '  ' . $site['title'];
+            $i += 1; ?></a></li>
         <?php endforeach; ?>
       </ol>
 
