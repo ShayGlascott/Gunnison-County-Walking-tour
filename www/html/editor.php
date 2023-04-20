@@ -10,73 +10,23 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 
 ?>
 <html>
-  <head>
-    <style>
-      .box {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px 0;
-      }
-  
-      .title {
-        background-color: #ccc;
-        padding: 10px;
-        font-weight: bold;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        text-align: center;
-      }
-      .image-preview {
-        display: flex;
-        flex-wrap: wrap;
-      }
+<head>
 
-      .preview_img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        margin: 10px;
-      }
-      #textboxid
-      {
-          height:100px;
-          width: 300px;
-          font-size:10pt;
-      }
+  <link rel="stylesheet" href="editorStyling.css">
+  <title>Gunnion Historic Walking Tour</title>
+</head>
 
 
-    </style>
-    <link rel="stylesheet" href="style.css">
-    <title>Gunnion Historic Walking Tour</title>
-  </head>
-  
-  
-  <body>
-  <a href='index.php'>HOME</a>
-  <a href='admin.php'>ADMIN</a>
-  <a href='logout.php'>LOGOUT</a>
+<body>
+<a href='index.php'>HOME</a>
+<a href='admin.php'>ADMIN</a>
+<a href='logout.php'>LOGOUT</a>
 <?php
-
+require('model.php');
 $site_id = $_GET['site_id'];
-//$_SESSION['sID'] = $site_id;
 $operation = $_GET['function'];
-//$_SESSION['op'] = $operation;
-$host = 'mysql';
-$db_name = 'tourdb';
-$username = 'user';
-$password = 'password';
 
-try {
-  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  exit();
-}
-
-
-
+$conn = connectDb();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   if($operation == "edit_site_page" || $operation == 'delete_stop'){

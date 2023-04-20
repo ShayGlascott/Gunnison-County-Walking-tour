@@ -1,26 +1,8 @@
 <?php
-
-$host = 'mysql';
-$db_name = 'tourdb';
-$username = 'user';
-$password = 'password';
-
-try {
-  $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  exit();
-}
-    $t1q = "SELECT * FROM `historic_sites`";
-    $stmt = $conn->prepare($t1q);
-    $stmt->execute();
-    $data= $stmt->fetchAll();
-
-    $t1q = "SELECT * FROM home";
-    $stmt1 = $conn->prepare($t1q);
-    $stmt1->execute();
-    $data1= $stmt1->fetchAll();
+require('model.php');
+$conn = connectDb();
+$data = getAllTourData($conn);
+$data1 = getHomeData($conn);
 
 ?>
 <!DOCTYPE html>

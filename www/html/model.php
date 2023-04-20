@@ -50,7 +50,15 @@ function getHomeData($conn){
     return $data;
 }
 
-function getTourStop($conn){
+function getAllTourData($conn){
+    $t1q = "SELECT * FROM `historic_sites`";
+    $stmt = $conn->prepare($t1q);
+    $stmt->execute();
+    $data= $stmt->fetchAll();
+    return $data;
+}
+
+function getTourStopById($conn){
     $getId = $_GET['id'];
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
     $statement = $conn->prepare($t1q);

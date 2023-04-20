@@ -1,7 +1,7 @@
 <?php
 require('model.php');
 $conn = connectDb();
-$data = getTourStop($conn);
+$data = getTourStopById($conn);
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 

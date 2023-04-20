@@ -12,23 +12,7 @@ if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
 
 <html>
   <head>
-    <style>
-      .box {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px 0;
-      }
-  
-      .title {
-        background-color: #ccc;
-        padding: 10px;
-        font-weight: bold;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="editorStyling.css">
     <title>Gunnion Historic Walking Tour</title>
   </head>
     <a href='index.php'>HOME</a>
