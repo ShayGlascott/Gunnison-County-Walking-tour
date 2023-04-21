@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
-    echo "<script>location.href='edit_home_page.php';</script>";
+    echo "<script>location.href='editHomePage.php';</script>";
 
 
 }
