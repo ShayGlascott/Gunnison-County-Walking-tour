@@ -51,7 +51,8 @@ $data1 = getHomeData($conn);
               }
             </style> -->
       <div style="position:relative">
-        <img src="<?php echo $data1['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
+      
+        <img src="<?php // change to pictures/echo $data1['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
         <br>
         <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
         <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>

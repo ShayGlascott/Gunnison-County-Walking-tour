@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   ?>
 
   <!-- Button to edit main page -->
-  <button onclick="window.location.href ='edit_home_page.php'">Edit Home Page</button>
+  <button onclick="window.location.href ='editHomePage.php'">Edit Home Page</button>
 
 
   <!-- List of tour stops -->

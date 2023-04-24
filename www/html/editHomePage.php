@@ -28,6 +28,8 @@ $data= $stmt1->fetchAll();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_FILES['file'])) {
+
+      //change to save to pictures
         $uploadDir = 'mapMaterials/';
         $fileName_1 = $_FILES['file']['name'];
         $filePath_1 = $uploadDir . $fileName_1;
@@ -87,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
-    echo "<script>location.href='edit_home_page.php';</script>";
+    echo "<script>location.href='editHomePage.php';</script>";
 
 
 }
