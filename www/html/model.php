@@ -60,9 +60,9 @@ function getAllTourData($conn)
     return $data;
 }
 
-function getTourStopById($conn)
+function getTourStopById($conn, $getId)
 {
-    $getId = $_GET['id'];
+    
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
     $statement = $conn->prepare($t1q);
     $statement->execute();
@@ -77,6 +77,15 @@ function getAllUsers($conn)
     $stmt1->execute();
     $data = $stmt1->fetchAll();
     return $data;
+}
+
+function getSlideshowPics($conn)
+{
+    $t1q = "SELECT * FROM slideShowImages";
+    $stmt1 = $conn->prepare($t1q);
+    $stmt1->execute();
+    $slideShowPics = $stmt1->fetchAll();
+    return $slideShowPics;
 }
 
 function update($conn, $update)

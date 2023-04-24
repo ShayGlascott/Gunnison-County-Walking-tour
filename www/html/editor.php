@@ -1,13 +1,11 @@
 <?php
 //verify that the session is active and login was successful
 session_start();
-
 if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   //if usr isnt logged in redirect to login page
   echo "<script>location.href='login.php';</script>";
   exit;
 }
-
 ?>
 <html>
 
@@ -17,7 +15,6 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   <title>Gunnion Historic Walking Tour</title>
 </head>
 
-
 <body>
   <a href='index.php'>HOME</a>
   <a href='admin.php'>ADMIN</a>
@@ -26,9 +23,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   require('model.php');
   $site_id = $_GET['site_id'];
   $operation = $_GET['function'];
-
   $conn = connectDb();
-
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($operation == "edit_site_page" || $operation == 'delete_stop') {
       $sites = array();
@@ -37,9 +32,6 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
       $stmt->execute();
       $data = $stmt->fetchAll();
     }
-
-
-
   }
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $site_id = $_POST['site_id'];
@@ -156,11 +148,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         }
       }
       echo "<script>location.href='admin.php';</script>";
-
-
-
     }
-
   }
 
 
@@ -316,10 +304,10 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
                 <input id='textboxid' type="text" name="new_img2_cap" required><br>
                 <label for="new_text1">Introduction Text:</label><br>
                 <textarea name='new_text1' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-              </textarea><br>
+                  </textarea><br>
                 <label for="new_text2">Read More Text:</label><br>
                 <textarea name='new_text2' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-              </textarea><br>
+                  </textarea><br>
                 <input type="submit" name="submit" value="Create!">
               </form>
             </td>

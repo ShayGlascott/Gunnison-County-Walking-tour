@@ -43,30 +43,58 @@ $data = getHomeData($conn);
   </header>
   <br><br><br><br>
   <script src="index.js"></script>
+
+  <!-- <script src="slideshow.js"></script> -->
+
   <!-- Add your content here -->
   <div class=main-info>
+
     <?php foreach ($data as $data): ?>
       <h2>
         <?php echo $data['intro_heading_text']; ?>
       </h2>
       <p>
         <?php echo $data['intro_text']; ?>
-      </p>
+
+
+        <!-- slideshow of old images -->
+      <h2>
+        
+      </h2>
+      <br>
+      <div class="slideshow-container">
+        <?php
+        $slideShowPics = getSlideshowPics($conn);
+        $max = count($slideShowPics); foreach ($slideShowPics as $pics):
+          ?>
+          <div class='mySlides'>
+            <div class='captionText' ><?php echo $pics['oldImage_caption'];  ?></div>
+            <img src='pictures/<?php echo $pics['oldImage_fname']; ?>' style='width:50%'>
+          </div>
+          <?php
+        endforeach;
+        ?>
+        <script src="slideshow.js"></script>
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
       <h2>Points of Interest</h2>
       <div style="position:relative">
         <img src="<?php echo $data['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
         <br>
-        <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
-        <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
-        <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
       </div>
-      <ol type="1">
-        <?php
-        $i = 1; foreach ($sites as $site): ?>
-          <li><a href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $i . '  ' . $site['title'];
-            $i += 1; ?></a></li>
-        <?php endforeach; ?>
-      </ol>
+      <div>
+        <ul>
+          <?php
+          $i = 1; foreach ($sites as $site): ?>
+            <li><a class="siteLinks" href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $i . ') ' . $site['title'];
+               $i += 1; ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+
 
       <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
         find more locations, etc. -->

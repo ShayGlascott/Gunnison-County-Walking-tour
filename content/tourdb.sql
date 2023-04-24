@@ -40,6 +40,9 @@ CREATE TABLE `historic_sites` (
   `text2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='table for the templates';
 
+
+
+
 --
 -- Dumping data for table `historic_sites`
 --
@@ -57,6 +60,20 @@ INSERT INTO `historic_sites` (`id`, `img1_fname`, `img1_altText`, `img1_caption`
 --
 -- Table structure for table `home`
 --
+
+CREATE TABLE `slideShowImages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `oldImage_fname` text NOT NULL,
+  `oldImage_caption` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `slideShowImages` (`oldImage_fname`, `oldImage_caption`) VALUES 
+  ('gunnisonArtCenterBefore.png', 'Gunnison Art Center'),
+  ('gunnisonCityHallOld.png', 'Gunnison City Hall'),
+  ('gunnisonHotelOld.png', 'Gunnison Hotel'),
+  ('hartmanBlockOld.png', 'Hartman Block'),
+  ('johnsonBuildingOld.png', 'Johnson Building');
 
 CREATE TABLE `home` (
   `intro_heading_text` text NOT NULL,

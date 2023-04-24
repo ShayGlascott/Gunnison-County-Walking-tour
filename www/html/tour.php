@@ -1,7 +1,8 @@
 <?php
 require('model.php');
 $conn = connectDb();
-$data = getTourStopById($conn);
+$getId = $_GET['id'];
+$data = getTourStopById($conn, $getId);
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 
@@ -84,7 +85,10 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
     <!-- Further information and pictures for those interested in reading more -->
     <?php $id = $data['id'] ?>
     <!--Getting the id for the item that is being displayed-->
-    <?php echo '<a href="ReadMore.php?id=' . $id . '">Read More</a>'; ?>
+    <div class='readMoreLink'>
+      <?php echo '<a href="ReadMore.php?id=' . $id . '" style="text-decoration: none; ">Read More</a>'; ?>
+    </div>
+
   <?php endforeach; ?>
   <?php
   $next_site_id = $getId + 1;
