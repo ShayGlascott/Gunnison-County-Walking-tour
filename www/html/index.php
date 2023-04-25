@@ -59,10 +59,10 @@ $data = getHomeData($conn);
 
         <!-- slideshow of old images -->
       
-      <h2>
+      <!-- <h2>
         Historic Slideshow
-      </h2>
-      <br><br>
+      </h2> -->
+      <br><br><br> 
       <div class="slideshow-container">
         <?php
         $slideShowPics = getSlideshowPics($conn);

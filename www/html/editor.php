@@ -50,10 +50,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($operation == "edit_site_page" || $operation == 'delete_stop') {
       $sites = array();
-      $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
-      $stmt = $conn->prepare($t1q);
-      $stmt->execute();
-      $data = $stmt->fetchAll();
+      $data = getTourStopById($conn, $site_id);
     }
   }
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -327,10 +324,10 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
                 <input id='textboxid' type="text" name="new_img2_cap" required><br>
                 <label for="new_text1">Introduction Text:</label><br>
                 <textarea name='new_text1' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                          </textarea><br>
+                      </textarea><br>
                 <label for="new_text2">Read More Text:</label><br>
                 <textarea name='new_text2' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                          </textarea><br>
+                      </textarea><br>
                 <input type="submit" name="submit" value="Create!">
               </form>
             </td>
@@ -365,9 +362,3 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 </body>
 
 </html>
-
-
-<?php
-// Close database connection
-
-?>
