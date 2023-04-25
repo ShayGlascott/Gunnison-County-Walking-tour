@@ -17,7 +17,7 @@ function connectDb()
     return $conn;
 }
  */
-function openDatabaseConnection() {
+function connectDb() {
     try {
         $pdo = new PDO('sqlite:/app/data/data.db');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
