@@ -8,44 +8,12 @@ services:
             - 80:80  
         links:  
             - php  
-        volumes_from:  
-            - app-data  
 
     php:    
         build: ./php/  
         container_name: php-container  
         expose:  
             - 9000  
-        links:  
-            - mysql  
-        volumes_from:  
-            - app-data
         volumes:
-            - ./www/html/pictures:/var/www/html/pictures:rw
-            - ./www/html/mapMaterials:/var/www/html/mapMaterials:rw  
-  
-
-    app-data:    
-        image: php:7.0-fpm  
-        container_name: app-data-container  
-        volumes:  
-            - ./www/html/:/var/www/html/  
-        command: "true"  
-
-    mysql:    
-        image: mysql:5.7  
-        container_name: mysql-container  
-        volumes_from:  
-            - mysql-data  
-        environment:  
-         MYSQL_ROOT_PASSWORD: secret  
-         MYSQL_DATABASE: tourdb  
-         MYSQL_USER: user  
-         MYSQL_PASSWORD: password  
-
-    mysql-data:    
-        image: mysql:5.7  
-        container_name: mysql-data-container  
-        volumes:  
-            - ./content/tourdb.sql:/docker-entrypoint-initdb.d/init.sql  
-        command: "true" 
+            - ./www/html/pictures:/var/www/html/pictures:rw # volume mount for the pictures folder
+            - ./data/data.db:/app/data/data.db:rw # volume mount for the SQLite database  
