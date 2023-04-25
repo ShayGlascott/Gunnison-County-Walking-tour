@@ -58,10 +58,11 @@ $data = getHomeData($conn);
 
 
         <!-- slideshow of old images -->
+      
       <h2>
-        
+        Historic Slideshow
       </h2>
-      <br>
+      <br><br>
       <div class="slideshow-container">
         <?php
         $slideShowPics = getSlideshowPics($conn);
@@ -76,11 +77,15 @@ $data = getHomeData($conn);
         ?>
         <script src="slideshow.js"></script>
         <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
       </div>
       <br>
-      <h2>Points of Interest</h2>
+      <!-- <h2>Points of Interest</h2> -->
+      <h2>How to go on the tour...</h2>
+      <p>
+        <?php echo $data['how_to_text']; ?>
+      </p>
       <div style="position:relative">
         <img src="<?php echo $data['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
         <br>
@@ -99,10 +104,7 @@ $data = getHomeData($conn);
       <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
         find more locations, etc. -->
 
-      <h2>How to go on the tour...</h2>
-      <p>
-        <?php echo $data['how_to_text']; ?>
-      </p>
+      
       <br>
       <footer>
         <div class="container">

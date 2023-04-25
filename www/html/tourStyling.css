@@ -226,7 +226,6 @@ footer .col-md-4 {
 
 .readMoreLink,
 .readMoreLink:visited {
-    background-color: blanchedalmond;
     color: white;
     border: 3px solid black;
     padding: 10px 20px;
@@ -240,9 +239,6 @@ footer .col-md-4 {
 
     background-color: black;
     color: white;
-}
-.readMoreLink:visited {
-    color: black;
 }
 
 @media screen and (max-width: 500px) {

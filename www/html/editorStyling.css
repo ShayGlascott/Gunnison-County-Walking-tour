@@ -11,6 +11,8 @@
     padding: 0;
 }
 
+
+
 body {
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
@@ -18,38 +20,15 @@ body {
     text-align: center;
 }
 
+p {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .container {
     max-width: 1000px;
     padding: 20px;
     margin: 0 auto;
-}
-
-.box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.title {
-    background-color: #ccc;
-    padding: 10px;
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    text-align: center;
-}
-
-.image-preview {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.preview_img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin: 10px;
 }
 
 #navbar {

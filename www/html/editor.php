@@ -16,9 +16,32 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 </head>
 
 <body>
-  <a href='index.php'>HOME</a>
-  <a href='admin.php'>ADMIN</a>
-  <a href='logout.php'>LOGOUT</a>
+  <header id="navbar">
+    <nav class="navbar-container container">
+      <a class="home-link">
+        <div class="navbar-logo">
+          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
+        </div>
+        Gunnison Walking Tour
+      </a>
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
+        aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <br><br><br><br>
+  <script src="index.js"></script>
   <?php
   require('model.php');
   $site_id = $_GET['site_id'];
@@ -304,10 +327,10 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
                 <input id='textboxid' type="text" name="new_img2_cap" required><br>
                 <label for="new_text1">Introduction Text:</label><br>
                 <textarea name='new_text1' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                  </textarea><br>
+                          </textarea><br>
                 <label for="new_text2">Read More Text:</label><br>
                 <textarea name='new_text2' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                  </textarea><br>
+                          </textarea><br>
                 <input type="submit" name="submit" value="Create!">
               </form>
             </td>

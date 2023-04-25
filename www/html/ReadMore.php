@@ -55,7 +55,7 @@ $data = $statement->fetchAll();
     <h1>More Info </h1>
     <script src="index.js"></script>
     <div>
-    <?php echo $data['text2']?> 
+    <?php echo "<p> ".$data['text2']." </p>"?> 
     <?php endforeach; ?>
 
     <?php $next_site_id = $getId + 1 ?>

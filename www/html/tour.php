@@ -6,7 +6,6 @@ $data = getTourStopById($conn, $getId);
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
 ?>
 
-
 <html>
 
 <head>
@@ -86,7 +85,7 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
     <?php $id = $data['id'] ?>
     <!--Getting the id for the item that is being displayed-->
     <div class='readMoreLink'>
-      <?php echo '<a href="ReadMore.php?id=' . $id . '" style="text-decoration: none; ">Read More</a>'; ?>
+      <a href="ReadMore.php?id='<?php echo $id ?>'" style="text-decoration: none; ">Read More</a>
     </div>
 
   <?php endforeach; ?>
@@ -98,6 +97,7 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
     <button onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
     <?php
   }
+  
   ?>
   <footer>
     <div class="container">

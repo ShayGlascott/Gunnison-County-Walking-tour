@@ -1,52 +1,39 @@
-<?php 
-    session_start();
+<?php
+session_start();
 
-    if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
-        //if usr isnt logged in redirect to login page
-        echo "<script>location.href='login.php';</script>";
-        exit;
-    }
-    $site_id = $_GET['id'];
-    $host = 'mysql';
-    $db_name = 'tourdb';
-    $username = 'user';
-    $password = 'password';
+if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
+  //if usr isnt logged in redirect to login page
+  echo "<script>location.href='login.php';</script>";
+  exit;
+}
+$site_id = $_GET['id'];
+require('model.php');
+$conn = connectDb();
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  $data = getTourStopById($conn, $site_id);
+}
 
-    try {
-      $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
-      exit();
-    }
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-      $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $site_id;
-      $stmt = $conn->prepare($t1q);
-      $stmt->execute();
-      $data= $stmt->fetchAll();
-    }
-    
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $site_id = $_POST['site_id'];
-      $text2 = $_POST['ut1'];
-      $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
-      $stmt = $conn->prepare($query);
-      $stmt->bindParam(':text2', $text2);
-      $stmt->bindParam(':site_id', $site_id);
-      if ($stmt->execute()) {
-          echo "success";
-          echo "<script>location.href='editor.php?function=edit_site_page&site_id=".$site_id."';</script>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $site_id = $_POST['site_id'];
+  $text2 = $_POST['ut1'];
+  $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(':text2', $text2);
+  $stmt->bindParam(':site_id', $site_id);
+  if ($stmt->execute()) {
+    echo "success";
+    echo "<script>location.href='editor.php?function=edit_site_page&site_id=" . $site_id . "';</script>";
 
-      } else {
-          echo "<script>alert('Database error, please try again in a moment.');</script>";
-      }
+  } else {
+    echo "<script>alert('Database error, please try again in a moment.');</script>";
   }
-  
+}
 
 
-foreach($data as $data):
-echo '<!DOCTYPE html>
+
+foreach ($data as $data):
+  echo '<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
@@ -79,8 +66,8 @@ echo '<!DOCTYPE html>
     <h2>Edit Read More</h2>
     <div class="box" style=\'position: absolute; top: 2;\'>
         <form action="editText2.php" method="post">
-            <textarea id="myTextarea" name="ut1">'.$data['text2']. '</textarea>
-            <input type="hidden" name="site_id" value='.$data['id'].'>
+            <textarea id="myTextarea" name="ut1">' . $data['text2'] . '</textarea>
+            <input type="hidden" name="site_id" value=' . $data['id'] . '>
             <input type="submit" value="submit">
         </form>
     </div>
@@ -89,5 +76,3 @@ echo '<!DOCTYPE html>
 endforeach;
 
 ?>
-
-

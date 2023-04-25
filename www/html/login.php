@@ -8,18 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo "<script>location.href='admin.php';</script>";
   }
 }
-$host = 'mysql';
-$db_name = 'tourdb';
-$username = 'user';
-$password = 'password';
-
-try {
-  $conn = new PDO('mysql:host=' . $host . ';port=3306;dbname=' . $db_name, $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  exit();
-}
+require('model.php');
+$conn = connectDb();
 if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $passwd = $_POST['password'];
@@ -55,11 +45,36 @@ if (isset($_POST['submit'])) {
 <html>
 
 <head>
-
+  <link rel="stylesheet" href="editorStyling.css">
 </head>
 
 <body>
-  <a href='index.php'>Home</a>
+  <header id="navbar">
+    <nav class="navbar-container container">
+      <a class="home-link">
+        <div class="navbar-logo">
+          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
+        </div>
+        Gunnison Walking Tour
+      </a>
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
+        aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <br><br><br><br>
+  <script src="index.js"></script>
   <h1>Login</h1>
 
   <form method="POST">

@@ -16,9 +16,6 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   <link rel="stylesheet" href="editorStyling.css">
   <title>Gunnion Historic Walking Tour</title>
 </head>
-<a href='index.php'>HOME</a>
-<a href='admin.php'>ADMIN</a>
-<a href='logout.php'>LOGOUT</a>
 <?php
 
 require('model.php');
@@ -35,7 +32,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 ?>
 
 <body>
-  <h1>Gunnison Walking Tour Administration Page</h1>
+  <header id="navbar">
+    <nav class="navbar-container container">
+      <a class="home-link">
+        <div class="navbar-logo">
+          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
+        </div>
+        Gunnison Walking Tour
+      </a>
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
+        aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <br><br><br><br>
+  <script src="index.js"></script>
+  <h1>Administration Page</h1>
   <?php
   if ($_SESSION['id'] == 0) {
     ?>
