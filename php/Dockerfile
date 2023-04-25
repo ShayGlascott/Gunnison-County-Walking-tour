@@ -3,6 +3,6 @@
     RUN mkdir -p /var/www/html/pictures
     RUN chmod 777 /var/www/html/pictures
     RUN chown -R www-data:www-data /var/www/html/pictures
-    RUN mkdir -p /var/www/html/mapMaterials
-    RUN chmod 777 /var/www/html/mapMaterials
-    RUN chown -R www-data:www-data /var/www/html/mapMaterials
+    # RUN mkdir -p /var/www/html/mapMaterials
+    # RUN chmod 777 /var/www/html/mapMaterials
+    # RUN chown -R www-data:www-data /var/www/html/mapMaterials
