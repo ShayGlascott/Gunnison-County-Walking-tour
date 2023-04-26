@@ -188,7 +188,7 @@ function update($conn, $update)
 
     }
 }
-function add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2){
+function add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$img1_fname,$img2_fname){
 
     $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
         VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
@@ -220,7 +220,7 @@ function add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_capt
     echo "<script>location.href='admin.php';</script>";
 }
 
-function updateImg1($conn,$img1_fname){
+function updateImg1($conn,$img1_fname,$site_id){
     $query = "UPDATE historic_sites SET img1_fname = '$img1_fname' WHERE id = $site_id";
           if ($stmt1 = $conn->prepare($query)) {
             echo "<script>alert('The First image  was updated Successfully!');</script>;";
@@ -229,7 +229,7 @@ function updateImg1($conn,$img1_fname){
             echo "<script>alert('Database error, please try again.');</script>;";
           }
 }
-function updateImg2($conn,$img2_fname){
+function updateImg2($conn,$img2_fname,$site_id){
     $query = "UPDATE historic_sites SET img2_fname = '$img2_fname' WHERE id = $site_id";
           if ($stmt1 = $conn->prepare($query)) {
             echo "<script>alert('The Second image  was updated Successfully!');</script>;";
