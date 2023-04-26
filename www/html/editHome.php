@@ -1,5 +1,5 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <link rel="stylesheet" href="editorStyling.css">
   <title>Gunnion Historic Walking Tour</title>
@@ -33,7 +33,7 @@
   <br><br><br><br>
   <script src="index.js"></script>
   <div class="box">
-    <?php foreach ($data as $data): ?>
+    <?php //foreach ($data as $data): ?>
 
       <h2>Edit Map Photo:</h2><br>
       <form method="POST" enctype="multipart/form-data">
@@ -78,8 +78,7 @@
         <input type='text' name='email' value='<?php echo $data['email']; ?>' required><br>
         <input type='submit' value='Update!'>
       </form>
-    <?php endforeach; ?>
+    <?php //endforeach; ?>
   </div>
 </body>
 
-</html>
