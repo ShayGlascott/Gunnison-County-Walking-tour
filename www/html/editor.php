@@ -6,6 +6,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   echo "<script>location.href='login.php';</script>";
   exit;
 }
+$site_id = "";
 ?>
 <html>
 
@@ -96,7 +97,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $text1 = $_POST['new_text1'];
         $text2 = $_POST['new_text2'];
 
-        add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2);
+        add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$fileName_1,$fileName_2);
       }
     } else {
 
