@@ -7,7 +7,9 @@ services:
         ports:  
             - 80:80  
         links:  
-            - php  
+            - php 
+        volumes_from:  
+            - app-data 
 
     php:    
         build: ./php/  
