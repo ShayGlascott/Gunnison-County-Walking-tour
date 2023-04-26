@@ -14,7 +14,7 @@ cd CS_495
 (Required to upload pictures using the admin page)
 ```
 # chmod 777 www/html/pictures/
-# chmod 777 www/html/mapMaterials/
+# chmod 666 data/data.sqlite3
 ```
 ### Build the Docker images:  
 ```
