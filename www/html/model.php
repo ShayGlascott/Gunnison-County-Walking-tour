@@ -253,7 +253,6 @@ function editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$addres
             `phone_number` = :phone_number, 
             `email` = :email";
     
-        echo "3.5";
     
         $stmt = $conn->prepare($query);
         $stmt->bindParam(":intro_heading_text", $intro_heading_text);
@@ -263,14 +262,11 @@ function editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$addres
         $stmt->bindParam(":city_state_zip", $city_state_zip);
         $stmt->bindParam(":phone_number", $phone_number);
         $stmt->bindParam(":email", $email);
-        echo "4";
         if ($stmt->execute()) {
           echo "<script>alert('Updated Successfully!');</script>;";
         } else {
           echo "<script>alert('Error Updating, try again.');</script>;";
-    
         }
-      
       echo "<script>location.href='editHomePage.php';</script>";
     
     

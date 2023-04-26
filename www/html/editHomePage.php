@@ -10,6 +10,8 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 require('model.php');
 $conn = connectDb();
 $data = getHomeData($conn);
+require("editHome.php");
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -51,6 +53,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$address,$city_state_zip,$phone_number,$email);
 }
 }
-include("editHome.php");
 ?>
 
