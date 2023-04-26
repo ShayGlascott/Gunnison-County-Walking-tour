@@ -194,5 +194,55 @@ function update($conn, $update)
 
     }
 }
+function add_new_site($img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2){
+
+    $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
+        VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
+
+    // Prepare the query
+    $stmt = $conn->prepare($sql);
+
+    // Bind the parameters
+    $stmt->bindParam(':img1_fname', $img1_fname);
+    $stmt->bindParam(':img1_altText', $img1_altText);
+    $stmt->bindParam(':img1_caption', $img1_caption);
+    $stmt->bindParam(':img2_fname', $img2_fname);
+    $stmt->bindParam(':img2_altText', $img2_altText);
+    $stmt->bindParam(':img2_caption', $img2_caption);
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':text1', $text1);
+    $stmt->bindParam(':text2', $text2);
+
+    // Execute the query and insert the data into the database
+    if ($stmt->execute()) {
+      // Query executed successfully
+      echo "<script>alert('New Site has been created!');</script>;";
+
+    } else {
+      // Error executing query
+      echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
+
+    }
+    echo "<script>location.href='admin.php';</script>";
+}
+
+function updateImg1($img1_fname){
+    $query = "UPDATE historic_sites SET img1_fname = '$img1_fname' WHERE id = $site_id";
+          if ($stmt1 = $conn->prepare($query)) {
+            echo "<script>alert('The First image  was updated Successfully!');</script>;";
+            $stmt1->execute();
+          } else {
+            echo "<script>alert('Database error, please try again.');</script>;";
+          }
+}
+function updateImg2($img2_fname){
+    $query = "UPDATE historic_sites SET img2_fname = '$img2_fname' WHERE id = $site_id";
+          if ($stmt1 = $conn->prepare($query)) {
+            echo "<script>alert('The Second image  was updated Successfully!');</script>;";
+            $stmt1->execute();
+          } else {
+            echo "<script>alert('Database error, please try again.');</script>;";
+          }
+}
 
 ?>

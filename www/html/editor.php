@@ -43,10 +43,14 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
   <br><br><br><br>
   <script src="index.js"></script>
   <?php
+
+
   require('model.php');
   $site_id = $_GET['site_id'];
   $operation = $_GET['function'];
   $conn = connectDb();
+
+  
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($operation == "edit_site_page" || $operation == 'delete_stop') {
       $sites = array();
@@ -81,7 +85,6 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 
         } else {
           echo "<script>alert('The Second image had an error while being updated. Please try again');</script>;";
-
         }
         $img1_altText = $_POST['new_img1_alt'];
         $img1_caption = $_POST['new_img1_cap'];
@@ -93,34 +96,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $text1 = $_POST['new_text1'];
         $text2 = $_POST['new_text2'];
 
-        $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
-            VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
-
-        // Prepare the query
-        $stmt = $conn->prepare($sql);
-
-        // Bind the parameters
-        $stmt->bindParam(':img1_fname', $img1_fname);
-        $stmt->bindParam(':img1_altText', $img1_altText);
-        $stmt->bindParam(':img1_caption', $img1_caption);
-        $stmt->bindParam(':img2_fname', $img2_fname);
-        $stmt->bindParam(':img2_altText', $img2_altText);
-        $stmt->bindParam(':img2_caption', $img2_caption);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':text1', $text1);
-        $stmt->bindParam(':text2', $text2);
-
-        // Execute the query and insert the data into the database
-        if ($stmt->execute()) {
-          // Query executed successfully
-          echo "<script>alert('New Site has been created!');</script>;";
-
-        } else {
-          // Error executing query
-          echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
-
-        }
-        echo "<script>location.href='admin.php';</script>";
+        add_new_site($img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2);
       }
     } else {
 
@@ -133,16 +109,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $filePath_2 = $uploadDir . $fileName_2;
 
         if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
-          $query = "UPDATE historic_sites SET img1_fname = '$fileName_1' WHERE id = $site_id";
-          if ($stmt1 = $conn->prepare($query)) {
-            echo "<script>alert('The First image  was updated Successfully!');</script>;";
-            $stmt1->execute();
-
-
-          } else {
-            echo "<script>alert('Database error, please try again.');</script>;";
-          }
-
+        updateImg1($fileName_1);
         } else {
           echo "<script>alert('The First image had an error while being updated or was missing. Please try again');</script>;";
 
@@ -153,18 +120,9 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $fileName_2 = $_FILES['2file']['name'];
         $filePath_2 = $uploadDir . $fileName_2;
         if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
-          $query2 = "UPDATE historic_sites SET img2_fname = '$fileName_2' WHERE id = $site_id";
-          if ($s = $conn->prepare($query2)) {
-            echo "<script>alert('The Second image was updated Successfully!');</script>;";
-            $s->execute();
-
-          } else {
-            echo "<script>alert('Database error, please try again.');</script>;";
-          }
-
+          updateImg1($fileName_2);
         } else {
           echo "<script>alert('The Second image had an error while being updated or was missing.');</script>;";
-
         }
       }
       echo "<script>location.href='admin.php';</script>";
@@ -173,8 +131,6 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 
 
   ?>
-
-
   <div class="box">
 
     <?php
@@ -185,176 +141,16 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         <?php
         break;
       case "edit_site_page":
-        ?>
-        <?php foreach ($data as $site): ?>
-          <h1>Edit site information for
-            <?php echo $site['title']; ?>
-          </h1>
-          <table>
-            <tr>
-              <td>
-                <form action='editor.php' method="POST" enctype="multipart/form-data">
+        include("edit_site.php");
+        
+        break; 
 
-                  <div class="image-preview">
-                    <label for="1file">First Image:</label>
-                    <input type="file" name="1file" value="pictures/<?php echo $site['img1_fname'] ?>" accept="image/*"
-                      onchange="previewImage(event, '1file')"><br>
-                    <img id="preview_1file" class="preview_img" src="pictures/<?php echo $site['img1_fname'] ?>" /><br>
-                  </div>
-              </td>
-              <td>
-                <div class="image-preview">
-                  <label for="2file">Second Image:</label>
-                  <input type="file" name="2file" value="pictures/<?php echo $site['img2_fname'] ?>" accept="image/*"
-                    onchange="previewImage(event, '2file')"><br>
-                  <img id="preview_2file" class="preview_img" src="pictures/<?php echo $site['img2_fname'] ?>" /><br>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <script>
-                function previewImage(event, inputId) {
-                  var reader = new FileReader();
-                  reader.onload = function () {
-                    var outputId = "preview_" + inputId;
-                    var output = document.getElementById(outputId);
-                    output.src = reader.result;
-                  }
-                  reader.readAsDataURL(event.target.files[0]);
-                }
-              </script>
-              <td colspan="2">
-                <!--form to upload/update files -->
-                <input type='hidden' name='site_id' value="<?php echo $site_id; ?>">
-                <input type="hidden" name="function" value="edit_site_page">
-                <input type="submit" name="submit" value="Add Images">
-                </form>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <button onclick="window.location.href ='editText1.php?id=<?php echo $site_id; ?>'">Edit Introduction
-                  Text</button>
-                <button onclick="window.location.href ='editText2.php?id=<?php echo $site_id; ?>'">Edit Read More
-                  Text</button>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <!--form to post updated to the admin page -->
-                <form action="admin.php" method="POST" enctype="multipart/form-data">
-                  <input type='hidden' name='update' value='site'>
-                  <input type='hidden' name='update_site_id' value='<?php echo $site_id; ?>'>
-
-                  <label for="title">Title:</label>
-                  <input type="text" name="title" value="<?php echo $site['title']; ?>" required><br>
-
-                  <label for="img1_alt">First Image alt Text:</label>
-                  <input id='textboxid' type="text" name="img1_alt" value="<?php echo $site['img1_altText']; ?>" required><br>
-                  <label for="img1_cap">First Image Caption:</label>
-                  <input id='textboxid' type="text" name="img1_cap" value="<?php echo $site['img1_caption']; ?>" required><br>
-
-                  <label for="img2_alt">Second Image alt Text:</label>
-                  <input id='textboxid' type="text" name="img2_alt" value="<?php echo $site['img2_altText']; ?>" required><br>
-                  <label for="img2_cap">Second Image Caption:</label>
-                  <input id='textboxid' type="text" name="img2_cap" value="<?php echo $site['img2_caption']; ?>" required><br>
-
-                  <input type="submit" name="submit" value="UPDATE">
-                </form>
-              </td>
-            </tr>
-
-          </table>
-        <?php endforeach;
-        break; ?>
-
-        <?php
       case "new_tour_stop":
-        ?>
-        <h1>Add a new Stop:</h1>
-        <table>
-          <tr>
-            <script>
-              function previewImage(event, inputId) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                  var outputId = "preview_" + inputId;
-                  var output = document.getElementById(outputId);
-                  output.src = reader.result;
-                }
-                reader.readAsDataURL(event.target.files[0]);
-              }
-            </script>
-            <!--form to upload/update files -->
-
-
-          </tr>
-
-          <tr>
-            <td colspan="2">
-              <!--form to post updated to the admin page -->
-              <form action="editor.php" method="POST" enctype="multipart/form-data">
-                <input type='hidden' name='addNew' value='addIt'>
-
-                <div class="image-preview">
-                  <label for="new_1file">First Image:</label>
-                  <input type="file" name="new_1file" accept="image/*" onchange="previewImage(event, 'new_1file')"
-                    required><br>
-                  <img id="preview_new_1file" class="preview_img" /><br>
-                </div>
-
-                <div class="image-preview">
-                  <label for="new_2file">Second Image:</label>
-                  <input type="file" name="new_2file" accept="image/*" onchange="previewImage(event, 'new_2file')"
-                    required><br>
-                  <img id="preview_new_2file" class="preview_img" /><br>
-                </div>
-
-                <label for="title">Title:</label>
-                <input type="text" name="new_title" required><br>
-
-                <label for="new_img1_alt">First Image alt Text:</label>
-                <input id='textboxid' type="text" name="new_img1_alt" required><br>
-                <label for="new_img1_cap">First Image Caption:</label>
-                <input id='textboxid' type="text" name="new_img1_cap" required><br>
-
-                <label for="new_img2_alt">Second Image alt Text:</label>
-                <input id='textboxid' type="text" name="new_img2_alt" required><br>
-                <label for="new_img2_cap">Second Image Caption:</label>
-                <input id='textboxid' type="text" name="new_img2_cap" required><br>
-                <label for="new_text1">Introduction Text:</label><br>
-                <textarea name='new_text1' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                      </textarea><br>
-                <label for="new_text2">Read More Text:</label><br>
-                <textarea name='new_text2' rows="4" cols="50" required>Please copy and paste Information here. Make sure to go and update this after creating a new site so it renders correctly on the website!
-                      </textarea><br>
-                <input type="submit" name="submit" value="Create!">
-              </form>
-            </td>
-          </tr>
-
-        </table>
-
-        <?php
+        include("new_site.html");
         break;
-      case 'delete_stop': foreach ($data as $data):
-          ?>
-          <h2>Would you like to delete
-            <?php echo $data['title'] ?>?
-          </h2>
-          <button onclick="window.location.href ='admin.php'">NO TAKE ME BACK</button>
-          <h3>To delete please type in the site name as seen above.</h3>
-          <h3>Your answer is case sensitive.</h3>
-          <form action='admin.php' method='post'>
-            <input type='hidden' name='update' value='delete_stop'>
-            <input type='hidden' name='site_id' value='<?php echo $data['id'] ?>'>
-            <input type='text' name='name'>
-            <input type='submit' value='DELETE'>
-          </form>
-          <?php
-        endforeach;
-
-
+      case 'delete_stop': 
+        include("delete_site.php");
+        break;
     }
     ?>
 
