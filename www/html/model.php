@@ -1,7 +1,7 @@
 <?php
 function connectDb() {
     try {
-        $pdo = new PDO('sqlite:/app/data/data.db');
+        $pdo = new PDO('sqlite:/app/data/data.sqlite3');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch(PDOException $e) {

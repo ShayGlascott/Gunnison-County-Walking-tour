@@ -17,8 +17,8 @@ services:
         volumes_from:  
             - app-data
         volumes:
-            - ./www/html/pictures:/var/www/html/pictures:rw # volume mount for the pictures folder
-            - ./data/data.db:/app/data/data.db:rw # volume mount for the SQLite database  
+            - ./www/html/pictures:/var/www/html/pictures:rw  
+            - ./data/data.sqlite3:/app/data/data.sqlite3:rw  
 
     app-data:    
         image: php:7.0-fpm  
