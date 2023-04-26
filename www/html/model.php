@@ -1,19 +1,13 @@
 <?php
-function connectDb()
-{
-    $host = 'mysql';
-    $db_name = 'tourdb';
-    $username = 'user';
-    $password = 'password';
-
+function connectDb() {
     try {
-        $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
+        $pdo = new PDO('sqlite:/app/data/data.db');
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
-        exit();
+        return null;
     }
-    return $conn;
 }
 
 function getSites($conn)
