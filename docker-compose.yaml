@@ -19,9 +19,10 @@ services:
         volumes:
             - ./www/html/pictures:/var/www/html/pictures:rw # volume mount for the pictures folder
             - ./data/data.db:/app/data/data.db:rw # volume mount for the SQLite database  
-     app-data:    
+
+    app-data:    
         image: php:7.0-fpm  
         container_name: app-data-container  
         volumes:  
             - ./www/html/:/var/www/html/  
-        command: "true"
+        command: "true"  
