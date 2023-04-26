@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $city_state_zip = $_POST['city_state_zip'];
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
-    editHomePage($intro_heading_text,$intro_text,$how_to_text,$address,$city_state_zip,$phone_number,$email);
+    editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$address,$city_state_zip,$phone_number,$email);
+}
 }
 include("editHome.php");
 ?>

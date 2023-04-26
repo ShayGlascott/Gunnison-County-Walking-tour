@@ -96,7 +96,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $text1 = $_POST['new_text1'];
         $text2 = $_POST['new_text2'];
 
-        add_new_site($img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2);
+        add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$filName_1,$fileName_2);
       }
     } else {
 
@@ -109,7 +109,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $filePath_2 = $uploadDir . $fileName_2;
 
         if (move_uploaded_file($_FILES['1file']['tmp_name'], $filePath_1)) {
-        updateImg1($fileName_1);
+        updateImg1($conn,$fileName_1);
         } else {
           echo "<script>alert('The First image had an error while being updated or was missing. Please try again');</script>;";
 
@@ -120,7 +120,7 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
         $fileName_2 = $_FILES['2file']['name'];
         $filePath_2 = $uploadDir . $fileName_2;
         if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
-          updateImg1($fileName_2);
+          updateImg1($conn,$fileName_2);
         } else {
           echo "<script>alert('The Second image had an error while being updated or was missing.');</script>;";
         }
