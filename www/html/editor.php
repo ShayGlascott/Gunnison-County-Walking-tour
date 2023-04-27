@@ -53,12 +53,14 @@ $site_id = "";
 
   
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    //get the site to edit or delete
     if ($operation == "edit_site_page" || $operation == 'delete_stop') {
       $sites = array();
       $data = getTourStopById($conn, $site_id);
     }
   }
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //get site id and add new site
     $site_id = $_POST['site_id'];
     if (isset($_POST['addNew'])) {
       $new = $_POST['addNew'];
@@ -100,7 +102,7 @@ $site_id = "";
         add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$fileName_1,$fileName_2);
       }
     } else {
-
+      //update images for existing stops and move files into their respective places
 
       if (isset($_FILES['1file'])) {
         $uploadDir = 'pictures/';
@@ -133,14 +135,10 @@ $site_id = "";
 
   ?>
   <div class="box">
-
+    
     <?php
+    //switch to handle logic for CRUD Operations 
     switch ($operation) {
-      case "edit_main_page":
-        ?>
-
-        <?php
-        break;
       case "edit_site_page":
         include("edit_site.php");
         
