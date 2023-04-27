@@ -10,6 +10,7 @@ $data1 = getHomeData($conn);
 
 <head>
   <link rel="stylesheet" href="indexStyling.css">
+  <link rel="stylesheet" href="navbarStyling.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -44,18 +45,10 @@ $data1 = getHomeData($conn);
   <div class=main-info>
     <?php foreach ($data1 as $data1): ?>
 
-      <h1>Points of Interest</h1>
-      <!-- <style>
-              h1{
-                font-size: 100px;
-              }
-            </style> -->
+      <h1>How to go on the tour...</h1>
       <div style="position:relative">
         <img src="<?php echo $data1['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
         <br>
-        <a href="#region1" style="position:absolute; left:10%; top:20%;">Region 1</a>
-        <a href="#region2" style="position:absolute; left:20%; top:40%;">Region 2</a>
-        <a href="#region3" style="position:absolute; left:30%; top:30%;">Region 3</a>
       </div>
       <ul>
         <?php foreach ($data as $site): ?>

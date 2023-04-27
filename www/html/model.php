@@ -16,6 +16,36 @@ function connectDb()
     return $conn;
 }
 
+function createNavbar(){
+    echo
+    '<header id="navbar">
+    <nav class="navbar-container container">
+      <a class="home-link">
+        <div class="navbar-logo">
+          <img src="pictures/logo_white.png" alt="navLogo" weight="70px" height="70px" />
+        </div>
+        <p> Historic Walking Tour</p>
+      </a>
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
+        aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <script src="index.js"></script>';
+}
+
 function getSites($conn)
 {
     $sites = array();

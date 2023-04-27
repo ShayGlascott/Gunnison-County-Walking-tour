@@ -8,18 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo "<script>location.href='admin.php';</script>";
   }
 }
-$host = 'mysql';
-$db_name = 'tourdb';
-$username = 'user';
-$password = 'password';
-
-try {
-  $conn = new PDO('mysql:host=' . $host . ';port=3306;dbname=' . $db_name, $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  exit();
-}
+require('model.php');
+$conn = connectDb();
 if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $passwd = $_POST['password'];
@@ -28,6 +18,7 @@ if (isset($_POST['submit'])) {
   $statement = $conn->prepare($sql);
   $statement->execute(['username' => $username]);
   $row = $statement->fetch(PDO::FETCH_ASSOC);
+
 
   if ($row) {
     $hashed_password = $row['passwd'];
@@ -55,11 +46,13 @@ if (isset($_POST['submit'])) {
 <html>
 
 <head>
-
+  <link rel="stylesheet" href="indexStyling.css">
+  <link rel="stylesheet" href="navbarStyling.css">
 </head>
 
 <body>
-  <a href='index.php'>Home</a>
+  <?php createNavbar(); ?>
+  <br><br><br><br>
   <h1>Login</h1>
 
   <form method="POST">
