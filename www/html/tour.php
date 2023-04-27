@@ -11,38 +11,13 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
 
 <head>
   <link rel="stylesheet" href="tourStyling.css">
-
+  <link rel="stylesheet" href="navbarStyling.css">
 </head>
 
 <body>
-  <header id="navbar">
-    <nav class="navbar-container container">
-      <a class="home-link">
-        <div class="navbar-logo">
-          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
-        </div>
-        Gunnison Walking Tour
-      </a>
-      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
-        aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div id="navbar-menu" aria-labelledby="navbar-toggle">
-        <ul class="navbar-links">
-          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <br><br>
-  <br><br>
-  <script src="tour.js"></script>
-
+  <?php createNavbar(); ?>
+  <br><br><br><br>
+  <script src="index.js"></script>
   <?php foreach ($data as $data): ?>
 
     <h1>

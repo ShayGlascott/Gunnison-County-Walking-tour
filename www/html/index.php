@@ -9,40 +9,18 @@ $data = getHomeData($conn);
 <html lang="en">
 
 <head>
-
+  <title> Historic Walking Tour </title>
   <!-- code to move to element after link click -->
   <link rel="stylesheet" href="indexStyling.css">
+  <link rel="stylesheet" href="navbarStyling.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body onload="startSlideshow()">
-  <header id="navbar">
-    <nav class="navbar-container container">
-      <a class="home-link">
-        <div class="navbar-logo">
-          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
-        </div>
-        Gunnison Walking Tour
-      </a>
-      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
-        aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div id="navbar-menu" aria-labelledby="navbar-toggle">
-        <ul class="navbar-links">
-          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <?php createNavbar(); ?>
   <br><br><br><br>
-  <script src="index.js"></script>
+
 
   <!-- <script src="slideshow.js"></script> -->
 
@@ -59,28 +37,32 @@ $data = getHomeData($conn);
 
         <!-- slideshow of old images -->
       <h2>
-        
+
       </h2>
       <br>
-      <div class="frame">
-        <div class="slideshow-container">
-          <?php
-          $slideShowPics = getSlideshowPics($conn);
-          $max = count($slideShowPics); foreach ($slideShowPics as $pics):
-            ?>
-            <div class='mySlides fade'>
-              <div class='captionText' ><?php echo $pics['oldImage_caption'];  ?></div>
-              <img src='pictures/<?php echo $pics['oldImage_fname']; ?>' style='width:50%'>
-            </div>
-            <?php
-          endforeach;
+      <div class="slideshow-container">
+        <?php
+        $slideShowPics = getSlideshowPics($conn);
+        $max = count($slideShowPics); foreach ($slideShowPics as $pics):
           ?>
-          <script src="slideshow.js"></script>
-          <!-- Next and previous buttons -->
-        </div>
+          <div class='mySlides fade'>
+            <div class='captionText'>
+              <?php echo $pics['oldImage_caption']; ?>
+            </div>
+            <img src='pictures/<?php echo $pics['oldImage_fname']; ?>' style='width:50%'>
+          </div>
+          <?php
+        endforeach;
+        ?>
+        <script src="slideshow.js"></script>
+        <!-- Next and previous buttons -->
       </div>
+
       <br>
-      <h2>Points of Interest</h2>
+      <h2>How to go on the tour...</h2>
+      <p>
+        <?php echo $data['how_to_text']; ?>
+      </p>
       <div style="position:relative">
         <img src="<?php echo $data['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
         <br>
@@ -99,10 +81,7 @@ $data = getHomeData($conn);
       <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
         find more locations, etc. -->
 
-      <h2>How to go on the tour...</h2>
-      <p>
-        <?php echo $data['how_to_text']; ?>
-      </p>
+      
       <br>
       <footer>
         <div class="container">
