@@ -5,50 +5,29 @@ $data = getTourStopById($conn, $_GET['id']);
 ?>
 
 <html>
-<?php foreach ($data as $data): ?>
 
-  <head>
-    <link rel="stylesheet" href="navbarStyling.css">
-    <link rel="stylesheet" href="readMoreStyling.css">
-  </head>
+<head>
+  <title> Historic Walking Tour </title>
+  <!-- code to move to element after link click -->
+  <link rel="stylesheet" href="indexStyling.css">
+  <link rel="stylesheet" href="navbarStyling.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-  <body>
-    <header id="navbar">
-      <nav class="navbar-container container">
-        <a class="home-link">
-          <div class="navbar-logo">
-            <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
-          </div>
-          Gunnison Walking Tour
-        </a>
-        <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
-          aria-expanded="false">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <div id="navbar-menu" aria-labelledby="navbar-toggle">
-          <ul class="navbar-links">
-            <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <br><br><br><br>
-    <h1>More Info </h1>
-    <script src="index.js"></script>
-    <div>
-    <?php echo $data['text2']?> 
+<body>
+  <?php createNavbar(); ?>
+  <br><br><br><br>
+  <h1>More Info </h1>
+  <script src="index.js"></script>
+  <div>
+    <?php foreach ($data as $row) : ?>
+      <?php echo $row['text2']; ?>
     <?php endforeach; ?>
-
     <?php $next_site_id = $getId + 1 ?>
     <br>
     <button onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
   </div>
-
 </body>
 <footer>
   <div class="container">
