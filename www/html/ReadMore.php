@@ -26,27 +26,22 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
     <?php foreach ($data as $row): ?>
       <?php echo "<p> " . $row['text2'] . "<p> "; ?>
     <?php endforeach; ?>
-    <div style="    
-    display: flex;
-    justify-content: space-between;
-    text-align: center; 
-    padding-right: 20%;
-    ">
+    <div class = "buttonStuff">
       <?php
       $prev_site_id = $getId - 1;
       if ($prev_site_id >= 1) {
         ?>
         <br>
-        <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $prev_site_id; ?>;'">Previous Stop</button>
+        <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $prev_site_id; ?>;'">  <  Previous Stop </button>
         <?php
       }
       ?>
       <?php
       $next_site_id = $getId + 1;
-      if ($next_site_id < $last_site_id) {
+      if ($next_site_id <= $last_site_id) {
         ?>
         <br>
-        <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
+        <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop  ></button>
         <?php
       }
       ?>

@@ -19,6 +19,7 @@ $data = getHomeData($conn);
 <body onload="startSlideshow()">
   <?php createNavbar(); ?>
   <br><br><br><br>
+  <img src = "pictures/birdsEyeGunni.jpg" class = "birdEyePic">
   <div class=main-info>
 
     <?php foreach ($data as $data): ?>

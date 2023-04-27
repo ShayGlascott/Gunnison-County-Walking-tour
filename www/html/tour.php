@@ -7,6 +7,10 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
 $data1 = getHomeData($conn);
 
 ?>
+<script>
+  resizeImages();
+  window.addEventListener('resize', resizeImages);
+</script>
 
 
 <html>
@@ -20,6 +24,7 @@ $data1 = getHomeData($conn);
   <?php createNavbar(); ?>
   <br><br><br><br>
   <script src="index.js"></script>
+
   <?php foreach ($data as $data): ?>
 
     <h1>
@@ -67,39 +72,36 @@ $data1 = getHomeData($conn);
       <?php echo '<a href="ReadMore.php?id=' . $id . '" style="text-decoration: none; color: black;">Read More</a>'; ?>
     </div>
   <?php endforeach; ?>
-  <div style="    
-    display: flex;
-    justify-content: space-between;
-    text-align: center; 
-    padding-right: 20%;
-    ">
+  <div class="buttonStuff">
     <?php
     $prev_site_id = $getId - 1;
     if ($prev_site_id >= 1) {
       ?>
       <br>
-      <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $prev_site_id; ?>;'">< Previous Stop </button>
-      <script>
-      resizeImages();
-      window.addEventListener('resize', resizeImages);
-      </script>
-      <?php
+      <button class="tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $prev_site_id; ?>;'">
+        < Previous Stop </button>
+          <script>
+            resizeImages();
+            window.addEventListener('resize', resizeImages);
+          </script>
+          <?php
     }
     ?>
 
-    <?php
-    $next_site_id = $getId + 1;
-    if ($next_site_id < $last_site_id) {
-      ?>
-      <br>
-      <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop ></button>
-      <script>
-      resizeImages();
-      window.addEventListener('resize', resizeImages);
-      </script>
-      <?php
-    }
-    ?>
+        <?php
+        $next_site_id = $getId + 1;
+        if ($next_site_id <= $last_site_id) {
+          ?>
+          <br>
+          <button class="tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next
+            Stop > </button>
+          <script>
+            resizeImages();
+            window.addEventListener('resize', resizeImages);
+          </script>
+          <?php
+        }
+        ?>
 
 
   </div>

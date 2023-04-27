@@ -10,16 +10,6 @@
     margin: 0;
     padding: 0;
 }
-.tourButtons {
-    background-color: #e7e7e7;
-    border: 3px solid black;
-    border-color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-} 
 
 
 body {
@@ -214,9 +204,42 @@ footer .col-md-4 {
     text-align: center;
 }
 
+.buttonStuff {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tourButtons {
+    background-color: #e7e7e7;
+    border: 3px solid black;
+    border-color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+@media (max-width: 500px) {
+    .tourButtons {
+        padding-right: 0;
+        font-size: small;
+    }
+
+    .readMoreLink {
+        font-size: small;
+    }
+
+    .row {
+        display: block;
+    }
+}
+
 .row {
     display: flex;
 }
+
 
 .column {
     padding: 1px;
@@ -233,7 +256,10 @@ footer .col-md-4 {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-h1, h2, h3{
+
+h1,
+h2,
+h3 {
     font-family: 'Montserrat';
     color: #4c2b3d;
 }
