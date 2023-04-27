@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <div class="box">
       <div class="title">Edit Users</div>
       <table>
-        <tr>
+      <tr>
           <th>User</th>
           <th>Delete</th>
         </tr>
@@ -116,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   ?>
 
   <!-- Button to edit main page -->
+  <button onclick="window.location.href ='addSlide.php'">Edit Slide Show</button>
   <button onclick="window.location.href ='editHomePage.php'">Edit Home Page</button>
 
 

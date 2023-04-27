@@ -326,4 +326,18 @@ function editHomePage($conn, $intro_heading_text, $intro_text, $how_to_text, $ad
         }
       echo "<script>location.href='admin.php';</script>";
 }
+function deleteSlide($conn,$id)
+{
+    $stmt = $conn->prepare("DELETE FROM slideShowImages WHERE id = :id");
+    $stmt->bindParam(":id", $id);
+    if ($stmt->execute()) {
+        // Query executed successfully
+        echo "<script>alert('A image was deleted!');</script>;";
+    } else {
+        // Error executing query
+        echo "<script>alert('ERROR DELETING IMAGE.Please try again.');</script>;";
+    }
+    echo "<script>location.href='admin.php';</script>";
+
+}
 ?>
