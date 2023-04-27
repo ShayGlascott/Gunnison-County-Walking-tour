@@ -2,12 +2,12 @@
 function connectDb()
 {
     $host = 'mysql';
-    $db_name = 'tourdb';
+    $database = 'tourdb';
     $username = 'user';
     $password = 'password';
 
     try {
-        $conn = new PDO('mysql:host=mysql;port=3306;dbname=tourdb', 'root', 'secret');
+        $conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

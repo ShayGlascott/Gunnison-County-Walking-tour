@@ -16,7 +16,7 @@ $data = getHomeData($conn);
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body onload="startSlideshow()">
   <header id="navbar">
     <nav class="navbar-container container">
       <a class="home-link">
@@ -62,22 +62,22 @@ $data = getHomeData($conn);
         
       </h2>
       <br>
-      <div class="slideshow-container">
-        <?php
-        $slideShowPics = getSlideshowPics($conn);
-        $max = count($slideShowPics); foreach ($slideShowPics as $pics):
-          ?>
-          <div class='mySlides'>
-            <div class='captionText' ><?php echo $pics['oldImage_caption'];  ?></div>
-            <img src='pictures/<?php echo $pics['oldImage_fname']; ?>' style='width:50%'>
-          </div>
+      <div class="frame">
+        <div class="slideshow-container">
           <?php
-        endforeach;
-        ?>
-        <script src="slideshow.js"></script>
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          $slideShowPics = getSlideshowPics($conn);
+          $max = count($slideShowPics); foreach ($slideShowPics as $pics):
+            ?>
+            <div class='mySlides fade'>
+              <div class='captionText' ><?php echo $pics['oldImage_caption'];  ?></div>
+              <img src='pictures/<?php echo $pics['oldImage_fname']; ?>' style='width:50%'>
+            </div>
+            <?php
+          endforeach;
+          ?>
+          <script src="slideshow.js"></script>
+          <!-- Next and previous buttons -->
+        </div>
       </div>
       <br>
       <h2>Points of Interest</h2>

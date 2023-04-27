@@ -1,8 +1,16 @@
 var slideIndex = 1;
 showSlides(slideIndex);
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+function startSlideshow() {
+  setInterval(showNextSlide, 5000);
+}
+
+function showNextSlide() {
+  slideIndex++;
+  if (slideIndex > document.getElementsByClassName("mySlides").length) {
+    slideIndex = 1;
+  }
+  showSlides(slideIndex);
 }
 
 function currentSlide(n) {

@@ -232,10 +232,22 @@ footer .col-md-4 {
     /* or any other desired height */
 }
 
+
+
 .mySlides {
     position: relative;
     text-align: center;
     color: white;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
 .captionText {
@@ -245,33 +257,26 @@ footer .col-md-4 {
     background: rgba(0, 0, 0, 0.75);
     color: white;
     padding: 10px 20px;
+    bottom: -2px;
 }
-
-.prev,
-.next {
-    background: linear-gradient(to right, #4c4c4c, #262626);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 50px;
-    cursor: pointer;
-    width: auto;
-    font-size: 18px;
-    transition: 0.6s ease;
-}
-
-.next {
-    right: 0;
-}
-
-.prev:hover,
-.next:hover {
-    background: linear-gradient(to right, #262626, #4c4c4c);
-}
-
-
 
 @media screen and (max-width: 500px) {
-    .column {
-        width: 100%;
+    .mySlides img {
+        height: 250px;
     }
 }
+
+
+@media screen and (max-width: 450px) {
+    .mySlides img {
+        height: 150px;
+    }
+    .captionText {
+        bottom: -25px;
+    }
+}
+@media screen and (min-width: 901px) {
+    .mySlides img {
+      height: 400px;
+    }
+  }
