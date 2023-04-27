@@ -23,7 +23,7 @@ function createNavbar()
     <nav class="navbar-container container">
       <a class="home-link">
         <div class="navbar-logo">
-          <img src="pictures/logo_white.png" alt="navLogo" weight="70px" height="70px" />
+          <img src="pictures/logo_white.png" alt="navLogo" weight="65px" height="65px" />
         </div>
         <p> Historic Walking Tour</p>
       </a>
@@ -309,21 +309,21 @@ function editHomePage($conn, $intro_heading_text, $intro_text, $how_to_text, $ad
             `city_state_zip` = :city_state_zip, 
             `phone_number` = :phone_number, 
             `email` = :email";
-
-
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":intro_heading_text", $intro_heading_text);
-    $stmt->bindParam(":intro_text", $intro_text);
-    $stmt->bindParam(":how_to_text", $how_to_text);
-    $stmt->bindParam(":address", $address);
-    $stmt->bindParam(":city_state_zip", $city_state_zip);
-    $stmt->bindParam(":phone_number", $phone_number);
-    $stmt->bindParam(":email", $email);
-    if ($stmt->execute()) {
-        echo "<script>alert('Updated Successfully!');</script>;";
-    } else {
-        echo "<script>alert('Error Updating, try again.');</script>;";
-    }
-    echo "<script>location.href='editHomePage.php';</script>";
+    
+    
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":intro_heading_text", $intro_heading_text);
+        $stmt->bindParam(":intro_text", $intro_text);
+        $stmt->bindParam(":how_to_text", $how_to_text);
+        $stmt->bindParam(":address", $address);
+        $stmt->bindParam(":city_state_zip", $city_state_zip);
+        $stmt->bindParam(":phone_number", $phone_number);
+        $stmt->bindParam(":email", $email);
+        if ($stmt->execute()) {
+          echo "<script>alert('Updated Successfully!');</script>;";
+        } else {
+          echo "<script>alert('Error Updating, try again.');</script>;";
+        }
+      echo "<script>location.href='admin.php';</script>";
 }
 ?>

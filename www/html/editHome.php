@@ -51,39 +51,39 @@
       </div>
 
 
-      <script>
-        function previewImage(event, inputId) {
-          var reader = new FileReader();
-          reader.onload = function () {
-            var outputId = "preview_" + inputId;
-            var output = document.getElementById(outputId);
-            output.src = reader.result;
+        <script>
+          function previewImage(event, inputId) {
+            var reader = new FileReader();
+            reader.onload = function () {
+              var outputId = "preview_" + inputId;
+              var output = document.getElementById(outputId);
+              output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
           }
-          reader.readAsDataURL(event.target.files[0]);
-        }
-      </script>
-      <input type="submit" name="submit" value="Add Images">
-    </form>
-    <h2>Edit the home page:</h2>
-    <form method='post'>
-      <label for='intro_heading_text'>Edit Intro Heading:</label>
-      <input type='text' name='intro_heading_text' value='<?php echo $data['intro_heading_text']; ?>' required><br>
-      <label for='intro_text'>Edit Intro Text</label><br>
-      <textarea name='intro_text' style='height: 100px; width: 600px'
-        required><?php echo $data['intro_text']; ?></textarea><br>
-      <label for='how_to_text'>Edit How to Text</label><br>
-      <textarea name='how_to_text' style='height: 100px; width: 600px'
-        required><?php echo $data['how_to_text']; ?></textarea><br>
-      <label for='address'>Address:</label>
-      <input type='text' name='address' value='<?php echo $data['address']; ?>' required><br>
-      <label for='city_state_zip'>City State,Zip:</label>
-      <input type='text' name='city_state_zip' value='<?php echo $data['city_state_zip']; ?>' required><br>
-      <label for='phone_number'>Phone Number:</label>
-      <input type='text' name='phone_number' value='<?php echo $data['phone_number']; ?>' required><br>
-      <label for='email'>Email:</label>
-      <input type='text' name='email' value='<?php echo $data['email']; ?>' required><br>
-      <input type='submit' value='Update!'>
-    </form>
+        </script>
+        <input type="submit" name="submit" value="Add Images">
+      </form>
+      <h2>Edit the home page:</h2>
+      <form method='post'>
+        <label for='intro_heading_text'>Edit Intro Heading:</label>
+        <input type='text' name='intro_heading_text' value='<?php echo $data['intro_heading_text']; ?>' required><br>
+        <label for='intro_text'>Edit Intro Text</label><br>
+        <textarea name='intro_text' style='height: 100px; width: 600px'
+          required><?php echo $data['intro_text']; ?></textarea><br>
+        <label for='how_to_text'>Edit How to Text</label><br>
+        <textarea name='how_to_text' style='height: 100px; width: 600px'
+          required><?php echo $data['how_to_text']; ?></textarea><br>
+        <label for='address'>Address:</label>
+        <input type='text' name='address' value='<?php echo $data['address']; ?>' required><br>
+        <label for='city_state_zip'>City State,Zip:</label>
+        <input type='text' name='city_state_zip' value='<?php echo $data['city_state_zip']; ?>' required><br>
+        <label for='phone_number'>Phone Number:</label>
+        <input type='text' name='phone_number' value='<?php echo $data['phone_number']; ?>' required><br>
+        <label for='email'>Email:</label>
+        <input type='text' name='email' value='<?php echo $data['email']; ?>' required><br>
+        <input type='submit' value='Update!'>
+      </form>
     <?php //endforeach; ?>
   </div>
 </body>

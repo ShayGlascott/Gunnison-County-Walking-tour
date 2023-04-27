@@ -23,7 +23,7 @@ $data1 = getHomeData($conn);
   <div class=main-info>
     <?php foreach ($data1 as $data1): ?>
 
-      <h1>How to go on the tour...</h1>
+      <h2>How to go on the tour...</h2>
       <p>
         <?php echo $data1['how_to_text']; ?>
       </p>

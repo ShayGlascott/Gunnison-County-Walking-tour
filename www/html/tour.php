@@ -62,47 +62,75 @@ $data1 = getHomeData($conn);
     <!-- Further information and pictures for those interested in reading more -->
     <?php $id = $data['id'] ?>
     <!--Getting the id for the item that is being displayed-->
+
     <div class='readMoreLink'>
-      <?php echo '<a href="ReadMore.php?id=' . $id . '" style="text-decoration: none; ">Read More</a>'; ?>
+      <?php echo '<a href="ReadMore.php?id=' . $id . '" style="text-decoration: none; color: black;">Read More</a>'; ?>
     </div>
-
   <?php endforeach; ?>
-  <?php
-  $next_site_id = $getId + 1;
-  if ($next_site_id < $last_site_id) {
-    ?>
-    <br>
-    <button onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop</button>
+  <div style="    
+    display: flex;
+    justify-content: space-between;
+    text-align: center; 
+    padding-right: 20%;
+    ">
     <?php
-  }
-  ?>
-  <?php foreach ($data1 as $data1): ?>
-  <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
+    $prev_site_id = $getId - 1;
+    if ($prev_site_id >= 1) {
+      ?>
+      <br>
+      <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $prev_site_id; ?>;'">< Previous Stop </button>
+      <script>
+      resizeImages();
+      window.addEventListener('resize', resizeImages);
+      </script>
+      <?php
+    }
+    ?>
 
-              <img src="pictures/logo.png" alt="Logo" style = "height:200px; weight:200px;"><br><br>
-              <a href="about.php">About Us</a><br><br>
-              <ul>
-                <li>
-                  <?php echo $data1['address']; ?>
-                </li>
-                <li>
-                  <?php echo $data1['city_state_zip']; ?>
-                </li>
-                <li>Phone:
-                  <?php echo $data1['phone_number']; ?>
-                </li>
-                <li>Email:
-                  <?php echo $data1['email']; ?>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
+    <?php
+    $next_site_id = $getId + 1;
+    if ($next_site_id < $last_site_id) {
+      ?>
+      <br>
+      <button class = "tourButtons" onclick="window.location.href ='tour.php?id=<?php echo $next_site_id; ?>;'">Next Stop ></button>
+      <script>
+      resizeImages();
+      window.addEventListener('resize', resizeImages);
+      </script>
+      <?php
+    }
+    ?>
+
+
+  </div>
+
+  <?php foreach ($data1 as $data1): ?>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+
+            <img src="pictures/logo.png" alt="Logo" style="height:200px; weight:200px;"><br><br>
+            <a href="about.php">About Us</a><br><br>
+            <ul>
+              <li>
+                <?php echo $data1['address']; ?>
+              </li>
+              <li>
+                <?php echo $data1['city_state_zip']; ?>
+              </li>
+              <li>Phone:
+                <?php echo $data1['phone_number']; ?>
+              </li>
+              <li>Email:
+                <?php echo $data1['email']; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 </body>
 
 </html>

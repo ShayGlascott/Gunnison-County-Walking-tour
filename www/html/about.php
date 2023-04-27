@@ -22,16 +22,17 @@
   <div class=main-info>
 
     <h1>About Us</h1>
-    <img src = 'pictures/ericSavage.jpg' style="height:400px; width:275px;">
+    <img src = 'pictures/ericSavage.jpg' style="height:25%; width:25%;">
     <h3> Eric Savage </h3>
     <p>My Name is Eric Savage. I graduated from Western Colorado University in 2023. I got my degree in History and Anthropology. 
       I created the content for the buildings on this website. I took some of the photos as well as 
-      compiled the old er photos found on here as well. Gunnison has a rich history full of very interesting 
+      compiled the older photos found on here as well. Gunnison has a rich history full of very interesting 
       stories going back over a century compiling this was a great experience I learned a lot more about the history of 
       Gunnison than I thought was possible.</p>
     
 
   </div>
+  <br>  
   <?php foreach ($data1 as $data1): ?>
   <footer>
         <div class="container">
