@@ -78,6 +78,5 @@
         <input type='text' name='email' value='<?php echo $data['email']; ?>' required><br>
         <input type='submit' value='Update!'>
       </form>
-    <?php //endforeach; ?>
   </div>
 </body>

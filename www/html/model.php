@@ -298,6 +298,6 @@ function editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$addres
         } else {
           echo "<script>alert('Error Updating, try again.');</script>;";
         }
-      echo "<script>location.href='editHomePage.php';</script>";
+      echo "<script>location.href='admin.php';</script>";
 }
 ?>

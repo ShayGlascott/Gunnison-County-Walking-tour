@@ -10,8 +10,9 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 require('model.php');
 $conn = connectDb();
 $data = getHomeData($conn);
+foreach ($data as $data):
 require("editHome.php");
-
+endforeach; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
