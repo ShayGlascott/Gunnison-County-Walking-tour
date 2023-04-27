@@ -16,9 +16,10 @@ function connectDb()
     return $conn;
 }
 
-function createNavbar(){
+function createNavbar()
+{
     echo
-    '<header id="navbar">
+        '<header id="navbar">
     <nav class="navbar-container container">
       <a class="home-link">
         <div class="navbar-logo">
@@ -45,6 +46,27 @@ function createNavbar(){
   
   <script src="index.js"></script>';
 }
+
+function createFooter($data) {
+    echo '
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="pictures/logo.png" alt="Logo" style="height:200px; width:200px;"><br><br>
+              <a href="about.php">About Us</a><br><br>
+              <ul>
+                <li>' . $data["address"] . '</li>
+                <li>' . $data["city_state_zip"] . '</li>
+                <li>Phone:' . $data["phone_number"] . '</li>
+                <li>Email:' . $data["email"] . '</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>';
+  }
+  
 
 function getSites($conn)
 {
@@ -92,7 +114,7 @@ function getAllTourData($conn)
 
 function getTourStopById($conn, $getId)
 {
-    
+
     $t1q = "SELECT * FROM `historic_sites` WHERE id = " . $getId;
     $statement = $conn->prepare($t1q);
     $statement->execute();
@@ -224,7 +246,8 @@ function update($conn, $update)
 
     }
 }
-function add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_caption,$title,$text1,$text2,$img1_fname,$img2_fname){
+function add_new_site($conn, $img1_altText, $img1_caption, $img2_altText, $img2_caption, $title, $text1, $text2, $img1_fname, $img2_fname)
+{
 
     $sql = "INSERT INTO `historic_sites`(`img1_fname`, `img1_altText`, `img1_caption`, `img2_fname`, `img2_altText`, `img2_caption`, `title`, `text1`, `text2`) 
         VALUES (:img1_fname, :img1_altText, :img1_caption, :img2_fname, :img2_altText, :img2_caption, :title, :text1, :text2)";
@@ -245,59 +268,62 @@ function add_new_site($conn,$img1_altText,$img1_caption,$img2_altText,$img2_capt
 
     // Execute the query and insert the data into the database
     if ($stmt->execute()) {
-      // Query executed successfully
-      echo "<script>alert('New Site has been created!');</script>;";
+        // Query executed successfully
+        echo "<script>alert('New Site has been created!');</script>;";
 
     } else {
-      // Error executing query
-      echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
+        // Error executing query
+        echo "<script>alert('ERROR ADDING NEW SITE.Please try again.');</script>;";
 
     }
     echo "<script>location.href='admin.php';</script>";
 }
 
-function updateImg1($conn,$img1_fname,$site_id){
+function updateImg1($conn, $img1_fname, $site_id)
+{
     $query = "UPDATE historic_sites SET img1_fname = '$img1_fname' WHERE id = $site_id";
-          if ($stmt1 = $conn->prepare($query)) {
-            echo "<script>alert('The First image  was updated Successfully!');</script>;";
-            $stmt1->execute();
-          } else {
-            echo "<script>alert('Database error, please try again.');</script>;";
-          }
+    if ($stmt1 = $conn->prepare($query)) {
+        echo "<script>alert('The First image  was updated Successfully!');</script>;";
+        $stmt1->execute();
+    } else {
+        echo "<script>alert('Database error, please try again.');</script>;";
+    }
 }
-function updateImg2($conn,$img2_fname,$site_id){
+function updateImg2($conn, $img2_fname, $site_id)
+{
     $query = "UPDATE historic_sites SET img2_fname = '$img2_fname' WHERE id = $site_id";
-          if ($stmt1 = $conn->prepare($query)) {
-            echo "<script>alert('The Second image  was updated Successfully!');</script>;";
-            $stmt1->execute();
-          } else {
-            echo "<script>alert('Database error, please try again.');</script>;";
-          }
+    if ($stmt1 = $conn->prepare($query)) {
+        echo "<script>alert('The Second image  was updated Successfully!');</script>;";
+        $stmt1->execute();
+    } else {
+        echo "<script>alert('Database error, please try again.');</script>;";
+    }
 }
 
-function editHomePage($conn,$intro_heading_text,$intro_text,$how_to_text,$address,$city_state_zip,$phone_number,$email){    
-        $query = "UPDATE home SET `intro_heading_text` = :intro_heading_text, 
+function editHomePage($conn, $intro_heading_text, $intro_text, $how_to_text, $address, $city_state_zip, $phone_number, $email)
+{
+    $query = "UPDATE home SET `intro_heading_text` = :intro_heading_text, 
             `intro_text` = :intro_text, 
             `how_to_text` = :how_to_text,
             `address` = :address, 
             `city_state_zip` = :city_state_zip, 
             `phone_number` = :phone_number, 
             `email` = :email";
-    
-    
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(":intro_heading_text", $intro_heading_text);
-        $stmt->bindParam(":intro_text", $intro_text);
-        $stmt->bindParam(":how_to_text", $how_to_text);
-        $stmt->bindParam(":address", $address);
-        $stmt->bindParam(":city_state_zip", $city_state_zip);
-        $stmt->bindParam(":phone_number", $phone_number);
-        $stmt->bindParam(":email", $email);
-        if ($stmt->execute()) {
-          echo "<script>alert('Updated Successfully!');</script>;";
-        } else {
-          echo "<script>alert('Error Updating, try again.');</script>;";
-        }
-      echo "<script>location.href='editHomePage.php';</script>";
+
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":intro_heading_text", $intro_heading_text);
+    $stmt->bindParam(":intro_text", $intro_text);
+    $stmt->bindParam(":how_to_text", $how_to_text);
+    $stmt->bindParam(":address", $address);
+    $stmt->bindParam(":city_state_zip", $city_state_zip);
+    $stmt->bindParam(":phone_number", $phone_number);
+    $stmt->bindParam(":email", $email);
+    if ($stmt->execute()) {
+        echo "<script>alert('Updated Successfully!');</script>;";
+    } else {
+        echo "<script>alert('Error Updating, try again.');</script>;";
+    }
+    echo "<script>location.href='editHomePage.php';</script>";
 }
 ?>

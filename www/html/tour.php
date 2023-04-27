@@ -4,6 +4,8 @@ $conn = connectDb();
 $getId = $_GET['id'];
 $data = getTourStopById($conn, $getId);
 $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC LIMIT 1")->fetchColumn();
+$data1 = getHomeData($conn);
+
 ?>
 
 
@@ -74,23 +76,33 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
     <?php
   }
   ?>
+  <?php foreach ($data1 as $data1): ?>
   <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
 
-          <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
-          <a href="about.php">About Us</a><br><br>
-          <ul>
-            <li>123 Main Street</li>
-            <li>City, State ZIP</li>
-            <li>Phone: 123-456-7890</li>
-            <li>Email: info@example.com</li>
-          </ul>
+              <img src="pictures/logo.png" alt="Logo" style = "height:200px; weight:200px;"><br><br>
+              <a href="about.php">About Us</a><br><br>
+              <ul>
+                <li>
+                  <?php echo $data1['address']; ?>
+                </li>
+                <li>
+                  <?php echo $data1['city_state_zip']; ?>
+                </li>
+                <li>Phone:
+                  <?php echo $data1['phone_number']; ?>
+                </li>
+                <li>Email:
+                  <?php echo $data1['email']; ?>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 </body>
 
 </html>
