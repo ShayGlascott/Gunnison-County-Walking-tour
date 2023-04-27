@@ -24,6 +24,11 @@ cd CS_495
 ```
 # docker-compose up -d
 ```
+### Database initialization:
+(Required to )
+```
+# docker exec mysql-container sh -c 'mysql -uroot -p"secret" "tourdb" < /docker-entrypoint-initdb.d/init.sql'
+```
 ### Check status of Docker containers:  
 ```
 # docker ps -a
