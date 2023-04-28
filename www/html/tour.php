@@ -110,7 +110,7 @@ $data1 = getHomeData($conn);
         <div class="row">
           <div class="col-md-4">
 
-            <img src="pictures/logo.png" alt="Logo" style="height:200px; weight:200px;"><br><br>
+            <img src="pictures/logo.png" alt="Logo" style="height:200px;"><br><br>
             <a href="about.php">About Us</a><br><br>
             <ul>
               <li>
