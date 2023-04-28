@@ -9,8 +9,7 @@ $data = getHomeData($conn);
 <html lang="en">
 
 <head>
-  <title> Historic Walking Tour </title>
-  <!-- code to move to element after link click -->
+  <title> Gunnison Historic Walking Tour </title>
   <link rel="stylesheet" href="indexStyling.css">
   <link rel="stylesheet" href="navbarStyling.css">
   <meta charset="UTF-8" />
@@ -20,11 +19,7 @@ $data = getHomeData($conn);
 <body onload="startSlideshow()">
   <?php createNavbar(); ?>
   <br><br><br><br>
-
-
-  <!-- <script src="slideshow.js"></script> -->
-
-  <!-- Add your content here -->
+  <img src = "pictures/birdsEyeGunni.jpg" class = "birdEyePic">
   <div class=main-info>
 
     <?php foreach ($data as $data): ?>
@@ -33,13 +28,8 @@ $data = getHomeData($conn);
       </h2>
       <p>
         <?php echo $data['intro_text']; ?>
-
-
         <!-- slideshow of old images -->
-      <h2>
-
-      </h2>
-      <br>
+      <br><br>
       <div class="slideshow-container">
         <?php
         $slideShowPics = getSlideshowPics($conn);
@@ -76,39 +66,12 @@ $data = getHomeData($conn);
           <?php endforeach; ?>
         </ul>
       </div>
-
-
       <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
         find more locations, etc. -->
-
-      
       <br>
-      <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-
-              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
-              <a href="about.php">About Us</a><br><br>
-              <ul>
-                <li>
-                  <?php echo $data['address']; ?>
-                </li>
-                <li>
-                  <?php echo $data['city_state_zip']; ?>
-                </li>
-                <li>Phone:
-                  <?php echo $data['phone_number']; ?>
-                </li>
-                <li>Email:
-                  <?php echo $data['email']; ?>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <?php 
+    createFooter($data);
+    endforeach; ?>
 </body>
 
 </html>

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <title> Gunnison Historic Walking Tour </title>
+  <!-- code to move to element after link click -->
   <link rel="stylesheet" href="editorStyling.css">
-  <title>Gunnion Historic Walking Tour</title>
+  <link rel="stylesheet" href="navbarStyling.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
@@ -10,9 +15,9 @@
     <nav class="navbar-container container">
       <a class="home-link">
         <div class="navbar-logo">
-          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
+          <img src="pictures/logo_white.png" alt="navLogo" weight="70px" height="70px" />
         </div>
-        Gunnison Walking Tour
+        <p> Historic Walking Tour</p>
       </a>
       <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
         aria-expanded="false">
@@ -25,24 +30,25 @@
           <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
           <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
           <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="logout.php">Logout</a></li>
         </ul>
       </div>
     </nav>
   </header>
-  <br><br><br><br>
+
   <script src="index.js"></script>
+  <br><br><br><br>
   <div class="box">
     <?php //foreach ($data as $data): ?>
 
-      <h2>Edit Map Photo:</h2><br>
-      <form method="POST" enctype="multipart/form-data">
+    <h2>Edit Map Photo:</h2><br>
+    <form method="POST" enctype="multipart/form-data">
 
-        <div class="image-preview">
-          <label for="file">Map:</label>
-          <input type="file" name="file" accept="image/*" onchange="previewImage(event, 'file')"><br>
-          <img id="preview_file" class="preview_img" src="<?php echo $data['map_fname']; ?>" /><br>
-        </div>
+      <div class="image-preview">
+        <label for="file">Map:</label>
+        <input type="file" name="file" accept="image/*" onchange="previewImage(event, 'file')"><br>
+        <img id="preview_file" class="preview_img" src="<?php echo $data['map_fname']; ?>" /><br>
+      </div>
 
 
         <script>

@@ -16,53 +16,32 @@ $data1 = getHomeData($conn);
 </head>
 
 <body>
-  <header id="navbar">
-    <nav class="navbar-container container">
-      <a class="home-link">
-        <div class="navbar-logo">
-          <img src="pictures/cityOfGunniLogo.png" alt='navLogo' weight="70px" height="70px" />
-        </div>
-        Gunnison Walking Tour
-      </a>
-      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
-        aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div id="navbar-menu" aria-labelledby="navbar-toggle">
-        <ul class="navbar-links">
-          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+<?php createNavbar(); ?>
+
   <br><br><br><br>
-  <script src="index.js"></script>
   <div class=main-info>
     <?php foreach ($data1 as $data1): ?>
-
-      <h1>How to go on the tour...</h1>
-      <div style="position:relative">
-        <img src="<?php echo $data1['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
-        <br>
-      </div>
-      <ul>
-        <?php foreach ($data as $site): ?>
-          <li><a href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $site['title']; ?></a></li>
-        <?php endforeach; ?>
-      </ul>
-
-      <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
-            find more locations, etc. -->
 
       <h2>How to go on the tour...</h2>
       <p>
         <?php echo $data1['how_to_text']; ?>
       </p>
+      <div style="position:relative">
+        <img src="<?php echo $data1['map_fname']; ?>" class="map" alt="Map of Gunnison, Colorado">
+        <br>
+      </div>
+      <div>
+        <ul>
+          <?php
+          $i = 1; foreach ($data as $site): ?>
+            <li><a class="siteLinks" href="tour.php?id=<?php echo $site['id']; ?>"><?php echo $i . ') ' . $site['title'];
+               $i += 1; ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+
+      <!-- This is extra information that will probably be desired.  How to go on the tour, scan QR code,
+            find more locations, etc. -->
 
       <br>
 
@@ -72,7 +51,7 @@ $data1 = getHomeData($conn);
           <div class="row">
             <div class="col-md-4">
 
-              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
+              <img src="pictures/logo.png" alt="Logo" style = "height:200px; weight:200px;"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
                 <li>
@@ -94,5 +73,4 @@ $data1 = getHomeData($conn);
       </div>
     </footer>
 </body>
-
 </html>

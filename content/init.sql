@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `historic_sites`
 --
 
-CREATE TABLE `historic_sites` (
+CREATE TABLE IF NOT EXISTS `historic_sites`  (
   `id` int(11) NOT NULL,
   `img1_fname` text NOT NULL,
   `img1_altText` text NOT NULL,
@@ -61,7 +61,7 @@ INSERT INTO `historic_sites` (`id`, `img1_fname`, `img1_altText`, `img1_caption`
 -- Table structure for table `home`
 --
 
-CREATE TABLE `slideShowImages` (
+CREATE TABLE IF NOT EXISTS `slideShowImages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `oldImage_fname` text NOT NULL,
   `oldImage_caption` text NOT NULL,
@@ -75,7 +75,7 @@ INSERT INTO `slideShowImages` (`oldImage_fname`, `oldImage_caption`) VALUES
   ('hartmanBlockOld.png', 'Hartman Block'),
   ('johnsonBuildingOld.png', 'Johnson Building');
 
-CREATE TABLE `home` (
+CREATE TABLE IF NOT EXISTS `home` (
   `intro_heading_text` text NOT NULL,
   `intro_text` text NOT NULL,
   `map_fname` text NOT NULL,
@@ -99,7 +99,7 @@ INSERT INTO `home` (`intro_heading_text`, `intro_text`, `map_fname`, `how_to_tex
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `uName` text NOT NULL,
   `passwd` text NOT NULL

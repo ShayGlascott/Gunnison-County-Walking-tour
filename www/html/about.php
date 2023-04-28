@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  
-    <!-- code to move to element after link click -->
-    <link rel = "stylesheet" href = "indexStyling.css">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <header id="navbar">
-        <nav class="navbar-container container">
-          <a class="home-link">
-            <div class="navbar-logo">
-              <img src = "pictures/cityOfGunniLogo.png" alt = 'navLogo'
-                weight = "70px"
-                height = "70px" />
-            </div>
-            Gunnison Walking Tour
-          </a>
-          <button
-            type="button"
-            id="navbar-toggle"
-            aria-controls="navbar-menu"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-            >
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div id="navbar-menu" aria-labelledby="navbar-toggle">
-            <ul class="navbar-links">
-              <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <br><br><br><br>
-      <script src="index.js"></script>
-      <!-- Add your content here -->
-      <div class = main-info>
 
-      <h2>About Us</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<head>
+  <title> Gunnison Historic Walking Tour </title>
+  <link rel="stylesheet" href="indexStyling.css">
+  <link rel="stylesheet" href="navbarStyling.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-      </div>
+<body>
+  <?php
+  require('model.php');
+  createNavbar(); 
+  $conn = connectDb();
+  $data1 = getHomeData($conn);
+  ?>
+  <br><br><br><br>
+  <!-- Add your content here -->
+  <div class=main-info>
 
-      <footer>
+    <h1>About Us</h1>
+    <img src = 'pictures/ericSavage.jpg' style="height:25%; width:25%;">
+    <h3> Eric Savage </h3>
+    <p>My Name is Eric Savage. I graduated from Western Colorado University in 2023. I got my degree in History and Anthropology. 
+      I created the content for the buildings on this website. I took some of the photos as well as 
+      compiled the older photos found on here as well. Gunnison has a rich history full of very interesting 
+      stories going back over a century compiling this was a great experience I learned a lot more about the history of 
+      Gunnison than I thought was possible.</p>
+    <br>
+    <img src = 'pictures/heather.jpg' style="height:25%; width:25%;">
+    <h3> Dr. Heather Thiessen-Reily </h3>
+    <p>
+    Dr. Heather Thiessen-Reily, Chair of the Department of Behavioral 
+    and Social Sciences and a respected professor of History at Western State Colorado University,
+     has a passion for providing her students with practical, real-world projects. As part of this commitment, 
+     she led a team of students in creating a website for the Gunnison Historical Walking Tour. Bringing the 
+     project to the students and collaborating with Eric Savage on the content, Dr. Thiessen-Reily's guidance 
+     and mentorship helped the team successfully complete the project. Her dedication to creating impactful learning 
+     experiences has made her a highly regarded member of the academic community at Western State Colorado University.
+    </p>
+    <br>
+    <h3>Gunnison Historic Preservation Commission </h3>
+    <p>
+    If you're interested in exploring Gunnison's rich history and learning more about the town's heritage, we invite you to 
+    visit the Gunnison Historic Preservation Committee website. Click the link below to be redirected to their website, where 
+    you'll find a wealth of information about local landmarks, historic buildings, and cultural events. Whether you're a resident 
+    or a visitor, the GHPC website is a great resource for anyone who wants to discover the stories that make Gunnison such a special 
+    place. So don't wait, click the link now and start your journey into the past!
+    
+  </p>
+    <a href="https://www.gunnisoncounty.org/193/Historic-Preservation-Commission"> Visit GHPC </a>
+
+  </div>
+  <br>  
+  <?php foreach ($data1 as $data1): ?>
+  <footer>
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              
-              <img src="pictures/cityOfGunniLogo.png" alt="Logo"><br><br>
+
+              <img src="pictures/logo.png" alt="Logo" style = "height:200px; weight:200px;"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
-                <li>123 Main Street</li>
-                <li>City, State ZIP</li>
-                <li>Phone: 123-456-7890</li>
-                <li>Email: info@example.com</li>
-              </ul>
-            </div>
+                <li>
+                  <?php echo $data1['address']; ?>
+                </li>
+                <li>
+                  <?php echo $data1['city_state_zip']; ?>
+                </li>
+                <li>Phone:
+                  <?php echo $data1['phone_number']; ?>
+                </li>
+                <li>Email:
+                  <?php echo $data1['email']; ?>
+                </li>
+              <?php endforeach; ?>
+            </ul>
           </div>
         </div>
-      </footer>
+      </div>
+    </footer>
 
 
-    </html>
 
+
+</html>

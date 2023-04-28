@@ -13,12 +13,13 @@ if (!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1) {
 <html>
 
 <head>
+  <title> Gunnison Historic Walking Tour </title>
   <link rel="stylesheet" href="editorStyling.css">
-  <title>Gunnion Historic Walking Tour</title>
+  <link rel="stylesheet" href="navbarStyling.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<a href='index.php'>HOME</a>
-<a href='admin.php'>ADMIN</a>
-<a href='logout.php'>LOGOUT</a>
+
 <?php
 
 require('model.php');
@@ -35,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 ?>
 
 <body>
+  <?php createEditorNavbar(); ?>
+  <br><br><br><br>
+
   <h1>Gunnison Walking Tour Administration Page</h1>
   <?php
   if ($_SESSION['id'] == 0) {
@@ -81,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <div class="box">
       <div class="title">Edit Users</div>
       <table>
-        <tr>
+      <tr>
           <th>User</th>
           <th>Delete</th>
         </tr>
@@ -112,7 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   ?>
 
   <!-- Button to edit main page -->
-  <button onclick="window.location.href ='edit_home_page.php'">Edit Home Page</button>
+  <button onclick="window.location.href ='addSlide.php'">Edit Slide Show</button>
+  <button onclick="window.location.href ='editHomePage.php'">Edit Home Page</button>
 
 
   <!-- List of tour stops -->
