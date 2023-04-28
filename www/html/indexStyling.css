@@ -37,21 +37,6 @@
     }
 }
 
-@media (max-width: 500px) {
-
-    .tourButtons {
-        padding-right: 0;
-        font-size: small;
-    }
-
-    .readMoreLink {
-        font-size: small;
-    }
-
-    .row {
-        display: block;
-    }
-}
 
 .row {
     display: flex;

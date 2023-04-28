@@ -223,14 +223,9 @@ footer .col-md-4 {
 
 @media (max-width: 500px) {
     .tourButtons {
-        padding-right: 0;
-        font-size: small;
+        padding-right: 15px;
+    
     }
-
-    .readMoreLink {
-        font-size: small;
-    }
-
     .row {
         display: block;
     }
