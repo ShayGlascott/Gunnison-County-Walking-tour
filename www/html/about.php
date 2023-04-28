@@ -21,6 +21,17 @@
   <div class=main-info>
 
     <h1>About Us</h1>
+    <img src = 'pictures/wcu.png' style="height:25%; width:25%;">
+    <h3>Development Team</h3>
+    <p>Zachary Campbell, Ben Klingbeil, and Shay Glascott are a team of web developers 
+      who created a comprehensive website to facilitate access to information about the 
+      town of Gunnison, Colorado for both its residents and visitors. All members of the 
+      team are students at Western, with Zachary due to graduate in May and Shay and Ben 
+      set to become seniors. The team's primary objective was to bridge 
+      the gap between the Computer Science (CS) and History departments at Western Colorado University by providing a 
+      platform that would offer easy access to the town's history. The team worked collaboratively throughout the design and development stages, with each member 
+      contributing their unique skills and expertise to the project. The website the team created is user-friendly and accessible, featuring a clean 
+        and modern design with easy navigation, and a responsive layout for mobile devices.</p><br>
     <img src = 'pictures/ericSavage.jpg' style="height:25%; width:25%;">
     <h3> Eric Savage </h3>
     <p>My Name is Eric Savage. I graduated from Western Colorado University in 2023. I got my degree in History and Anthropology. 
@@ -60,7 +71,7 @@
           <div class="row">
             <div class="col-md-4">
 
-              <img src="pictures/logo.png" alt="Logo" style = "height:200px;"><br><br>
+              <img src="pictures/logo.png" alt="Logo" style = "height:200px; width:200px;"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
                 <li>
