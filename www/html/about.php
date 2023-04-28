@@ -40,6 +40,17 @@
      and mentorship helped the team successfully complete the project. Her dedication to creating impactful learning 
      experiences has made her a highly regarded member of the academic community at Western State Colorado University.
     </p>
+    <br>
+    <h3>Gunnison Historic Preservation Commission </h3>
+    <p>
+    If you're interested in exploring Gunnison's rich history and learning more about the town's heritage, we invite you to 
+    visit the Gunnison Historic Preservation Committee website. Click the link below to be redirected to their website, where 
+    you'll find a wealth of information about local landmarks, historic buildings, and cultural events. Whether you're a resident 
+    or a visitor, the GHPC website is a great resource for anyone who wants to discover the stories that make Gunnison such a special 
+    place. So don't wait, click the link now and start your journey into the past!
+    
+  </p>
+    <a href="https://www.gunnisoncounty.org/193/Historic-Preservation-Commission"> Visit GHPC </a>
 
   </div>
   <br>  

@@ -30,9 +30,11 @@ $data1 = getHomeData($conn);
     <div class="row">
       <div class="column">
         <img class="pictures" src="pictures/<?php echo $data['img1_fname']; ?>">
+        <?php echo $data['img1_caption']; ?>
       </div>
       <div class="column">
         <img class="pictures" src="pictures/<?php echo $data['img2_fname']; ?>">
+        <?php echo $data['img2_caption']; ?>
       </div>
     </div>
 
