@@ -89,8 +89,8 @@ function createFooter($data) {
               <ul>
                 <li>' . $data["address"] . '</li>
                 <li>' . $data["city_state_zip"] . '</li>
-                <li>Phone:' . $data["phone_number"] . '</li>
-                <li>Email:' . $data["email"] . '</li>
+                <li>Phone: ' . $data["phone_number"] . '</li>
+                <li>Email: ' . $data["email"] . '</li>
               </ul>
             </div>
           </div>
