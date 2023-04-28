@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 ?>
 
 <body>
-  <?php createNavbar(); ?>
+  <?php createEditorNavbar(); ?>
   <br><br><br><br>
 
   <h1>Gunnison Walking Tour Administration Page</h1>

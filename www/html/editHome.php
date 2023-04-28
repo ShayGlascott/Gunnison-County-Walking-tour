@@ -30,7 +30,7 @@
           <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
           <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
           <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="login.php">Login</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="logout.php">Logout</a></li>
         </ul>
       </div>
     </nav>

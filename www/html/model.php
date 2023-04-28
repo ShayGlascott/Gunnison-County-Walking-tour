@@ -46,6 +46,37 @@ function createNavbar()
   
   <script src="index.js"></script>';
 }
+function createEditorNavbar()
+{
+    echo
+    '<header id="navbar">
+    <nav class="navbar-container container">
+      <a class="home-link">
+        <div class="navbar-logo">
+          <img src="pictures/logo_white.png" alt="navLogo" weight="65px" height="65px" />
+        </div>
+        <p> Historic Walking Tour</p>
+      </a>
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu"
+        aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="index.php">Home</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="tourStops.php">Tours</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="about.php">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="logout.php">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <script src="index.js"></script>';
+}
+
 
 function createFooter($data) {
     echo '
@@ -53,7 +84,7 @@ function createFooter($data) {
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              <img src="pictures/logo.png" alt="Logo" style="height:200px; width:200px;"><br><br>
+              <img src="pictures/logo.png" alt="Logo" style = "height:200px; weight:200px;"><br><br>
               <a href="about.php">About Us</a><br><br>
               <ul>
                 <li>' . $data["address"] . '</li>

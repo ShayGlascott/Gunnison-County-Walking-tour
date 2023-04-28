@@ -17,7 +17,6 @@
   $data1 = getHomeData($conn);
   ?>
   <br><br><br><br>
-  <script src="index.js"></script>
   <!-- Add your content here -->
   <div class=main-info>
 
@@ -29,7 +28,18 @@
       compiled the older photos found on here as well. Gunnison has a rich history full of very interesting 
       stories going back over a century compiling this was a great experience I learned a lot more about the history of 
       Gunnison than I thought was possible.</p>
-    
+    <br>
+    <img src = 'pictures/heather.jpg' style="height:25%; width:25%;">
+    <h3> Dr. Heather Thiessen-Reily </h3>
+    <p>
+    Dr. Heather Thiessen-Reily, Chair of the Department of Behavioral 
+    and Social Sciences and a respected professor of History at Western State Colorado University,
+     has a passion for providing her students with practical, real-world projects. As part of this commitment, 
+     she led a team of students in creating a website for the Gunnison Historical Walking Tour. Bringing the 
+     project to the students and collaborating with Eric Savage on the content, Dr. Thiessen-Reily's guidance 
+     and mentorship helped the team successfully complete the project. Her dedication to creating impactful learning 
+     experiences has made her a highly regarded member of the academic community at Western State Colorado University.
+    </p>
 
   </div>
   <br>  

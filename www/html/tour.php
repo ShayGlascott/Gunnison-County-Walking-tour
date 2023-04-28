@@ -7,10 +7,7 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
 $data1 = getHomeData($conn);
 
 ?>
-<script>
-  resizeImages();
-  window.addEventListener('resize', resizeImages);
-</script>
+
 
 
 <html>
@@ -23,7 +20,6 @@ $data1 = getHomeData($conn);
 <body>
   <?php createNavbar(); ?>
   <br><br><br><br>
-  <script src="index.js"></script>
 
   <?php foreach ($data as $data): ?>
 

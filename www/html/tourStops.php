@@ -19,7 +19,6 @@ $data1 = getHomeData($conn);
 <?php createNavbar(); ?>
 
   <br><br><br><br>
-  <script src="index.js"></script>
   <div class=main-info>
     <?php foreach ($data1 as $data1): ?>
 

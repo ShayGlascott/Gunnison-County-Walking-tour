@@ -21,9 +21,8 @@ $site_id = "";
 
 <body>
 
-  <?php createNavbar(); ?>
+  <?php createEditorNavbar(); ?>
   <br><br><br><br>
-  <script src="index.js"></script>
   <?php
 
 

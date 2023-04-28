@@ -21,7 +21,6 @@ $last_site_id = $conn->query("SELECT id FROM `historic_sites` ORDER BY id DESC L
   <?php createNavbar(); ?>
   <br><br><br><br>
   <h1>More Info </h1>
-  <script src="index.js"></script>
   <div>
     <?php foreach ($data as $row): ?>
       <?php echo "<p> " . $row['text2'] . "<p> "; ?>
