@@ -371,4 +371,29 @@ function deleteSlide($conn,$id)
     echo "<script>location.href='admin.php';</script>";
 
 }
+function editText1($conn,$text2,$site_id){
+  $query = "UPDATE historic_sites SET text1 = :text2 WHERE id = :site_id";
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(':text2', $text2);
+  $stmt->bindParam(':site_id', $site_id);
+  if ($stmt->execute()) {
+    echo "success";
+    echo "<script>location.href='editor.php?function=edit_site_page&site_id=" . $site_id . "';</script>";
+  } else {
+    echo "<script>alert('Database error, please try again in a moment.');</script>";
+  }
+}
+function editText2($conn,$text2,$site_id){
+  $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(':text2', $text2);
+  $stmt->bindParam(':site_id', $site_id);
+  if ($stmt->execute()) {
+    echo "success";
+    echo "<script>location.href='editor.php?function=edit_site_page&site_id=" . $site_id . "';</script>";
+  } else {
+    echo "<script>alert('Database error, please try again in a moment.');</script>";
+  }
+}
+
 ?>

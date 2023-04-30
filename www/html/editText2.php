@@ -19,16 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $site_id = $_POST['site_id'];
   $text2 = $_POST['ut1'];
-  $query = "UPDATE historic_sites SET text2 = :text2 WHERE id = :site_id";
-  $stmt = $conn->prepare($query);
-  $stmt->bindParam(':text2', $text2);
-  $stmt->bindParam(':site_id', $site_id);
-  if ($stmt->execute()) {
-    echo "success";
-    echo "<script>location.href='editor.php?function=edit_site_page&site_id=" . $site_id . "';</script>";
-  } else {
-    echo "<script>alert('Database error, please try again in a moment.');</script>";
-  }
+  editText2($conn,$text2,$site_id);
 }
 
 foreach ($data as $data) :
