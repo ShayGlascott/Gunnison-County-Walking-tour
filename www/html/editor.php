@@ -102,7 +102,7 @@ $site_id = "";
         $fileName_2 = $_FILES['2file']['name'];
         $filePath_2 = $uploadDir . $fileName_2;
         if (move_uploaded_file($_FILES['2file']['tmp_name'], $filePath_2)) {
-          updateImg1($conn, $fileName_2, $site_id);
+          updateImg2($conn, $fileName_2, $site_id);
         } else {
           echo "<script>alert('The Second image had an error while being updated or was missing.');</script>;";
         }
