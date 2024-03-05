@@ -3,13 +3,14 @@ version: '3'
 services:      
     nginx:    
         build: ./nginx/  
-        container_name: nginx-container  
+        container_name: nginx-container 
         ports:  
             - 80:80  
         links:  
             - php  
         volumes_from:  
             - app-data  
+        restart: always
 
     php:    
         build: ./php/  
